@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		470110051FFB08C000AA4D9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470110041FFB08C000AA4D9D /* AppDelegate.swift */; };
+		470110071FFB08C000AA4D9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470110061FFB08C000AA4D9D /* ViewController.swift */; };
+		4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470110081FFB08C000AA4D9D /* Main.storyboard */; };
+		4701100D1FFB08C100AA4D9D /* FitTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */; };
+		4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4701100E1FFB08C100AA4D9D /* Assets.xcassets */; };
+		470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */; };
+		47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */; };
+		47C0A2E41FFB153800C22A2E /* CreateWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */; };
+		47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */; };
+		47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E71FFB155E00C22A2E /* OffWorkoutViewController.swift */; };
+		47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E91FFB177100C22A2E /* Exercise.swift */; };
+		47C0A2EC1FFB1A5200C22A2E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2EB1FFB1A5200C22A2E /* Workout.swift */; };
+		47C0A2EE1FFB2A8F00C22A2E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2ED1FFB2A8F00C22A2E /* RootViewController.swift */; };
+		47C0A2F01FFB2ADB00C22A2E /* ExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2EF1FFB2ADB00C22A2E /* ExercisesViewController.swift */; };
+		47C0A2F21FFB2AE700C22A2E /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */; };
+		47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */; };
+		47C0A2F61FFB4A8100C22A2E /* CreatePhaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */; };
+		B62F9DE42F15F77D8ADF55B4 /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.release.xcconfig"; sourceTree = "<group>"; };
+		470110011FFB08C000AA4D9D /* FitTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		470110041FFB08C000AA4D9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		470110061FFB08C000AA4D9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		470110091FFB08C000AA4D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4701100C1FFB08C100AA4D9D /* FitTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FitTime.xcdatamodel; sourceTree = "<group>"; };
+		4701100E1FFB08C100AA4D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		470110111FFB08C100AA4D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		470110131FFB08C100AA4D9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
+		47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewController.swift; sourceTree = "<group>"; };
+		47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWorkoutViewController.swift; sourceTree = "<group>"; };
+		47C0A2E71FFB155E00C22A2E /* OffWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffWorkoutViewController.swift; sourceTree = "<group>"; };
+		47C0A2E91FFB177100C22A2E /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		47C0A2EB1FFB1A5200C22A2E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		47C0A2ED1FFB2A8F00C22A2E /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		47C0A2EF1FFB2ADB00C22A2E /* ExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewController.swift; sourceTree = "<group>"; };
+		47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
+		47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePhase.swift; sourceTree = "<group>"; };
+		47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhaseViewController.swift; sourceTree = "<group>"; };
+		AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
+		DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		47010FFE1FFB08C000AA4D9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B62F9DE42F15F77D8ADF55B4 /* Pods_FitTime.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47010FF81FFB08C000AA4D9D = {
+			isa = PBXGroup;
+			children = (
+				470110031FFB08C000AA4D9D /* FitTime */,
+				470110021FFB08C000AA4D9D /* Products */,
+				FC11C0C49AC514A458C2F1C7 /* Pods */,
+				B127370A3DA98DAE9548A551 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		470110021FFB08C000AA4D9D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				470110011FFB08C000AA4D9D /* FitTime.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		470110031FFB08C000AA4D9D /* FitTime */ = {
+			isa = PBXGroup;
+			children = (
+				470110041FFB08C000AA4D9D /* AppDelegate.swift */,
+				470110061FFB08C000AA4D9D /* ViewController.swift */,
+				470110081FFB08C000AA4D9D /* Main.storyboard */,
+				4701100E1FFB08C100AA4D9D /* Assets.xcassets */,
+				470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */,
+				470110131FFB08C100AA4D9D /* Info.plist */,
+				4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */,
+				47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */,
+				47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */,
+				47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */,
+				47C0A2E71FFB155E00C22A2E /* OffWorkoutViewController.swift */,
+				47C0A2E91FFB177100C22A2E /* Exercise.swift */,
+				47C0A2EB1FFB1A5200C22A2E /* Workout.swift */,
+				47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */,
+				47C0A2ED1FFB2A8F00C22A2E /* RootViewController.swift */,
+				47C0A2EF1FFB2ADB00C22A2E /* ExercisesViewController.swift */,
+				47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */,
+				47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */,
+			);
+			path = FitTime;
+			sourceTree = "<group>";
+		};
+		B127370A3DA98DAE9548A551 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC11C0C49AC514A458C2F1C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */,
+				37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		470110001FFB08C000AA4D9D /* FitTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 470110161FFB08C100AA4D9D /* Build configuration list for PBXNativeTarget "FitTime" */;
+			buildPhases = (
+				2B76C70742E5FD14FA55F0AA /* [CP] Check Pods Manifest.lock */,
+				47010FFD1FFB08C000AA4D9D /* Sources */,
+				47010FFE1FFB08C000AA4D9D /* Frameworks */,
+				47010FFF1FFB08C000AA4D9D /* Resources */,
+				1B53BB4BA56A7E50AC33C941 /* [CP] Embed Pods Frameworks */,
+				FAAFA96C26F755707D04BC14 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FitTime;
+			productName = FitTime;
+			productReference = 470110011FFB08C000AA4D9D /* FitTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		47010FF91FFB08C000AA4D9D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = LateRisers;
+				TargetAttributes = {
+					470110001FFB08C000AA4D9D = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 47010FFC1FFB08C000AA4D9D /* Build configuration list for PBXProject "FitTime" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 47010FF81FFB08C000AA4D9D;
+			productRefGroup = 470110021FFB08C000AA4D9D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				470110001FFB08C000AA4D9D /* FitTime */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47010FFF1FFB08C000AA4D9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */,
+				4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */,
+				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B53BB4BA56A7E50AC33C941 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B76C70742E5FD14FA55F0AA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FAAFA96C26F755707D04BC14 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		47010FFD1FFB08C000AA4D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C0A2EE1FFB2A8F00C22A2E /* RootViewController.swift in Sources */,
+				47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */,
+				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
+				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,
+				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
+				47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */,
+				47C0A2F01FFB2ADB00C22A2E /* ExercisesViewController.swift in Sources */,
+				47C0A2EC1FFB1A5200C22A2E /* Workout.swift in Sources */,
+				47C0A2F21FFB2AE700C22A2E /* WorkoutsViewController.swift in Sources */,
+				47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */,
+				47C0A2F61FFB4A8100C22A2E /* CreatePhaseViewController.swift in Sources */,
+				47C0A2E41FFB153800C22A2E /* CreateWorkoutViewController.swift in Sources */,
+				470110051FFB08C000AA4D9D /* AppDelegate.swift in Sources */,
+				4701100D1FFB08C100AA4D9D /* FitTime.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		470110081FFB08C000AA4D9D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				470110091FFB08C000AA4D9D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				470110111FFB08C100AA4D9D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		470110141FFB08C100AA4D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		470110151FFB08C100AA4D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		470110171FFB08C100AA4D9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				INFOPLIST_FILE = FitTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		470110181FFB08C100AA4D9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				INFOPLIST_FILE = FitTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		47010FFC1FFB08C000AA4D9D /* Build configuration list for PBXProject "FitTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				470110141FFB08C100AA4D9D /* Debug */,
+				470110151FFB08C100AA4D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		470110161FFB08C100AA4D9D /* Build configuration list for PBXNativeTarget "FitTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				470110171FFB08C100AA4D9D /* Debug */,
+				470110181FFB08C100AA4D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4701100C1FFB08C100AA4D9D /* FitTime.xcdatamodel */,
+			);
+			currentVersion = 4701100C1FFB08C100AA4D9D /* FitTime.xcdatamodel */;
+			path = FitTime.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 47010FF91FFB08C000AA4D9D /* Project object */;
+}
