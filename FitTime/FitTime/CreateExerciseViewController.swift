@@ -15,12 +15,17 @@ class CreateExerciseViewController: UIViewController {
     @IBOutlet weak var typeSegment: UISegmentedControl!
     @IBOutlet weak var phaseTableView: UITableView!
 
+    @IBOutlet weak var muscleTableView: UITableView!
     var exercise: Exercise?
 
     var phases = List<ExercisePhase>()
+    var muscles = [MuscleTypeWrapper]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        muscles = MuscleType.getMuscleDatasource(with: exercise)
 
         if let ex = exercise {
             nameLabel.text = ex.name
@@ -45,8 +50,10 @@ class CreateExerciseViewController: UIViewController {
         let realm = try! Realm()
 
         if let ex = exercise {
+
             // Persist your data easily
             try! realm.write {
+                exercise?.muscleGroups = muscles.filter{ $0.isSelected }.map{ $0.muscle }
                 realm.add(ex, update: true)
             }
         } else {
@@ -54,6 +61,7 @@ class CreateExerciseViewController: UIViewController {
             exercise.name = name
             exercise.typeEnum = typeSegment.selectedSegmentIndex == 0 ? .pull : .push
             exercise.phases.append(objectsIn: phases)
+            exercise.muscleGroups = muscles.filter{ $0.isSelected }.map{ $0.muscle }
 
             // Persist your data easily
             try! realm.write {
@@ -83,86 +91,122 @@ extension CreateExerciseViewController: CreatePhaseViewControllerDelegate {
 
 extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
+        if tableView == phaseTableView {
+            if section == 0 {
+                return 1
+            }
+
+            return phases.count
         }
 
-        return phases.count
+        return muscles.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if tableView == phaseTableView {
+            return 2
+        }
+
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "add", for: indexPath)
-            cell.textLabel?.text = "Add Phases"
+        if tableView == phaseTableView {
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "add", for: indexPath)
+                cell.textLabel?.text = "Add Phases"
+                return cell
+            }
+
+            let phase = phases[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "phase", for: indexPath)
+            cell.textLabel?.text = phase.name
+            cell.detailTextLabel?.text = "\(phase.interval)"
             return cell
         }
 
-        let phase = phases[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "phase", for: indexPath)
-        cell.textLabel?.text = phase.name
-        cell.detailTextLabel?.text = "\(phase.interval)"
+        let muscle = muscles[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = muscle.muscle.rawValue
+        cell.backgroundColor = muscle.isSelected ? .red : .white
+
+        //cell.detailTextLabel?.text = "\(phase.interval)"
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            if let createVC = storyboard?.instantiateViewController(withIdentifier: "CreatePhaseViewController") as? CreatePhaseViewController {
-                createVC.delegate = self
-                navigationController?.pushViewController(createVC, animated: true)
+        if tableView == phaseTableView {
+            if indexPath.section == 0 {
+                if let createVC = storyboard?.instantiateViewController(withIdentifier: "CreatePhaseViewController") as? CreatePhaseViewController {
+                    createVC.delegate = self
+                    navigationController?.pushViewController(createVC, animated: true)
+                }
             }
         }
+
+        let muscle = muscles[indexPath.row]
+        muscle.isSelected = !muscle.isSelected
+
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 0 {
-            return false
+        if tableView == phaseTableView {
+            if indexPath.section == 0 {
+                return false
+            }
+
+            return true
         }
 
-        return true
+        return false
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 0 {
-            return false
+        if tableView == phaseTableView {
+            if indexPath.section == 0 {
+                return false
+            }
+
+            return true
         }
 
-        return true
+        return false
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let phase = phases[sourceIndexPath.row]
-
-        if let _ = exercise {
-            let realm = try! Realm()
-            try! realm.write {
-                phases.remove(at: sourceIndexPath.row)
-                phases.insert(phase, at: destinationIndexPath.row)
-            }
-        } else {
-            phases.remove(at: sourceIndexPath.row)
-            phases.insert(phase, at: destinationIndexPath.row)
-        }
-
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete, indexPath.section == 1 {
-            let index = indexPath.row
+        if tableView == phaseTableView {
+            let phase = phases[sourceIndexPath.row]
 
             if let _ = exercise {
                 let realm = try! Realm()
                 try! realm.write {
-                    phases.remove(at: index)
+                    phases.remove(at: sourceIndexPath.row)
+                    phases.insert(phase, at: destinationIndexPath.row)
                 }
             } else {
-                phases.remove(at: index)
+                phases.remove(at: sourceIndexPath.row)
+                phases.insert(phase, at: destinationIndexPath.row)
             }
+        }
+    }
 
-            phaseTableView.deleteRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if tableView == phaseTableView {
+            if editingStyle == .delete, indexPath.section == 1 {
+                let index = indexPath.row
+
+                if let _ = exercise {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        phases.remove(at: index)
+                    }
+                } else {
+                    phases.remove(at: index)
+                }
+
+                phaseTableView.deleteRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+            }
         }
     }
 }

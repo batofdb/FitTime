@@ -75,10 +75,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="jbg-U2-YFN" firstAttribute="top" secondItem="OZ0-qS-HuI" secondAttribute="top" id="5fI-jL-Ju9"/>
+                            <constraint firstAttribute="trailing" secondItem="jbg-U2-YFN" secondAttribute="trailing" id="9JH-rn-Xeu"/>
+                            <constraint firstItem="jbg-U2-YFN" firstAttribute="leading" secondItem="oZO-k4-tYl" secondAttribute="leading" id="Czi-0b-aHN"/>
                             <constraint firstAttribute="trailing" secondItem="jbg-U2-YFN" secondAttribute="trailing" id="NhN-fq-oMC"/>
                             <constraint firstItem="jbg-U2-YFN" firstAttribute="leading" secondItem="oZO-k4-tYl" secondAttribute="leading" id="WvB-ip-vEh"/>
                             <constraint firstItem="jbg-U2-YFN" firstAttribute="top" secondItem="OZ0-qS-HuI" secondAttribute="top" id="dYo-Kc-KN8"/>
-                            <constraint firstAttribute="bottom" secondItem="jbg-U2-YFN" secondAttribute="bottom" id="mf9-cP-q0O"/>
+                            <constraint firstAttribute="bottom" secondItem="jbg-U2-YFN" secondAttribute="bottom" id="yHD-Yg-T4q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OZ0-qS-HuI"/>
                     </view>
@@ -202,7 +205,7 @@
                                         </segments>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Kx-1B-kDb">
-                                        <rect key="frame" x="0.0" y="173" width="375" height="474"/>
+                                        <rect key="frame" x="0.0" y="173" width="375" height="285"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="add" id="9JX-xr-d8u">
@@ -227,6 +230,27 @@
                                             <outlet property="delegate" destination="4x7-VM-C16" id="rfb-Js-Krg"/>
                                         </connections>
                                     </tableView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lmE-87-FKs">
+                                        <rect key="frame" x="0.0" y="482" width="375" height="165"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="165" id="M25-k1-HBS"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="ilr-rW-V5B">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ilr-rW-V5B" id="k9e-Kc-F2A">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="4x7-VM-C16" id="U7y-Ch-iFX"/>
+                                            <outlet property="delegate" destination="4x7-VM-C16" id="LDx-ac-1hb"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -236,8 +260,11 @@
                                     <constraint firstItem="M2M-Vq-deP" firstAttribute="top" secondItem="gLm-N1-Ask" secondAttribute="bottom" constant="45" id="Ltk-Gx-hje"/>
                                     <constraint firstItem="M2M-Vq-deP" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" constant="127" id="act-GK-zBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="6Kx-1B-kDb" secondAttribute="trailing" id="gJk-zX-IpT"/>
-                                    <constraint firstAttribute="bottom" secondItem="6Kx-1B-kDb" secondAttribute="bottom" id="gsi-ji-OJw"/>
+                                    <constraint firstAttribute="bottom" secondItem="lmE-87-FKs" secondAttribute="bottom" id="gSU-pe-CUl"/>
                                     <constraint firstItem="gLm-N1-Ask" firstAttribute="top" secondItem="YE5-6u-xYO" secondAttribute="top" constant="19" id="kyn-Zo-u8B"/>
+                                    <constraint firstAttribute="trailing" secondItem="lmE-87-FKs" secondAttribute="trailing" id="uy7-Xg-HZu"/>
+                                    <constraint firstItem="lmE-87-FKs" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" id="vru-9V-CnW"/>
+                                    <constraint firstItem="lmE-87-FKs" firstAttribute="top" secondItem="6Kx-1B-kDb" secondAttribute="bottom" constant="24" id="ymJ-KN-Xlv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -251,6 +278,7 @@
                         <viewLayoutGuide key="safeArea" id="yVg-oT-TQD"/>
                     </view>
                     <connections>
+                        <outlet property="muscleTableView" destination="lmE-87-FKs" id="2no-mb-ceb"/>
                         <outlet property="nameLabel" destination="gLm-N1-Ask" id="8wL-KN-hV5"/>
                         <outlet property="phaseTableView" destination="6Kx-1B-kDb" id="h2v-fc-HZP"/>
                         <outlet property="typeSegment" destination="M2M-Vq-deP" id="pJr-El-ee5"/>

@@ -1,0 +1,6 @@
+framework module Pods_FitTime {
+  umbrella header "Pods-FitTime-umbrella.h"
+
+  export *
+  module * { export * }
+}
