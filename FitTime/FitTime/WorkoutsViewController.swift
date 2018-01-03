@@ -19,11 +19,11 @@ class WorkoutsViewController: UIViewController {
 
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         navigationItem.rightBarButtonItems = [add]
-        // Do any additional setup after loading the view.
     }
 
     @objc func addTapped() {
-
+        let vc = storyboard?.instantiateViewController(withIdentifier: "CreateWorkoutViewController")
+        navigationController?.pushViewController(vc!, animated: true)
     }
 }
 

@@ -107,7 +107,6 @@ class MuscleTypeWrapper {
 
 class Exercise: Object {
     @objc dynamic var name: String = ""
-    @objc dynamic var type: Int = 0
 
     override static func primaryKey() -> String? {
         return "name"
@@ -127,6 +126,7 @@ class Exercise: Object {
         }
     }
 
+    @objc dynamic var type: Int = 0
     var typeEnum: ExerciseType {
         get {
             return ExerciseType(rawValue: type) ?? .unknown

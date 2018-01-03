@@ -68,9 +68,6 @@ class CreateExerciseViewController: UIViewController {
                 realm.add(exercise, update: true)
             }
         }
-
-
-
         navigationController?.popViewController(animated: true)
     }
 }
