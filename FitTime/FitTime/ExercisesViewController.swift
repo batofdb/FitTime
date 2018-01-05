@@ -69,6 +69,7 @@ extension ExercisesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "title", for: indexPath)
+            cell.selectionStyle = .none
             return cell
         }
 
@@ -76,6 +77,7 @@ extension ExercisesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = exercise.name
         cell.detailTextLabel?.text = exercise.typeEnum == .pull ? "Pull" : "Push"
+        cell.selectionStyle = .none
         return cell
     }
 

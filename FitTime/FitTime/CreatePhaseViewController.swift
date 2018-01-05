@@ -22,7 +22,7 @@ class CreatePhaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        hideKeyboard()
         // Do any additional setup after loading the view.
     }
 

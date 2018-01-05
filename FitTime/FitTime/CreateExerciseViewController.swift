@@ -10,27 +10,26 @@ import UIKit
 import RealmSwift
 
 class CreateExerciseViewController: UIViewController {
-
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var typeSegment: UISegmentedControl!
     @IBOutlet weak var phaseTableView: UITableView!
-
     @IBOutlet weak var muscleTableView: UITableView!
+
     var exercise: Exercise?
-
-    var phases = List<ExercisePhase>()
+    //var phases = List<ExercisePhase>()
+    var phases = [ExercisePhase]()
     var muscles = [MuscleTypeWrapper]()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboard()
 
         muscles = MuscleType.getMuscleDatasource(with: exercise)
 
         if let ex = exercise {
             nameLabel.text = ex.name
             typeSegment.selectedSegmentIndex = ex.typeEnum == .pull ? 0 : 1
-            phases = ex.phases
+            phases = Array(ex.phases)
         }
 
         let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))
@@ -54,6 +53,8 @@ class CreateExerciseViewController: UIViewController {
             // Persist your data easily
             try! realm.write {
                 exercise?.muscleGroups = muscles.filter{ $0.isSelected }.map{ $0.muscle }
+                ex.phases.removeAll()
+                ex.phases.append(objectsIn: phases)
                 realm.add(ex, update: true)
             }
         } else {
@@ -74,14 +75,16 @@ class CreateExerciseViewController: UIViewController {
 
 extension CreateExerciseViewController: CreatePhaseViewControllerDelegate {
     func saved(phase: ExercisePhase) {
-        if let ex = exercise {
-            let realm = try! Realm()
-            try! realm.write {
-                phases.append(phase)
-            }
-        } else {
-            phases.append(phase)
-        }
+//        if let ex = exercise {
+//            let realm = try! Realm()
+//            try! realm.write {
+//                phases.append(phase)
+//            }
+//        } else {
+//            phases.append(phase)
+//        }
+
+        phases.append(phase)
         phaseTableView.reloadData()
     }
 }
@@ -112,6 +115,7 @@ extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelega
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "add", for: indexPath)
                 cell.textLabel?.text = "Add Phases"
+                cell.selectionStyle = .none
                 return cell
             }
 
@@ -119,6 +123,7 @@ extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "phase", for: indexPath)
             cell.textLabel?.text = phase.name
             cell.detailTextLabel?.text = "\(phase.interval)"
+            cell.selectionStyle = .none
             return cell
         }
 
@@ -126,6 +131,7 @@ extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = muscle.muscle.rawValue
         cell.backgroundColor = muscle.isSelected ? .red : .white
+        cell.selectionStyle = .none
 
         //cell.detailTextLabel?.text = "\(phase.interval)"
         return cell
@@ -171,20 +177,29 @@ extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelega
         return false
     }
 
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if sourceIndexPath.section == 1 && proposedDestinationIndexPath.section == 0 {
+            return IndexPath(row: 0, section: 1)
+        }
+
+        return proposedDestinationIndexPath
+    }
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if tableView == phaseTableView {
             let phase = phases[sourceIndexPath.row]
 
-            if let _ = exercise {
-                let realm = try! Realm()
-                try! realm.write {
-                    phases.remove(at: sourceIndexPath.row)
-                    phases.insert(phase, at: destinationIndexPath.row)
-                }
-            } else {
-                phases.remove(at: sourceIndexPath.row)
-                phases.insert(phase, at: destinationIndexPath.row)
-            }
+            phases.remove(at: sourceIndexPath.row)
+            phases.insert(phase, at: destinationIndexPath.row)
+//            if let _ = exercise {
+//                let realm = try! Realm()
+//                try! realm.write {
+//                    phases.remove(at: sourceIndexPath.row)
+//                    phases.insert(phase, at: destinationIndexPath.row)
+//                }
+//            } else {
+//
+//            }
         }
     }
 
@@ -193,15 +208,16 @@ extension CreateExerciseViewController: UITableViewDataSource, UITableViewDelega
             if editingStyle == .delete, indexPath.section == 1 {
                 let index = indexPath.row
 
-                if let _ = exercise {
-                    let realm = try! Realm()
-                    try! realm.write {
-                        phases.remove(at: index)
-                    }
-                } else {
-                    phases.remove(at: index)
-                }
+//                if let _ = exercise {
+//                    let realm = try! Realm()
+//                    try! realm.write {
+//                        phases.remove(at: index)
+//                    }
+//                } else {
+//                    phases.remove(at: index)
+//                }
 
+                phases.remove(at: index)
                 phaseTableView.deleteRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
             }
         }

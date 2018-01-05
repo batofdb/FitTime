@@ -9,10 +9,10 @@
 import UIKit
 import RealmSwift
 
-enum ExerciseToWorkoutBridgeType: Int {
-    case repetition = 0
-    case time
-    case unknown
+enum ExerciseToWorkoutBridgeType: String {
+    case repetition = "Reps"
+    case time = "Time"
+    case unknown = ""
 }
 
 class Workout: Object {
@@ -24,6 +24,10 @@ class Workout: Object {
     @objc dynamic var cooldown: Int = 0
     @objc dynamic var warmup: Int = 0
     @objc dynamic var dates: String = ""
+
+    @objc dynamic var setRest: Int = 0
+    @objc dynamic var repRest: Int = 0
+    
     @objc dynamic var datesPerformed: String = ""
 
     var preExercises = List<ExerciseToWorkoutBridge>()
@@ -42,12 +46,30 @@ class ExerciseToWorkoutBridge: Object {
     @objc dynamic var rootExercise: Exercise?
     @objc dynamic var time: Int = 0
     @objc dynamic var repetitions: Int = 0
+
+    @objc dynamic var rest: Int = 0
+
+    @objc dynamic var intervalType: Int = 0
+    var intervalTypeEnum: ExerciseIntervalType {
+        get {
+            return ExerciseIntervalType(rawValue: intervalType) ?? .unknown
+        }
+
+        set {
+            intervalType = newValue.rawValue
+        }
+    }
+
     @objc dynamic var weight: Int = 0
     @objc dynamic var machineSetting: Int = 0
-    @objc dynamic var timestamp: String = ""
-    
 
-    @objc dynamic var type: Int = 0
+    @objc dynamic var goalWeight: Int = 0
+    @objc dynamic var goalMachineSetting: Int = 0
+
+    @objc dynamic var timestamp: String = ""
+    @objc dynamic var heartRate: CGFloat = 0.0
+    
+    @objc dynamic var type: String = ""
     var typeEnum: ExerciseToWorkoutBridgeType {
         get {
             return ExerciseToWorkoutBridgeType(rawValue: type) ?? .unknown
