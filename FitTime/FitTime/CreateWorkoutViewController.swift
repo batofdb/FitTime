@@ -9,6 +9,11 @@
 import UIKit
 import RealmSwift
 
+enum WorkoutFormat: Int {
+    case basic = 0
+    case advanced
+}
+
 enum ExerciseIntervalType: Int {
     case pre
     case main
@@ -38,11 +43,25 @@ class CreateWorkoutViewController: UIViewController {
     @IBOutlet weak var repRest: UITextField!
     @IBOutlet weak var setRest: UITextField!
 
+    @IBOutlet weak var workoutFormat: UISegmentedControl!
     var workout: Workout?
+    var workoutType: WorkoutFormat = .basic {
+        didSet {
+            if workoutType == .advanced {
+                updateWorkout(with: self.sets.text ?? "1")
+            } else {
+                exerciseTableView.reloadData()
+            }
+        }
+    }
 
+    @IBOutlet weak var sets: UITextField!
+    
     var mainExercises = [ExerciseToWorkoutBridge]()
     var preExercises = [ExerciseToWorkoutBridge]()
     var postExercises = [ExerciseToWorkoutBridge]()
+
+    var temporaryWorkout = [ExerciseTime]()
 
     @IBOutlet weak var exerciseTableView: UITableView!
 
@@ -50,11 +69,25 @@ class CreateWorkoutViewController: UIViewController {
         super.viewDidLoad()
         hideKeyboard()
 
+        cooldown.delegate = self
+        warmup.delegate = self
+        repRest.delegate = self
+        setRest.delegate = self
+        sets.delegate = self
+        
+
+        sets.text = "1"
+
         let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))
         navigationItem.rightBarButtonItems = [save]
 
         exerciseTableView.isEditing = true
         exerciseTableView.allowsSelectionDuringEditing = true
+
+        workoutFormat.setTitle("Basic", forSegmentAt: WorkoutFormat.basic.rawValue)
+        workoutFormat.setTitle("Advanced", forSegmentAt: WorkoutFormat.advanced.rawValue)
+
+        workoutFormat.selectedSegmentIndex = 0
 
         if let w = workout {
             mainExercises = Array(w.mainExercises)
@@ -67,6 +100,10 @@ class CreateWorkoutViewController: UIViewController {
         }
 
         exerciseTableView.reloadData()
+    }
+
+    @IBAction func workoutFormatChanged(_ sender: UISegmentedControl) {
+        workoutType = sender.selectedSegmentIndex == 0 ? .basic : .advanced
     }
 
     @objc func savedTapped() {
@@ -109,96 +146,129 @@ class CreateWorkoutViewController: UIViewController {
 
 extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return preExercises.count
-        } else if section == 1 {
+        if workoutType == .basic {
+            if section == 0 {
+                return preExercises.count
+            } else if section == 1 {
+                return mainExercises.count
+            } else {
+                return postExercises.count
+            }
+
             return mainExercises.count
         } else {
-            return postExercises.count
+            return temporaryWorkout.count
         }
-
-        return mainExercises.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView == exerciseTableView {
-            return 3
-        }
+        if workoutType == .basic {
+            if tableView == exerciseTableView {
+                return 3
+            }
 
-        return 1
+            return 1
+        } else {
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exercise", for: indexPath)
 
-        var exercise = ExerciseToWorkoutBridge()
-        if indexPath.section == 0 {
-            exercise = preExercises[indexPath.row]
-            //cell.backgroundColor = .yellow
-        } else if indexPath.section == 1 {
-            exercise = mainExercises[indexPath.row]
-            //cell.backgroundColor = .green
+        if workoutType == .basic  {
+            var exercise = ExerciseToWorkoutBridge()
+            if indexPath.section == 0 {
+                exercise = preExercises[indexPath.row]
+                //cell.backgroundColor = .yellow
+            } else if indexPath.section == 1 {
+                exercise = mainExercises[indexPath.row]
+                //cell.backgroundColor = .green
+            } else {
+                exercise = postExercises[indexPath.row]
+                //cell.backgroundColor = .blue
+            }
+
+
+            cell.textLabel?.text = exercise.name
+            let ex = ExerciseTime(exercise: exercise)
+            cell.detailTextLabel?.text = "Duration: \(ex.duration)"
+            cell.selectionStyle = .none
+            //cell.detailTextLabel?.text = "\(phase.interval)"
         } else {
-            exercise = postExercises[indexPath.row]
-            //cell.backgroundColor = .blue
+            var time = temporaryWorkout[indexPath.row]
+            cell.textLabel?.text = time.name
+            cell.detailTextLabel?.text = "Duration: \(time.duration)"
+            cell.selectionStyle = .none
         }
-
-
-        cell.textLabel?.text = exercise.name
-        cell.selectionStyle = .none
-        //cell.detailTextLabel?.text = "\(phase.interval)"
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == exerciseTableView {
-            var arr = [ExerciseToWorkoutBridge]()
-            var ex = ExerciseToWorkoutBridge()
+        if workoutType == .basic {
+            if tableView == exerciseTableView {
+                var ex = ExerciseToWorkoutBridge()
 
-            switch indexPath.section {
-            case 0:
-                arr = preExercises
-                ex = preExercises[indexPath.row]
-            case 2:
-                arr = postExercises
-                ex = postExercises[indexPath.row]
-            default:
-                arr = mainExercises
-                ex = mainExercises[indexPath.row]
+                switch indexPath.section {
+                case 0:
+                    ex = preExercises[indexPath.row]
+                case 2:
+                    ex = postExercises[indexPath.row]
+                default:
+                    ex = mainExercises[indexPath.row]
+                }
+
+                if let createVC = storyboard?.instantiateViewController(withIdentifier: "ExerciseRefinementViewController") as? ExerciseRefinementViewController {
+                    createVC.delegate = self
+                    createVC.existingExerciseBridge = ex
+
+                    switch indexPath.section {
+                    case 0:
+                        createVC.exerciseIntervalType = .pre
+                    case 2:
+                        createVC.exerciseIntervalType = .post
+                    default:
+                        createVC.exerciseIntervalType = .main
+                    }
+
+                    navigationController?.pushViewController(createVC, animated: true)
+                }
             }
 
-            if let createVC = storyboard?.instantiateViewController(withIdentifier: "ExerciseRefinementViewController") as? ExerciseRefinementViewController {
-                createVC.delegate = self
-                createVC.existingExerciseBridge = ex
-                navigationController?.pushViewController(createVC, animated: true)
-            }
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
-
-        tableView.reloadRows(at: [indexPath], with: .none)
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        if tableView == exerciseTableView {
-//            if indexPath.section == 0 {
-//                return false
-//            }
-//
-//            return true
-//        }
+        if workoutType == .basic {
+    //        if tableView == exerciseTableView {
+    //            if indexPath.section == 0 {
+    //                return false
+    //            }
+    //
+    //            return true
+    //        }
 
-        return true
+            return true
+        }
+
+        return false
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        if tableView == exerciseTableView {
-//            if indexPath.section == 0 {
-//                return false
-//            }
-//
-//            return true
-//        }
+        if workoutType == .basic {
+    //        if tableView == exerciseTableView {
+    //            if indexPath.section == 0 {
+    //                return false
+    //            }
+    //
+    //            return true
+    //        }
 
-        return true
+            return true
+        }
+
+        return false
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -241,11 +311,14 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if sourceIndexPath.section == 1 && proposedDestinationIndexPath.section == 0 {
-            return IndexPath(row: 0, section: 1)
+        if workoutType == .basic {
+            if sourceIndexPath.section == 1 && proposedDestinationIndexPath.section == 0 {
+                return IndexPath(row: 0, section: 1)
+            }
         }
 
         return proposedDestinationIndexPath
+
     }
 
 
@@ -273,12 +346,16 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Warmup"
-        } else if section == 1 {
-            return "Exercises"
+        if workoutType == .basic {
+            if section == 0 {
+                return "Warmup"
+            } else if section == 1 {
+                return "Exercises"
+            } else {
+                return "Cooldown"
+            }
         } else {
-            return "Cooldown"
+            return nil
         }
     }
 }
@@ -307,6 +384,51 @@ extension CreateWorkoutViewController: ExerciseRefinementViewControllerDelegate 
             selectIn(exercises: &postExercises)
         default:
             selectIn(exercises: &mainExercises)
+        }
+
+        exerciseTableView.reloadData()
+    }
+}
+
+extension CreateWorkoutViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let newString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        if newString != "" {
+            updateWorkout(with: newString)
+        }
+
+        return true
+    }
+
+    func updateWorkout(with setsString: String) {
+        func createExerciseSet() {
+            for main in preExercises {
+                let time = ExerciseTime(exercise: main)
+                temporaryWorkout.append(time)
+            }
+
+            for main in mainExercises {
+                let time = ExerciseTime(exercise: main)
+                temporaryWorkout.append(time)
+            }
+
+            for main in postExercises {
+                let time = ExerciseTime(exercise: main)
+                temporaryWorkout.append(time)
+            }
+        }
+
+        temporaryWorkout.removeAll()
+
+        var sets: Int = 1
+
+        if let setsInt = Int(setsString) {
+            sets = setsInt
+        }
+
+        for _ in 1...sets {
+            createExerciseSet()
         }
 
         exerciseTableView.reloadData()

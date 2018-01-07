@@ -63,6 +63,9 @@ class ExerciseToWorkoutBridge: Object {
     @objc dynamic var weight: Int = 0
     @objc dynamic var machineSetting: Int = 0
 
+    var weightProgression = List<Int>()
+    var machineSettingProgression = List<Int>()
+
     @objc dynamic var goalWeight: Int = 0
     @objc dynamic var goalMachineSetting: Int = 0
 
