@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Reduce initial textfield lag
+        let tf = UITextField()
+        self.window?.addSubview(tf)
+        tf.becomeFirstResponder()
+        tf.resignFirstResponder()
+        tf.removeFromSuperview()
+
         let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         Realm.Configuration.defaultConfiguration = configuration
         do { _ = try Realm() } catch {}

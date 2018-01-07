@@ -202,6 +202,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="4Xp-R4-T3w"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="cooldown" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ugX-Ry-dHf">
                                 <rect key="frame" x="29" y="114" width="97" height="30"/>
@@ -212,6 +215,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="Bst-WP-pfb"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faU-U9-olg">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
@@ -293,12 +299,18 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="XVv-9J-qIw"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set Rest" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-MY-2KH">
                                 <rect key="frame" x="144" y="175" width="97" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="hRa-9a-i19"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xe-Qf-lMb">
                                 <rect key="frame" x="144" y="282" width="86" height="42"/>
@@ -312,6 +324,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="dIl-bc-Aqa"/>
+                                </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Obo-C9-gxq">
                                 <rect key="frame" x="127" y="246" width="121" height="28"/>
@@ -368,6 +383,9 @@
                         <viewLayoutGuide key="safeArea" id="Bdg-Ff-UeL"/>
                     </view>
                     <connections>
+                        <outlet property="addMain" destination="1Xe-Qf-lMb" id="DiU-Yf-x5w"/>
+                        <outlet property="addPost" destination="doe-Z0-oZA" id="TdZ-1e-di2"/>
+                        <outlet property="addPre" destination="nJE-b2-V71" id="gok-nL-Tkj"/>
                         <outlet property="cooldown" destination="ugX-Ry-dHf" id="mGf-8A-5ZP"/>
                         <outlet property="exerciseTableView" destination="KL1-0n-dg5" id="rt4-87-HD4"/>
                         <outlet property="name" destination="czZ-fV-5hj" id="EnL-md-NFl"/>

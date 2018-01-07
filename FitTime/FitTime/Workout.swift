@@ -27,6 +27,7 @@ class Workout: Object {
 
     @objc dynamic var setRest: Int = 0
     @objc dynamic var repRest: Int = 0
+    @objc dynamic var sets: Int = 0
     
     @objc dynamic var datesPerformed: String = ""
 

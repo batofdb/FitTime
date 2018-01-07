@@ -12,27 +12,59 @@ import RealmSwift
 protocol Timeable {
     var duration: Int { get set }
     var name: String { get set }
+    var type: TimerType { get set }
+}
+
+struct RestTime: Timeable {
+    var type: TimerType
+
+    var duration: Int
+    var name: String
+
+    init(rest: Int, type: TimerType) {
+        self.duration = rest
+        self.name = "Rest"
+        self.type = type
+    }
 }
 
 struct CooldownTime: Timeable {
+    var type: TimerType
+
     var duration: Int
     var rest: Int?
     var name: String
+
+    init(cooldown: Int) {
+        self.duration = cooldown
+        self.name = "Cooldown"
+        self.type = .cooldown
+    }
 }
 
 struct WarmupTime: Timeable {
+    var type: TimerType
+
     var duration: Int
     var rest: Int?
     var name: String
+
+    init(warmup: Int) {
+        self.duration = warmup
+        self.name = "Warmup"
+        self.type = .warmup
+    }
 }
 
 struct ExerciseTime: Timeable {
+    var type: TimerType
+
     var duration: Int
     var rest: Int?
     var name: String
     var rootExercise: ExerciseToWorkoutBridge
 
-    init(exercise: ExerciseToWorkoutBridge) {
+    init(exercise: ExerciseToWorkoutBridge, type: TimerType?) {
         self.duration = 0
         self.rootExercise = exercise
         self.name = self.rootExercise.name
@@ -49,10 +81,14 @@ struct ExerciseTime: Timeable {
         } else {
             self.duration = self.rootExercise.time
         }
+
+        self.type = type ?? .cooldown
     }
 }
 
 struct SetTime: Timeable {
+    var type: TimerType
+
     var duration: Int
     var rest: Int?
     var name: String
@@ -61,6 +97,8 @@ struct SetTime: Timeable {
 }
 
 struct WorkoutTime: Timeable {
+    var type: TimerType
+
     var duration: Int
     var rest: Int?
     var name: String

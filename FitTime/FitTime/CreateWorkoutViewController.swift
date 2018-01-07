@@ -21,6 +21,33 @@ enum ExerciseIntervalType: Int {
     case unknown
 }
 
+enum TimerType: Hashable {
+    public var hashValue : Int {
+        return self.toInt()
+    }
+
+    /// Return an 'Int' value for each `Component` type so `Component` can conform to `Hashable`
+    private func toInt() -> Int {
+        switch self {
+        case .warmup:
+            return 0
+        case .cooldown:
+            return 1
+        case .main(_):
+            return 2
+        }
+
+    }
+
+    static func ==(lhs: TimerType, rhs: TimerType) -> Bool {
+        return lhs.toInt() == rhs.toInt()
+    }
+
+    case warmup
+    case main(set: Int)
+    case cooldown
+}
+
 extension UIViewController {
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
@@ -43,15 +70,24 @@ class CreateWorkoutViewController: UIViewController {
     @IBOutlet weak var repRest: UITextField!
     @IBOutlet weak var setRest: UITextField!
 
+    @IBOutlet weak var addPost: UIButton!
+    @IBOutlet weak var addMain: UIButton!
+    @IBOutlet weak var addPre: UIButton!
     @IBOutlet weak var workoutFormat: UISegmentedControl!
     var workout: Workout?
     var workoutType: WorkoutFormat = .basic {
         didSet {
+            addPre.isHidden = workoutType == .advanced
+            addMain.isHidden = workoutType == .advanced
+            addPost.isHidden = workoutType == .advanced
+
             if workoutType == .advanced {
-                updateWorkout(with: self.sets.text ?? "1")
+                updateWorkout()
             } else {
                 exerciseTableView.reloadData()
             }
+
+            exerciseTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 
@@ -61,13 +97,23 @@ class CreateWorkoutViewController: UIViewController {
     var preExercises = [ExerciseToWorkoutBridge]()
     var postExercises = [ExerciseToWorkoutBridge]()
 
-    var temporaryWorkout = [ExerciseTime]()
+    var warmupTimes = [Timeable]()
+    var mainTimes = [Timeable]()
+    var cooldownTimes = [Timeable]()
+
+
+    var temporaryWorkout = [Timeable]()
+    var sections = [[TimerType: Int]]()
+
+    var saveButton = UIBarButtonItem()
 
     @IBOutlet weak var exerciseTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboard()
+
+        sections = [[.warmup: 0], [.main(set: 0) : 0], [.cooldown : 0]]
 
         cooldown.delegate = self
         warmup.delegate = self
@@ -78,25 +124,33 @@ class CreateWorkoutViewController: UIViewController {
 
         sets.text = "1"
 
-        let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))
-        navigationItem.rightBarButtonItems = [save]
+        exerciseTableView.rowHeight = 44
+
+        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))
+        saveButton.isEnabled = true
+        navigationItem.rightBarButtonItems = [saveButton]
 
         exerciseTableView.isEditing = true
         exerciseTableView.allowsSelectionDuringEditing = true
 
-        workoutFormat.setTitle("Basic", forSegmentAt: WorkoutFormat.basic.rawValue)
-        workoutFormat.setTitle("Advanced", forSegmentAt: WorkoutFormat.advanced.rawValue)
+        workoutFormat.setTitle("Edit", forSegmentAt: WorkoutFormat.basic.rawValue)
+        workoutFormat.setTitle("View", forSegmentAt: WorkoutFormat.advanced.rawValue)
 
         workoutFormat.selectedSegmentIndex = 0
 
         if let w = workout {
+            preExercises = Array(w.preExercises)
             mainExercises = Array(w.mainExercises)
+            postExercises = Array(w.postExercises)
+
             name.text = w.name
             cooldown.text = "\(w.cooldown)"
             warmup.text = "\(w.warmup)"
 
             setRest.text = "\(w.setRest)"
             repRest.text = "\(w.repRest)"
+
+            sets.text = "\(w.sets)"
         }
 
         exerciseTableView.reloadData()
@@ -113,11 +167,20 @@ class CreateWorkoutViewController: UIViewController {
         workout.warmup = Int(warmup.text!)!
         workout.setRest = Int(setRest.text!)!
         workout.repRest = Int(repRest.text!)!
+        workout.sets = Int(sets.text!)!
+        workout.preExercises.append(objectsIn: preExercises)
         workout.mainExercises.append(objectsIn: mainExercises)
+        workout.postExercises.append(objectsIn: postExercises)
 
         let realm = try! Realm()
-        try! realm.write {
-            realm.add(workout, update: true)
+        do {
+            try realm.write {
+                realm.add(workout, update: true)
+            }
+
+            saveButton.isEnabled = false
+        } catch let _ as NSError {
+
         }
 
     }
@@ -141,6 +204,9 @@ class CreateWorkoutViewController: UIViewController {
             createVC.exerciseIntervalType = type
             navigationController?.pushViewController(createVC, animated: true)
         }
+    }
+    @IBAction func textfieldChanged(_ sender: UITextField) {
+        updateWorkout()
     }
 }
 
@@ -191,7 +257,8 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
 
 
             cell.textLabel?.text = exercise.name
-            let ex = ExerciseTime(exercise: exercise)
+            let ex = ExerciseTime(exercise: exercise, type: nil)
+
             cell.detailTextLabel?.text = "Duration: \(ex.duration)"
             cell.selectionStyle = .none
             //cell.detailTextLabel?.text = "\(phase.interval)"
@@ -202,6 +269,10 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle = .none
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -350,7 +421,15 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
             if section == 0 {
                 return "Warmup"
             } else if section == 1 {
-                return "Exercises"
+                var setsStr = "1"
+
+                if let s = sets.text {
+                    setsStr = s.trimNonNumericCharacters()
+                }
+
+                let count = Int(setsStr) ?? 1
+
+                return "Exercises: \(setsStr) \(count == 1 ? "Set" : "Sets")"
             } else {
                 return "Cooldown"
             }
@@ -362,15 +441,17 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension CreateWorkoutViewController: ExerciseRefinementViewControllerDelegate {
     func selected(exercise: ExerciseToWorkoutBridge, for type: ExerciseIntervalType) {
-        func selectIn( exercises: inout [ExerciseToWorkoutBridge]) {
+        func selectIn(exercises: inout [ExerciseToWorkoutBridge]) {
             var found: Bool = false
 
+            /*
             for (idx, ex) in exercises.enumerated() {
                 if ex.name == exercise.name {
                     exercises[idx] = exercise
                     found = true
                 }
             }
+            */
 
             if !found {
                 exercises.append(exercise)
@@ -391,46 +472,101 @@ extension CreateWorkoutViewController: ExerciseRefinementViewControllerDelegate 
 }
 
 extension CreateWorkoutViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//
+//        let newString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+//        if newString != "" {
+//            self.updateWorkout(with: newString)
+//        }
+//
+//        if textField == sets {
+//            exerciseTableView.reloadData()
+//        }
+//
+//        return true
+//    }
 
-        let newString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        if newString != "" {
-            updateWorkout(with: newString)
-        }
-
-        return true
-    }
-
-    func updateWorkout(with setsString: String) {
-        func createExerciseSet() {
-            for main in preExercises {
-                let time = ExerciseTime(exercise: main)
+    func updateWorkout() {
+        func createExerciseTimer(forSet set: Int = 0, type: TimerType) {
+            func addExercise(ex: ExerciseToWorkoutBridge, isLast: Bool = false, type: TimerType) {
+                let time = ExerciseTime(exercise: ex, type: type)
                 temporaryWorkout.append(time)
+
+                var restStr: String = "0"
+                if !isLast {
+                    restStr = repRest.text ?? "0"
+                } else {
+                    restStr = setRest.text ?? "0"
+                }
+
+                temporaryWorkout.append(RestTime(rest: Int(restStr) ?? 0, type: type))
             }
 
-            for main in mainExercises {
-                let time = ExerciseTime(exercise: main)
-                temporaryWorkout.append(time)
-            }
+            switch type {
+                case .main(_):
+                    for main in mainExercises {
+                        addExercise(ex: main, isLast: main == mainExercises.last, type: type)
+                    }
 
-            for main in postExercises {
-                let time = ExerciseTime(exercise: main)
-                temporaryWorkout.append(time)
+                    addTimerSection(for: .main(set: 0), updateWithValue: mainExercises.count * 2)
+                case .warmup:
+                    for main in preExercises {
+                        addExercise(ex: main, isLast: main == preExercises.last, type: type)
+                    }
+                    addTimerSection(for: .warmup, updateWithValue: preExercises.count * 2)
+                case .cooldown:
+                    for main in postExercises {
+                        addExercise(ex: main, isLast: main == postExercises.last, type: type)
+                    }
+                    addTimerSection(for: .cooldown, updateWithValue: postExercises.count * 2)
             }
         }
 
         temporaryWorkout.removeAll()
+        resetTimerSection()
+
+        if let warm = warmup.text, warm != "" || warm != "0" {
+            temporaryWorkout.append(WarmupTime(warmup: Int(warm) ?? 0))
+            addTimerSection(for: .warmup)
+        }
 
         var sets: Int = 1
 
-        if let setsInt = Int(setsString) {
+        if let setsInt = Int(self.sets.text ?? "1") {
             sets = setsInt
         }
 
-        for _ in 1...sets {
-            createExerciseSet()
+        createExerciseTimer(type: .warmup)
+
+        for set in 1...sets {
+            createExerciseTimer(type: .main(set: set))
         }
 
-        exerciseTableView.reloadData()
+        createExerciseTimer(type: .cooldown)
+
+        if let cool = cooldown.text, cool != "" || cool != "0" {
+            temporaryWorkout.append(CooldownTime(cooldown: Int(cool) ?? 0))
+            addTimerSection(for: .cooldown)
+        }
+
+        self.exerciseTableView.reloadData()
+        print(sections)
+    }
+
+    func addTimerSection(for type: TimerType, updateWithValue value: Int = 1) {
+        for (idx, ty) in self.sections.enumerated() {
+            if let item = ty.first?.key, item == type, let oldValue = self.sections[idx][type] {
+                self.sections[idx][type] = oldValue + value
+            }
+        }
+    }
+
+    func resetTimerSection() {
+        for (idx, element) in sections.enumerated() {
+            if let key = element.keys.first {
+                self.sections[idx][key] = 0
+            }
+
+        }
     }
 }
