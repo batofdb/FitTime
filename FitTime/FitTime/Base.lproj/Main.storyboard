@@ -754,7 +754,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWg-5y-tw1">
-                                <rect key="frame" x="63" y="247" width="46" height="30"/>
+                                <rect key="frame" x="81" y="134" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6Pz-8U-5ZR"/>
                                     <constraint firstAttribute="width" constant="46" id="a3I-MK-IqX"/>
@@ -765,7 +765,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHF-el-J5h">
-                                <rect key="frame" x="142" y="247" width="46" height="30"/>
+                                <rect key="frame" x="160" y="134" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jI8-Lu-q6q"/>
                                     <constraint firstAttribute="width" constant="46" id="lug-Tm-sEa"/>
@@ -776,7 +776,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-F1-6Wm">
-                                <rect key="frame" x="229" y="247" width="46" height="30"/>
+                                <rect key="frame" x="247" y="134" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="0f9-Xr-bwc"/>
                                     <constraint firstAttribute="height" constant="30" id="nhN-RT-J7O"/>
@@ -786,21 +786,53 @@
                                     <action selector="onStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bcr-wS-VRC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ah-CW-oLX">
+                                <rect key="frame" x="24" y="134" width="30" height="30"/>
+                                <state key="normal" title="exit"/>
+                                <connections>
+                                    <action selector="onExistTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Xi-R6-hhj"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bJo-oe-wtl">
+                                <rect key="frame" x="0.0" y="193" width="375" height="474"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="0Xd-sj-hzI">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Xd-sj-hzI" id="JuO-M5-RqW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="3CJ-PM-DOJ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="3sQ-La-9xU"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="n3s-F1-6Wm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="227" id="1cY-AP-xCB"/>
-                            <constraint firstItem="fWg-5y-tw1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="227" id="60M-B9-ecz"/>
+                            <constraint firstItem="n3s-F1-6Wm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="114" id="1cY-AP-xCB"/>
+                            <constraint firstItem="5ah-CW-oLX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="1u8-aF-zGB"/>
+                            <constraint firstItem="fWg-5y-tw1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="114" id="60M-B9-ecz"/>
+                            <constraint firstItem="bJo-oe-wtl" firstAttribute="top" secondItem="fWg-5y-tw1" secondAttribute="bottom" constant="29" id="6zn-3g-1rG"/>
                             <constraint firstItem="OHF-el-J5h" firstAttribute="leading" secondItem="fWg-5y-tw1" secondAttribute="trailing" constant="33" id="9ue-J3-UU5"/>
                             <constraint firstItem="0u5-b9-6W4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="DuP-Qs-oys"/>
-                            <constraint firstItem="fWg-5y-tw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="HSD-M8-3tl"/>
+                            <constraint firstItem="fWg-5y-tw1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="HSD-M8-3tl"/>
                             <constraint firstItem="0u5-b9-6W4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="142" id="Pdb-aJ-CLk"/>
+                            <constraint firstItem="bJo-oe-wtl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Wc8-wY-P7y"/>
+                            <constraint firstItem="5ah-CW-oLX" firstAttribute="baseline" secondItem="fWg-5y-tw1" secondAttribute="baseline" id="Wfl-bX-htt"/>
                             <constraint firstItem="n3s-F1-6Wm" firstAttribute="leading" secondItem="OHF-el-J5h" secondAttribute="trailing" constant="41" id="XEv-AZ-2uW"/>
-                            <constraint firstItem="OHF-el-J5h" firstAttribute="top" secondItem="0u5-b9-6W4" secondAttribute="bottom" constant="121" id="XUt-XO-3do"/>
+                            <constraint firstItem="OHF-el-J5h" firstAttribute="top" secondItem="0u5-b9-6W4" secondAttribute="bottom" constant="8" id="XUt-XO-3do"/>
+                            <constraint firstItem="bJo-oe-wtl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ciW-UQ-zxd"/>
+                            <constraint firstAttribute="bottom" secondItem="bJo-oe-wtl" secondAttribute="bottom" id="pzd-Vn-tjY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="bJo-oe-wtl" id="Y0l-eK-vTD"/>
                         <outlet property="timerLabel" destination="0u5-b9-6W4" id="hPV-tO-DEg"/>
                     </connections>
                 </viewController>

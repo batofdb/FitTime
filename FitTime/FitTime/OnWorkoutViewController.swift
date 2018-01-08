@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 
 class OnWorkoutViewController: UIViewController {
+    var timerSections = [[Timeable]]()
+    var workout: Workout?
+
+    @IBOutlet weak var tableView: UITableView!
     var time: Int = 0 {
         didSet {
             DispatchQueue.main.async {
@@ -56,6 +60,14 @@ class OnWorkoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
+            print("Playback OK")
+            try AVAudioSession.sharedInstance().setActive(true)
+            print("Session is Active")
+        } catch {
+            print(error)
+        }
 
         // Workaround during init
         let utterance = AVSpeechUtterance(string:" ")
@@ -79,4 +91,59 @@ class OnWorkoutViewController: UIViewController {
         stop()
     }
 
+    @IBAction func onExistTapped(_ sender: UIButton) {
+        dismiss(animated: true) {
+
+        }
+    }
+}
+
+extension OnWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return timerSections[section].count
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return timerSections.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var time = timerSections[indexPath.section][indexPath.row]
+        cell.textLabel?.text = time.name
+        cell.detailTextLabel?.text = "Duration: \(time.duration)"
+        cell.selectionStyle = .none
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let first = timerSections[section].first {
+            switch first.type {
+            case .cooldown:
+                return "Cooldown"
+            case .warmup:
+                return "Warmup"
+            case .main(_):
+                var warmupExists: Bool = false
+                let firstItem = timerSections.first
+
+                if let i = firstItem?.first, i.type == .warmup {
+                    warmupExists = true
+                }
+
+                return "Set \(warmupExists ? section : section+1)"
+            }
+        }
+
+        return nil
+    }
 }

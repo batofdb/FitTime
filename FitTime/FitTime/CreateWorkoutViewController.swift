@@ -183,7 +183,15 @@ class CreateWorkoutViewController: UIViewController {
     }
 
     @IBAction func start(_ sender: Any) {
+        updateWorkout()
 
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "OnWorkoutViewController") as? OnWorkoutViewController {
+            vc.workout = workout
+            vc.timerSections = sections
+            present(vc, animated: true, completion: {
+                self.savedTapped()
+            })
+        }
     }
     @IBAction func addPreExercise(_ sender: Any) {
         newExerciseFor(type: .pre)
