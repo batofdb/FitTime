@@ -141,8 +141,19 @@ class CreateWorkoutViewController: UIViewController {
             postExercises = Array(w.postExercises)
 
             name.text = w.name
-            cooldown.text = "\(w.cooldown)"
-            warmup.text = "\(w.warmup)"
+
+            if w.cooldown == 0 {
+                cooldown.text = ""
+            } else {
+                cooldown.text = "\(w.cooldown)"
+            }
+
+
+            if w.warmup == 0 {
+                warmup.text = ""
+            } else {
+                warmup.text = "\(w.warmup)"
+            }
 
             setRest.text = "\(w.setRest)"
             repRest.text = "\(w.repRest)"
@@ -160,8 +171,16 @@ class CreateWorkoutViewController: UIViewController {
     @objc func savedTapped() {
         let workout = Workout()
         workout.name = name.text!
-        workout.cooldown = Int(cooldown.text!)!
-        workout.warmup = Int(warmup.text!)!
+
+        if let c = cooldown.text {
+            workout.cooldown = Int(c) ?? 0
+        }
+
+        if let w = warmup.text {
+            workout.warmup = Int(w) ?? 0
+        }
+
+
         workout.setRest = Int(setRest.text!)!
         workout.repRest = Int(repRest.text!)!
         workout.sets = Int(sets.text!)!
@@ -549,7 +568,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
         temporaryWorkout.removeAll()
         resetTimerSection()
 
-        if let warm = warmup.text, warm != "" || warm != "0" {
+        if let warm = warmup.text, warm != "" && warm != "0" {
             let w = WarmupTime(warmup: Int(warm) ?? 0)
             temporaryWorkout.append(w)
             addTimerSection(timer: w)
@@ -569,7 +588,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
 
         createExerciseTimer(type: .cooldown)
 
-        if let cool = cooldown.text, cool != "" || cool != "0" {
+        if let cool = cooldown.text, cool != "" && cool != "0" {
             let c = CooldownTime(cooldown: Int(cool) ?? 0)
             temporaryWorkout.append(c)
             addTimerSection(timer: c)
