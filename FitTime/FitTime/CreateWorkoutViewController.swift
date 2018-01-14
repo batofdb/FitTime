@@ -797,23 +797,27 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
                     let phaseCount = (exercisePhaseCount[.warmup] ?? 0) * 2
                     let restCount = exerciseRepititionCount[.warmup] ?? 0
 
-                    return totalDuration + phaseCount + restCount
+                    let introCount = exerciseRepititionCount[.warmup] ?? 0
+
+                    return totalDuration + phaseCount + restCount + introCount
                 case .cooldown:
                     let durationCount = postExercises.count - (exerciseRepititionCount[.cooldown] ?? 0)
                     let totalDuration = durationCount * 2
 
-                    let phaseCount = (exercisePhaseCount[.cooldown] ?? 0) * 2
+                    let phaseCount = (exercisePhaseCount[.cooldown] ?? 0)
                     let restCount = exerciseRepititionCount[.cooldown] ?? 0
+                    let introCount = exerciseRepititionCount[.cooldown] ?? 0
 
-                    return totalDuration + phaseCount + restCount
+                    return totalDuration + phaseCount + restCount + introCount
                 case .main(_):
                     let durationCount = mainExercises.count - (exerciseRepititionCount[.main(set: 0)] ?? 0)
                     let totalDuration = durationCount * 2
 
-                    let phaseCount = (exercisePhaseCount[.main(set: 0)] ?? 0) * 2
+                    let phaseCount = (exercisePhaseCount[.main(set: 0)] ?? 0)
                     let restCount = exerciseRepititionCount[.main(set: 0)] ?? 0
+                    let introCount = exerciseRepititionCount[.main(set: 0)] ?? 0
 
-                    return totalDuration + phaseCount + restCount
+                    return totalDuration + phaseCount + restCount + introCount
             }
         }
 
