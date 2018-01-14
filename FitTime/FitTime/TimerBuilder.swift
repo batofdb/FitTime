@@ -19,6 +19,27 @@ protocol Timeable {
     var reps: Int { get set }
 }
 
+struct IntroPhaseTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
+    var type: TimerType
+
+    var duration: Int
+    var name: String
+    var rootExercise: ExerciseTime
+
+    init(exercise: ExerciseTime, type: TimerType) {
+        self.duration = 7
+        self.rootExercise = exercise
+        self.name = "\(exercise.reps) reps of \(exercise.name) next."
+        self.type = type
+
+        repType = .repetition
+        reps = exercise.reps
+    }
+}
+
 struct PhaseTime: Timeable {
     var repType: ExerciseToWorkoutBridgeType
     var phases: [ExercisePhase]?
@@ -32,7 +53,7 @@ struct PhaseTime: Timeable {
     init(exercise: ExerciseTime, phase: ExercisePhase, type: TimerType) {
         self.duration = phase.interval
         self.rootExercise = exercise
-        self.name = "\(exercise.name):\(phase.name)"
+        self.name = phase.name //"\(exercise.name):\(phase.name)"
         self.type = type
 
         repType = .repetition

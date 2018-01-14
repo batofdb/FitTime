@@ -758,6 +758,9 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
         func extractExerciseReps(timer: Timeable) -> [Timeable] {
             var phases = [Timeable]()
             guard let timerPhases = timer.phases, let exercise = timer as? ExerciseTime else { return [Timeable]() }
+
+            phases.append(IntroPhaseTime(exercise: exercise, type: type))
+
             for _ in 1...timer.reps {
                 for ph in timerPhases {
                     phases.append(PhaseTime(exercise: exercise, phase: ph, type: type))
@@ -791,7 +794,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
                     let durationCount = preExercises.count - (exerciseRepititionCount[.warmup] ?? 0)
                     let totalDuration = durationCount * 2
 
-                    let phaseCount = exercisePhaseCount[.warmup] ?? 0
+                    let phaseCount = (exercisePhaseCount[.warmup] ?? 0) * 2
                     let restCount = exerciseRepititionCount[.warmup] ?? 0
 
                     return totalDuration + phaseCount + restCount
@@ -799,7 +802,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
                     let durationCount = postExercises.count - (exerciseRepititionCount[.cooldown] ?? 0)
                     let totalDuration = durationCount * 2
 
-                    let phaseCount = exercisePhaseCount[.cooldown] ?? 0
+                    let phaseCount = (exercisePhaseCount[.cooldown] ?? 0) * 2
                     let restCount = exerciseRepititionCount[.cooldown] ?? 0
 
                     return totalDuration + phaseCount + restCount
@@ -807,7 +810,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
                     let durationCount = mainExercises.count - (exerciseRepititionCount[.main(set: 0)] ?? 0)
                     let totalDuration = durationCount * 2
 
-                    let phaseCount = exercisePhaseCount[.main(set: 0)] ?? 0
+                    let phaseCount = (exercisePhaseCount[.main(set: 0)] ?? 0) * 2
                     let restCount = exerciseRepititionCount[.main(set: 0)] ?? 0
 
                     return totalDuration + phaseCount + restCount
