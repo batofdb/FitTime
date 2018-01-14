@@ -64,6 +64,10 @@ extension UIViewController {
 
 class CreateWorkoutViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
+
+    var warmCount: Int = 0
+    var coolCount: Int = 0
+
     @IBOutlet weak var cooldown: UITextField!
     @IBOutlet weak var warmup: UITextField!
 
@@ -87,7 +91,9 @@ class CreateWorkoutViewController: UIViewController {
                 exerciseTableView.reloadData()
             }
 
-            exerciseTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+
+            exerciseTableView.setContentOffset(CGPoint.zero, animated:false)
+
         }
     }
 
@@ -146,6 +152,7 @@ class CreateWorkoutViewController: UIViewController {
                 cooldown.text = ""
             } else {
                 cooldown.text = "\(w.cooldown)"
+                coolCount = w.cooldown
             }
 
 
@@ -153,6 +160,7 @@ class CreateWorkoutViewController: UIViewController {
                 warmup.text = ""
             } else {
                 warmup.text = "\(w.warmup)"
+                warmCount = w.warmup
             }
 
             setRest.text = "\(w.setRest)"
@@ -230,22 +238,60 @@ class CreateWorkoutViewController: UIViewController {
         }
     }
     @IBAction func textfieldChanged(_ sender: UITextField) {
+        if sender == warmup {
+            if let w = warmup.text, let warm = Int(w), warm > 0 {
+                warmCount = warm
+            } else {
+                warmCount = 0
+            }
+
+
+        }
+
+        if sender == cooldown {
+            if let c = cooldown.text, let cool = Int(c), cool > 0 {
+                coolCount = cool
+            } else {
+                coolCount = 0
+            }
+
+
+        }
+
         updateWorkout()
+        saveButton.isEnabled = true
+    }
+}
+
+extension CreateWorkoutViewController {
+    func typeFor(section: Int) -> ExerciseIntervalType {
+        if (warmCount > 0 || preExercises.count > 0), section == 0 {
+            return .pre
+        } else if mainExercises.count > 0 && section == 0 {
+            return .main
+        } else if (warmCount > 0 || preExercises.count > 0) && mainExercises.count > 0 && section == 1 {
+            return .main
+        } else  if mainExercises.count <= 0 && (warmCount > 0 || preExercises.count > 0)
+            && section == 1 && (coolCount > 0 || postExercises.count > 0) {
+            return .post
+        } else {
+            return .post
+        }
     }
 }
 
 extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if workoutType == .basic {
-            if section == 0 {
-                return preExercises.count
-            } else if section == 1 {
-                return mainExercises.count
-            } else {
-                return postExercises.count
+            switch typeFor(section: section) {
+                case .pre:
+                    return preExercises.count
+                case .main:
+                    return mainExercises.count
+                case .post:
+                    return postExercises.count
+                default: return 0
             }
-
-            return mainExercises.count
         } else {
             return sections[section].count
         }
@@ -254,7 +300,24 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int {
         if workoutType == .basic {
             if tableView == exerciseTableView {
-                return 3
+                var count: Int = 0
+                if let warm = warmup.text, let c = Int(warm), c > 0 {
+                    count += 1
+                } else if preExercises.count > 0 {
+                    count += 1
+                }
+
+                if let cool = cooldown.text, let c = Int(cool), c > 0 {
+                    count += 1
+                } else if postExercises.count > 0 {
+                    count += 1
+                }
+
+                if mainExercises.count > 0 {
+                    count += 1
+                }
+
+                return count
             }
 
             return 1
@@ -268,17 +331,17 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
 
         if workoutType == .basic  {
             var exercise = ExerciseToWorkoutBridge()
-            if indexPath.section == 0 {
-                exercise = preExercises[indexPath.row]
-                //cell.backgroundColor = .yellow
-            } else if indexPath.section == 1 {
-                exercise = mainExercises[indexPath.row]
-                //cell.backgroundColor = .green
-            } else {
-                exercise = postExercises[indexPath.row]
-                //cell.backgroundColor = .blue
-            }
 
+            switch typeFor(section: indexPath.section) {
+                case .pre:
+                    exercise = preExercises[indexPath.row]
+                case .main:
+                    exercise = mainExercises[indexPath.row]
+                case .post:
+                    exercise = postExercises[indexPath.row]
+                default:
+                    return UITableViewCell()
+            }
 
             cell.textLabel?.text = exercise.name
             let ex = ExerciseTime(exercise: exercise, type: nil)
@@ -430,8 +493,9 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
 //                } else {
 //                    workout?.mainExercises.remove(at: index)
 //                }
+
                 mainExercises.remove(at: index)
-                exerciseTableView.deleteRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+                exerciseTableView.deleteRows(at: [IndexPath(row: index, section: indexPath.section)], with: .automatic)
             }
 
 //            if editingStyle == .insert {
@@ -440,11 +504,38 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
 
+    func titleForEditView(section: Int) -> String {
+        func stringForMainExercises() -> String {
+            var setsStr = "1"
+
+            if let s = sets.text {
+                setsStr = s.trimNonNumericCharacters()
+            }
+
+            let count = Int(setsStr) ?? 1
+
+            return "Exercises: \(setsStr) \(count == 1 ? "Set" : "Sets")"
+        }
+
+        switch typeFor(section: section) {
+            case .pre:
+                return "Warmup"
+            case .main:
+                return stringForMainExercises()
+            case .post:
+                return "Cooldown"
+            default:
+                return ""
+        }
+    }
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if workoutType == .basic {
-            if section == 0 {
+            return titleForEditView(section: section)
+            /*
+            if section == 0, let warm = warmup.text, let c = Int(warm), c > 0 {
                 return "Warmup"
-            } else if section == 1 {
+            } else if section == 1 && mainExercises.count > 0 {
                 var setsStr = "1"
 
                 if let s = sets.text {
@@ -457,6 +548,7 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
             } else {
                 return "Cooldown"
             }
+            */
         } else {
 
             if let first = sections[section].first {

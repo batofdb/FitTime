@@ -192,6 +192,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textfieldChanged:" destination="D80-r3-XZY" eventType="editingChanged" id="Ndj-kZ-C4z"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="warmup" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yz3-cz-Lqs">
                                 <rect key="frame" x="29" y="70" width="97" height="30"/>
