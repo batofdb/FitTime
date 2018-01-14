@@ -155,7 +155,13 @@ class OnWorkoutViewController: UIViewController {
 
 
         if currentExerciseCount == currentExercise.duration {
-            speak(currentExercise.name)
+            var verbalExercise: String = currentExercise.name
+            if currentExercise.repType == .repetition {
+                var comps = verbalExercise.components(separatedBy: ":")
+                comps.remove(at: 0)
+                verbalExercise = comps.first ?? "Exercise"
+            }
+            speak(verbalExercise)
         }
 
 

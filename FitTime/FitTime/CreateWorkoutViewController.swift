@@ -103,6 +103,9 @@ class CreateWorkoutViewController: UIViewController {
     var preExercises = [ExerciseToWorkoutBridge]()
     var postExercises = [ExerciseToWorkoutBridge]()
 
+    var exercisePhaseCount = [TimerType : Int]()
+    var exerciseRepititionCount = [TimerType : Int]()
+
     var warmupTimes = [Timeable]()
     var mainTimes = [Timeable]()
     var cooldownTimes = [Timeable]()
@@ -117,6 +120,8 @@ class CreateWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboard()
+
+        resetRepsCache()
 
         cooldown.delegate = self
         warmup.delegate = self
@@ -170,6 +175,16 @@ class CreateWorkoutViewController: UIViewController {
         }
 
         exerciseTableView.reloadData()
+    }
+
+    func resetRepsCache() {
+        exercisePhaseCount[.warmup] = 0
+        exercisePhaseCount[.cooldown] = 0
+        exercisePhaseCount[.main(set: 0)] = 0
+
+        exerciseRepititionCount[.warmup] = 0
+        exerciseRepititionCount[.cooldown] = 0
+        exerciseRepititionCount[.main(set: 0)] = 0
     }
 
     @IBAction func workoutFormatChanged(_ sender: UISegmentedControl) {
@@ -367,10 +382,10 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
             if tableView == exerciseTableView {
                 var ex = ExerciseToWorkoutBridge()
 
-                switch indexPath.section {
-                case 0:
+                switch typeFor(section: indexPath.section) {
+                case .pre:
                     ex = preExercises[indexPath.row]
-                case 2:
+                case .post:
                     ex = postExercises[indexPath.row]
                 default:
                     ex = mainExercises[indexPath.row]
@@ -624,8 +639,10 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
     func updateWorkout() {
         func createExerciseTimer(forSet set: Int = 0, type: TimerType) {
             func addExercise(ex: ExerciseToWorkoutBridge, isLast: Bool = false, type: TimerType) {
+                var reps = [Timeable]()
+
                 let time = ExerciseTime(exercise: ex, type: type)
-                addTimerSection(timer: time)
+                addTimerSection(timer: time, type: type)
                 temporaryWorkout.append(time)
 
                 var restStr: String = "0"
@@ -637,7 +654,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
 
                 let r = RestTime(rest: Int(restStr) ?? 0, type: type)
                 temporaryWorkout.append(r)
-                addTimerSection(timer: r)
+                addTimerSection(timer: r, type: type)
             }
 
             switch type {
@@ -660,10 +677,58 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
         temporaryWorkout.removeAll()
         resetTimerSection()
 
+        for pre in preExercises {
+            if pre.typeEnum == .repetition {
+                if let num = exercisePhaseCount[.warmup] {
+                    exercisePhaseCount[.warmup] = num + (pre.repetitions * (pre.rootExercise?.phases.count ?? 0))
+                } else {
+                    exercisePhaseCount[.warmup] = pre.repetitions * (pre.rootExercise?.phases.count ?? 0)
+                }
+
+                if let num = exerciseRepititionCount[.warmup] {
+                    exerciseRepititionCount[.warmup] = num + 1
+                } else {
+                    exerciseRepititionCount[.warmup] = 1
+                }
+            }
+        }
+
+        for main in mainExercises {
+            if main.typeEnum == .repetition {
+                if let num = exercisePhaseCount[.main(set: 0)] {
+                    exercisePhaseCount[.main(set: 0)] = num + (main.repetitions * (main.rootExercise?.phases.count ?? 0))
+                } else {
+                    exercisePhaseCount[.main(set: 0)] = main.repetitions * (main.rootExercise?.phases.count ?? 0)
+                }
+
+                if let num = exerciseRepititionCount[.main(set: 0)] {
+                    exerciseRepititionCount[.main(set: 0)] = num + 1
+                } else {
+                    exerciseRepititionCount[.main(set: 0)] = 1
+                }
+            }
+        }
+
+        for post in postExercises {
+            if post.typeEnum == .repetition {
+                if let num = exercisePhaseCount[.cooldown] {
+                    exercisePhaseCount[.cooldown] = num + (post.repetitions * (post.rootExercise?.phases.count ?? 0))
+                } else {
+                    exercisePhaseCount[.cooldown] = post.repetitions * (post.rootExercise?.phases.count ?? 0)
+                }
+
+                if let num = exerciseRepititionCount[.cooldown] {
+                    exerciseRepititionCount[.cooldown] = num + 1
+                } else {
+                    exerciseRepititionCount[.cooldown] = 1
+                }
+            }
+        }
+
         if let warm = warmup.text, warm != "" && warm != "0" {
             let w = WarmupTime(warmup: Int(warm) ?? 0)
             temporaryWorkout.append(w)
-            addTimerSection(timer: w)
+            addTimerSection(timer: w, type: .warmup)
         }
 
         var sets: Int = 1
@@ -683,13 +748,72 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
         if let cool = cooldown.text, cool != "" && cool != "0" {
             let c = CooldownTime(cooldown: Int(cool) ?? 0)
             temporaryWorkout.append(c)
-            addTimerSection(timer: c)
+            addTimerSection(timer: c, type: .cooldown)
         }
 
         self.exerciseTableView.reloadData()
     }
 
-    func addTimerSection(timer: Timeable) {
+    func addTimerSection(timer: Timeable, type: TimerType) {
+        func extractExerciseReps(timer: Timeable) -> [Timeable] {
+            var phases = [Timeable]()
+            guard let timerPhases = timer.phases, let exercise = timer as? ExerciseTime else { return [Timeable]() }
+            for _ in 1...timer.reps {
+                for ph in timerPhases {
+                    phases.append(PhaseTime(exercise: exercise, phase: ph, type: type))
+                }
+            }
+
+            return phases
+        }
+
+        func appendToCurrentTimerSection(timer: Timeable, at index: Int) {
+            if timer.repType == .repetition {
+                let phases = extractExerciseReps(timer: timer)
+                sections[index].append(contentsOf: phases)
+            } else {
+                sections[index].append(timer)
+            }
+        }
+
+        func startNewTimerSection(timer: Timeable) {
+            if timer.repType == .repetition {
+                let phases = extractExerciseReps(timer: timer)
+                sections.append(phases)
+            } else {
+                sections.append([timer])
+            }
+        }
+
+        func calculateMaxCountFor(type: TimerType) -> Int {
+            switch type {
+                case .warmup:
+                    let durationCount = preExercises.count - (exerciseRepititionCount[.warmup] ?? 0)
+                    let totalDuration = durationCount * 2
+
+                    let phaseCount = exercisePhaseCount[.warmup] ?? 0
+                    let restCount = exerciseRepititionCount[.warmup] ?? 0
+
+                    return totalDuration + phaseCount + restCount
+                case .cooldown:
+                    let durationCount = postExercises.count - (exerciseRepititionCount[.cooldown] ?? 0)
+                    let totalDuration = durationCount * 2
+
+                    let phaseCount = exercisePhaseCount[.cooldown] ?? 0
+                    let restCount = exerciseRepititionCount[.cooldown] ?? 0
+
+                    return totalDuration + phaseCount + restCount
+                case .main(_):
+                    let durationCount = mainExercises.count - (exerciseRepititionCount[.main(set: 0)] ?? 0)
+                    let totalDuration = durationCount * 2
+
+                    let phaseCount = exercisePhaseCount[.main(set: 0)] ?? 0
+                    let restCount = exerciseRepititionCount[.main(set: 0)] ?? 0
+
+                    return totalDuration + phaseCount + restCount
+            }
+        }
+
         if sections.count > 0 {
             for (idx,time) in sections.enumerated() {
                 if let item = time.first, item.type == timer.type {
@@ -697,34 +821,34 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
                     var maxMainExerciseCount = 0
                     switch timer.type {
                         case .cooldown:
-                            maxMainExerciseCount = postExercises.count * 2
+                            maxMainExerciseCount = calculateMaxCountFor(type: .cooldown)
                             if let c = cooldown.text, let cc = Int(c), cc > 0 {
                                 maxMainExerciseCount += 1
                             }
                         case .warmup:
-                            maxMainExerciseCount = preExercises.count * 2
+                            maxMainExerciseCount = calculateMaxCountFor(type: .warmup)
                             if let c = warmup.text, let cc = Int(c), cc > 0 {
                                 maxMainExerciseCount += 1
                             }
                         case .main(_):
-                            maxMainExerciseCount = mainExercises.count * 2
+                            maxMainExerciseCount = calculateMaxCountFor(type: .main(set: 0))
                     }
 
 
                     let sectionCount = sections[idx].count
 
                     if timer.type == .main(set: 0), count == maxMainExerciseCount, idx == (sections.count-1) {
-                        sections.append([timer])
+                        startNewTimerSection(timer: timer)
                     } else if count < maxMainExerciseCount {
-                        sections[idx].append(timer)
+                        appendToCurrentTimerSection(timer: timer, at: idx)
                     }
 
                 } else if idx == sections.count - 1 {
-                    sections.append([timer])
+                    startNewTimerSection(timer: timer)
                 }
             }
         } else {
-            sections.append([timer])
+            startNewTimerSection(timer: timer)
         }
 
         /*
@@ -738,6 +862,6 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
 
     func resetTimerSection() {
         self.sections.removeAll()
-        self.sections.removeAll()
+        resetRepsCache()
     }
 }

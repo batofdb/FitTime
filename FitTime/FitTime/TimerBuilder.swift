@@ -13,9 +13,37 @@ protocol Timeable {
     var duration: Int { get set }
     var name: String { get set }
     var type: TimerType { get set }
+
+    var repType: ExerciseToWorkoutBridgeType { get set }
+    var phases: [ExercisePhase]? { get set }
+    var reps: Int { get set }
+}
+
+struct PhaseTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
+    var type: TimerType
+
+    var duration: Int
+    var name: String
+    var rootExercise: ExerciseTime
+
+    init(exercise: ExerciseTime, phase: ExercisePhase, type: TimerType) {
+        self.duration = phase.interval
+        self.rootExercise = exercise
+        self.name = "\(exercise.name):\(phase.name)"
+        self.type = type
+
+        repType = .repetition
+        reps = 0
+    }
 }
 
 struct RestTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
     var type: TimerType
 
     var duration: Int
@@ -25,10 +53,19 @@ struct RestTime: Timeable {
         self.duration = rest
         self.name = "Rest"
         self.type = type
+
+        repType = .unknown
+        reps = 0
     }
 }
 
 struct CooldownTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+
+    var phases: [ExercisePhase]?
+
+    var reps: Int
+
     var type: TimerType
 
     var duration: Int
@@ -39,10 +76,16 @@ struct CooldownTime: Timeable {
         self.duration = cooldown
         self.name = "Cooldown"
         self.type = .cooldown
+
+        repType = .unknown
+        reps = 0
     }
 }
 
 struct WarmupTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
     var type: TimerType
 
     var duration: Int
@@ -53,10 +96,16 @@ struct WarmupTime: Timeable {
         self.duration = warmup
         self.name = "Warmup"
         self.type = .warmup
+
+        repType = .unknown
+        reps = 0
     }
 }
 
 struct ExerciseTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
     var type: TimerType
 
     var duration: Int
@@ -72,8 +121,12 @@ struct ExerciseTime: Timeable {
             self.rest = self.rootExercise.rest
         }
 
+        self.repType = self.rootExercise.typeEnum
+        self.reps = exercise.repetitions
+
         if self.rootExercise.typeEnum == .repetition {
             if let phases = self.rootExercise.rootExercise?.phases {
+                self.phases = Array(phases)
                 var phaseTotal: Int = phases.map{ $0.interval }.reduce(0){ $0 + $1 }
                 phaseTotal = phaseTotal * self.rootExercise.repetitions
                 self.duration = phaseTotal
@@ -86,7 +139,12 @@ struct ExerciseTime: Timeable {
     }
 }
 
+
+
 struct SetTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
     var type: TimerType
 
     var duration: Int
@@ -97,6 +155,9 @@ struct SetTime: Timeable {
 }
 
 struct WorkoutTime: Timeable {
+    var repType: ExerciseToWorkoutBridgeType
+    var phases: [ExercisePhase]?
+    var reps: Int
     var type: TimerType
 
     var duration: Int
