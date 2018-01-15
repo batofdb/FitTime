@@ -27,8 +27,18 @@ platform :ios do
       build_secret: "11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc"
     )
 
-    # slack(
-    #   slack_url: "https://hooks.slack.com/services/IDS"
-    # )
+    slack(
+       message: “Shit got updated. Check your phones.“,
+       success: true,
+       slack_url: "https://hooks.slack.com/services/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",
+       attachment_properties: {
+           fields: [
+               {
+                   title: "Build number",
+                   value: ENV["BUILD_NUMBER"],
+               }
+           ]
+       }
+     )
   end
 end
