@@ -15,7 +15,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(workspace: "FitTime.xcworkspace", scheme: "FitTime")
-    upload_to_testflight
+    #upload_to_testflight
     
     pilot(
       skip_waiting_for_build_processing: true
