@@ -1,0 +1,8 @@
+app_identifier "com.LateRisers.FitTime" # The bundle identifier of your app
+apple_id "batofdb@gmail.com" # Your Apple email address
+
+itc_team_id "117978428" # iTunes Connect Team ID
+team_id "H9K6VY5R2A" # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

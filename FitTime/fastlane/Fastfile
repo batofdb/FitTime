@@ -1,0 +1,34 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    build_app(workspace: "FitTime.xcworkspace", scheme: "FitTime")
+    upload_to_testflight
+    
+    pilot(
+      skip_waiting_for_build_processing: true
+    ) # Skip the distribution of the app to all beta testers
+
+    crashlytics(
+      # keys for organization: Francis Bato’s Projects
+      api_token: "aa2806e408f876f92c02ed7521210b3567436363",
+      build_secret: "11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc"
+    )
+
+    # slack(
+    #   slack_url: "https://hooks.slack.com/services/IDS"
+    # )
+  end
+end
