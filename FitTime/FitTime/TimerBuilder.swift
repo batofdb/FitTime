@@ -30,7 +30,7 @@ struct IntroPhaseTime: Timeable {
     var rootExercise: ExerciseTime
 
     init(exercise: ExerciseTime, type: TimerType) {
-        self.duration = 7
+        self.duration = 4
         self.rootExercise = exercise
         self.name = "\(exercise.reps) reps of \(exercise.name)"
         self.type = type
