@@ -18,11 +18,16 @@ xcode-select --install
 
 # Available Actions
 ## iOS
+### ios release
+```
+fastlane ios release
+```
+Push a new beta build to TestFlight
 ### ios beta
 ```
 fastlane ios beta
 ```
-Push a new beta build to TestFlight
+
 
 ----
 

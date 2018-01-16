@@ -179,6 +179,13 @@ class OnWorkoutViewController: UIViewController {
         if self.synthesizer.isSpeaking {
             self.synthesizer.stopSpeaking(at: .immediate)
         }
+
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Uh oh!")
+        }
+
         self.synthesizer.speak(utterance)
     }
 
@@ -314,7 +321,11 @@ extension OnWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OnWorkoutViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Uh oh!")
+        }
     }
 }
 

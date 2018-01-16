@@ -13,22 +13,20 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
-  lane :beta do
+  lane :release do
+    #get_certificates           # invokes cert
+    #get_provisioning_profile   # invokes sigh
     build_app(workspace: "FitTime.xcworkspace", scheme: "FitTime")
     #upload_to_testflight
+    
     
     pilot(
       skip_waiting_for_build_processing: true
     ) # Skip the distribution of the app to all beta testers
 
-    crashlytics(
-      # keys for organization: Francis Bato’s Projects
-      api_token: "aa2806e408f876f92c02ed7521210b3567436363",
-      build_secret: "11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc"
-    )
 
     slack(
-       message: “Shit got updated. Check your phones.“,
+       message: “Submitted to iTunes.“,
        success: true,
        slack_url: "https://hooks.slack.com/services/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",
        attachment_properties: {
@@ -41,4 +39,33 @@ platform :ios do
        }
      )
   end
+
+  lane :beta do
+    build_app(workspace: "FitTime.xcworkspace",
+	scheme: “FitTime”,
+	export_method: “ad-hoc”,
+	configuration: “AdHoc”
+    )
+
+    crashlytics(
+      # keys for organization: Francis Bato’s Projects
+      api_token: "aa2806e408f876f92c02ed7521210b3567436363",
+      build_secret: "11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc"
+    )
+
+    slack(
+       message: “Shit got updated. Check Crashlytics Beta.“,
+       success: true,
+       slack_url: "https://hooks.slack.com/services/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",
+       attachment_properties: {
+           fields: [
+               {
+                   title: "Build number",
+                   value: ENV["BUILD_NUMBER"],
+               }
+           ]
+       }
+     )
+  end
+
 end

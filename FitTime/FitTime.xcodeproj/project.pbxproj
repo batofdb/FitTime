@@ -26,11 +26,12 @@
 		47C0A2F21FFB2AE700C22A2E /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */; };
 		47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */; };
 		47C0A2F61FFB4A8100C22A2E /* CreatePhaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */; };
-		B62F9DE42F15F77D8ADF55B4 /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */; };
+		B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.release.xcconfig"; sourceTree = "<group>"; };
+		28BB9713D1EEDE9732A647FD /* Pods-FitTime.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.adhoc.xcconfig"; sourceTree = "<group>"; };
+		38797FF3AFC9E13DE9C7C341 /* Pods-FitTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.release.xcconfig"; sourceTree = "<group>"; };
 		470110011FFB08C000AA4D9D /* FitTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		470110041FFB08C000AA4D9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		470110061FFB08C000AA4D9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +42,7 @@
 		470110131FFB08C100AA4D9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
+		47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitTime.entitlements; sourceTree = "<group>"; };
 		47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewController.swift; sourceTree = "<group>"; };
 		47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -52,8 +54,8 @@
 		47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
 		47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePhase.swift; sourceTree = "<group>"; };
 		47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhaseViewController.swift; sourceTree = "<group>"; };
-		AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
-		DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,20 +63,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B62F9DE42F15F77D8ADF55B4 /* Pods_FitTime.framework in Frameworks */,
+				B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29E0AD8055F6E79E16232D6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		47010FF81FFB08C000AA4D9D = {
 			isa = PBXGroup;
 			children = (
 				470110031FFB08C000AA4D9D /* FitTime */,
 				470110021FFB08C000AA4D9D /* Products */,
-				FC11C0C49AC514A458C2F1C7 /* Pods */,
-				B127370A3DA98DAE9548A551 /* Frameworks */,
+				5DFD8FB4C923C3F04A123D45 /* Pods */,
+				29E0AD8055F6E79E16232D6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +99,7 @@
 		470110031FFB08C000AA4D9D /* FitTime */ = {
 			isa = PBXGroup;
 			children = (
+				47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */,
 				470110041FFB08C000AA4D9D /* AppDelegate.swift */,
 				470110061FFB08C000AA4D9D /* ViewController.swift */,
 				470110081FFB08C000AA4D9D /* Main.storyboard */,
@@ -113,19 +124,12 @@
 			path = FitTime;
 			sourceTree = "<group>";
 		};
-		B127370A3DA98DAE9548A551 /* Frameworks */ = {
+		5DFD8FB4C923C3F04A123D45 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DC0C00A1B9ECE9782E951EBF /* Pods_FitTime.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FC11C0C49AC514A458C2F1C7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */,
-				37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */,
+				79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */,
+				28BB9713D1EEDE9732A647FD /* Pods-FitTime.adhoc.xcconfig */,
+				38797FF3AFC9E13DE9C7C341 /* Pods-FitTime.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -137,13 +141,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 470110161FFB08C100AA4D9D /* Build configuration list for PBXNativeTarget "FitTime" */;
 			buildPhases = (
-				2B76C70742E5FD14FA55F0AA /* [CP] Check Pods Manifest.lock */,
+				D962ED3CE8FADEFA4C6F1BD1 /* [CP] Check Pods Manifest.lock */,
 				47010FFD1FFB08C000AA4D9D /* Sources */,
 				47010FFE1FFB08C000AA4D9D /* Frameworks */,
 				47010FFF1FFB08C000AA4D9D /* Resources */,
-				1B53BB4BA56A7E50AC33C941 /* [CP] Embed Pods Frameworks */,
-				FAAFA96C26F755707D04BC14 /* [CP] Copy Pods Resources */,
 				47C05886200C43C300C3CBDC /* ShellScript */,
+				DB706A2C6C67245D3277C143 /* [CP] Embed Pods Frameworks */,
+				83A229D89E91372227375B0E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,6 +173,9 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -207,22 +214,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B53BB4BA56A7E50AC33C941 /* [CP] Embed Pods Frameworks */ = {
+		47C05886200C43C300C3CBDC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" aa2806e408f876f92c02ed7521210b3567436363 11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc";
+		};
+		83A229D89E91372227375B0E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2B76C70742E5FD14FA55F0AA /* [CP] Check Pods Manifest.lock */ = {
+		D962ED3CE8FADEFA4C6F1BD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -237,32 +257,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		47C05886200C43C300C3CBDC /* ShellScript */ = {
+		DB706A2C6C67245D3277C143 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" aa2806e408f876f92c02ed7521210b3567436363 11eae3a2808c31f544beb61e1884b2cea66dea9614c7712b9b1d0193926c43fc";
-		};
-		FAAFA96C26F755707D04BC14 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FitTime/Pods-FitTime-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -422,18 +429,30 @@
 		};
 		470110171FFB08C100AA4D9D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAA75F16AC4072D8D1CBFEBE /* Pods-FitTime.debug.xcconfig */;
+			baseConfigurationReference = 79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = FitTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "64c534dd-d155-46bd-b382-f99b51f25877";
-				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Development";
+				PROVISIONING_PROFILE = "ef1106f1-c585-46ef-89f4-9eeb6a51910f";
+				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Dev";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,22 +460,122 @@
 		};
 		470110181FFB08C100AA4D9D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37701A38FF2A5F12E6BD42D0 /* Pods-FitTime.release.xcconfig */;
+			baseConfigurationReference = 38797FF3AFC9E13DE9C7C341 /* Pods-FitTime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = FitTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "64c534dd-d155-46bd-b382-f99b51f25877";
-				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Development";
+				PROVISIONING_PROFILE = "4559d7a0-1162-4e0b-9aa3-42c7b9ecc9a8";
+				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Release";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		47A736CD200D298B00EAAA6E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = AdHoc;
+		};
+		47A736CE200D298B00EAAA6E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28BB9713D1EEDE9732A647FD /* Pods-FitTime.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxCocoa\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RxSwift\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SnapKit\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"$(SRCROOT)",
+				);
+				INFOPLIST_FILE = FitTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f7419678-04a5-4aff-8a32-280645576320";
+				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers AdHoc";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AdHoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -465,6 +584,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				470110141FFB08C100AA4D9D /* Debug */,
+				47A736CD200D298B00EAAA6E /* AdHoc */,
 				470110151FFB08C100AA4D9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -474,6 +594,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				470110171FFB08C100AA4D9D /* Debug */,
+				47A736CE200D298B00EAAA6E /* AdHoc */,
 				470110181FFB08C100AA4D9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
