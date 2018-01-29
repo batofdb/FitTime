@@ -203,3 +203,61 @@ struct TimerBuilder {
 //        self.workoutTime = WorkoutTime(workout: self.workout)
 //    }
 }
+
+typealias BackgroundTimerCompletion = () -> Void
+
+class BackgroundTimer {
+    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    var time: Int = 0 {
+        didSet {
+            print("Timer is running: \(time) seconds")
+        }
+    }
+    var timer: Timer? = nil
+
+    func startBackgroundTimer(completion: BackgroundTimerCompletion? = nil) {
+        guard let c = completion else { return }
+
+        registerBackgroundTask {
+            self.timer = Timer(timeInterval: 1, repeats: true, block: { [unowned self] (timer) in
+                self.time += 1
+
+                if self.time == 12 {
+                    self.stopBackgroundTimer()
+                    c()
+                }
+
+            })
+        }
+    }
+
+    func resetBackgroundTimer() {
+
+    }
+
+    func stopBackgroundTimer() {
+        endBackgroundTask()
+        timer?.invalidate()
+        timer = nil
+    }
+}
+
+extension BackgroundTimer {
+    func registerBackgroundTask(completion: BackgroundTimerCompletion? = nil) {
+        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+            guard let c = completion else {
+                self?.endBackgroundTask()
+                return
+            }
+
+            c()
+        }
+        assert(backgroundTask != UIBackgroundTaskInvalid)
+    }
+
+    func endBackgroundTask() {
+        print("Background task ended.")
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = UIBackgroundTaskInvalid
+    }
+}

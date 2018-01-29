@@ -16,7 +16,10 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    var timer: Timer?
+    var time: Int = 0
+    var backgroundTimer = BackgroundTimer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 

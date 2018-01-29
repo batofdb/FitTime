@@ -10,7 +10,9 @@ target 'FitTime' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'RealmSwift'
   pod 'SnapKit', '~> 4.0.0'
-
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git', :branch => 'wip/swift4'
+  pod 'Hue'
+  #pod 'Colours/Swift'
 
   pod 'Fabric'
   pod 'Crashlytics'

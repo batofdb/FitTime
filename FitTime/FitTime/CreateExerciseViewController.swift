@@ -30,6 +30,7 @@ class CreateExerciseViewController: UIViewController {
             nameLabel.text = ex.name
             typeSegment.selectedSegmentIndex = ex.typeEnum == .pull ? 0 : 1
             phases = Array(ex.phases)
+            self.title = ex.name
         }
 
         let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))

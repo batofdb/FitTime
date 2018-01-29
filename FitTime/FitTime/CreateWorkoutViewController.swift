@@ -74,6 +74,8 @@ class CreateWorkoutViewController: UIViewController {
     @IBOutlet weak var repRest: UITextField!
     @IBOutlet weak var setRest: UITextField!
 
+    var timerQueue = [Timeable]()
+
     @IBOutlet weak var addPost: UIButton!
     @IBOutlet weak var addMain: UIButton!
     @IBOutlet weak var addPre: UIButton!
@@ -227,8 +229,9 @@ class CreateWorkoutViewController: UIViewController {
     @IBAction func start(_ sender: Any) {
         updateWorkout()
 
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "OnWorkoutViewController") as? OnWorkoutViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "OnWorkoutViewController") as? OnWorkoutViewController, !timerQueue.isEmpty {
             vc.workout = workout
+            vc.timerQueue = timerQueue
             vc.timerSections = sections
             present(vc, animated: true, completion: {
                 self.savedTapped()
@@ -858,6 +861,7 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
             startNewTimerSection(timer: timer)
         }
 
+        timerQueue.append(timer)
         /*
         for (idx, ty) in self.sections.enumerated() {
             if let item = ty.first?.key, item == type, let oldValue = self.sections[idx][type] {
@@ -868,7 +872,8 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
     }
 
     func resetTimerSection() {
-        self.sections.removeAll()
+        sections.removeAll()
         resetRepsCache()
+        timerQueue.removeAll()
     }
 }

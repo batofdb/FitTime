@@ -18,7 +18,9 @@ enum TimerState {
 }
 
 class OnWorkoutViewController: UIViewController {
+    var backgroundTimer: BackgroundTimer = BackgroundTimer()
     var timerSections = [[Timeable]]()
+    var timerQueue = [Timeable]()
     var workout: Workout?
     var timerState: TimerState = .stopped {
         didSet {
@@ -33,7 +35,10 @@ class OnWorkoutViewController: UIViewController {
                     return
             }
 
-            tableView.scrollToRow(at: currentIndexPath, at: .top, animated: true)
+            DispatchQueue.main.async {
+                self.tableView.scrollToRow(at: self.currentIndexPath, at: .top, animated: true)
+            }
+
         }
     }
     let initialDelayInSeconds: Int = 5
@@ -76,6 +81,7 @@ class OnWorkoutViewController: UIViewController {
         case .stopped:
             stop()
         case .intro:
+            speak("Workout starting in \(introCount) seconds")
             intro()
         case .inProgress:
             start()
@@ -99,19 +105,23 @@ class OnWorkoutViewController: UIViewController {
     func countdownUpdated() {
         if countdownTime == 0 {
             timerState = .inProgress
+
+            for t in timerQueue {
+                speak(t.name, delay: Double(t.duration))
+            }
         } else if countdownTime == 5  {
             if let firstExercise = timerSections.first?.first {
-                speak("\(firstExercise.name) is next")
+               // speak("\(firstExercise.name) is next")
             }
         } else if countdownTime == introCount - 1, let name = workout?.name {
-            speak("\(name)")
+           // speak("\(name)")
         }
     }
 
     func timeUpdated() {
         guard   timerSections.indices.contains(currentIndexPath.section),
                 timerSections[currentIndexPath.section].indices.contains(currentIndexPath.row) else {
-                    speak("Workout Complete")
+                   // speak("Workout Complete")
                     timerState = .stopped
                 return
         }
@@ -138,7 +148,7 @@ class OnWorkoutViewController: UIViewController {
 
                     guard   timerSections.indices.contains(currentIndexPath.section),
                             timerSections[currentIndexPath.section].indices.contains(currentIndexPath.row) else {
-                            speak("Workout Complete")
+                            //speak("Workout Complete")
                             timerState = .stopped
                             return
                     }
@@ -171,22 +181,28 @@ class OnWorkoutViewController: UIViewController {
         self.timerLabel.text = "\(currentExerciseCount)"
     }
 
-    func speak(_ string: String) {
+    func speak(_ string: String, delay: Double = 0.0) {
         let utterance = AVSpeechUtterance(string:string)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         utterance.rate = 0.5
+        utterance.volume = 0.9
 
-        if self.synthesizer.isSpeaking {
-            self.synthesizer.stopSpeaking(at: .immediate)
+        if delay > 0 {
+            utterance.postUtteranceDelay = delay
+        }
+
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
         }
 
         do {
-            try AVAudioSession.sharedInstance().setActive(false)
+            try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Uh oh!")
         }
 
-        self.synthesizer.speak(utterance)
+
+        synthesizer.speak(utterance)
     }
 
     @IBOutlet weak var timerLabel: UILabel!
@@ -194,6 +210,10 @@ class OnWorkoutViewController: UIViewController {
     let synthesizer = AVSpeechSynthesizer()
 
     func start() {
+        backgroundTimer.startBackgroundTimer {
+            print("finished background timer")
+        }
+
         timer?.invalidate()
         timer = nil
 
@@ -228,6 +248,9 @@ class OnWorkoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print(timerSections)
+
         introUtterance = "\(workout?.name) starts in 10 seconds"
 
         do {
@@ -321,11 +344,11 @@ extension OnWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OnWorkoutViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        do {
-            try AVAudioSession.sharedInstance().setActive(false)
-        } catch {
-            print("Uh oh!")
-        }
+//        do {
+//            try AVAudioSession.sharedInstance().setActive(false)
+//        } catch {
+//            print("Uh oh!")
+//        }
     }
 }
 

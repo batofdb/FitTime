@@ -26,6 +26,9 @@
 		47C0A2F21FFB2AE700C22A2E /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */; };
 		47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */; };
 		47C0A2F61FFB4A8100C22A2E /* CreatePhaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */; };
+		47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */; };
+		47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */; };
+		47DA952D201EAC1D00DCD523 /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */; };
 		B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
 		47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePhase.swift; sourceTree = "<group>"; };
 		47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhaseViewController.swift; sourceTree = "<group>"; };
+		47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
+		47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
 		734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +126,9 @@
 				47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */,
 				4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */,
 				4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */,
+				47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */,
+				47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */,
+				47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */,
 			);
 			path = FitTime;
 			sourceTree = "<group>";
@@ -207,6 +216,7 @@
 			files = (
 				470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */,
 				4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */,
+				47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */,
 				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,8 +291,10 @@
 			files = (
 				47C0A2EE1FFB2A8F00C22A2E /* RootViewController.swift in Sources */,
 				47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */,
+				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,
+				47DA952D201EAC1D00DCD523 /* RoundedCornerView.swift in Sources */,
 				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
 				4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */,
 				47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */,
