@@ -13,6 +13,7 @@
 		4701100D1FFB08C100AA4D9D /* FitTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */; };
 		4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4701100E1FFB08C100AA4D9D /* Assets.xcassets */; };
 		470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */; };
+		473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A52D6201EF17C008C8CE3 /* FTAnimation.swift */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
 		47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */; };
@@ -43,6 +44,7 @@
 		4701100E1FFB08C100AA4D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		470110111FFB08C100AA4D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		470110131FFB08C100AA4D9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		473A52D6201EF17C008C8CE3 /* FTAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTAnimation.swift; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
 		47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitTime.entitlements; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */,
 				47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */,
 				47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */,
+				473A52D6201EF17C008C8CE3 /* FTAnimation.swift */,
 			);
 			path = FitTime;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			files = (
 				47C0A2EE1FFB2A8F00C22A2E /* RootViewController.swift in Sources */,
 				47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */,
+				473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */,
 				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,

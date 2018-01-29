@@ -9,14 +9,25 @@
 import UIKit
 import RealmSwift
 
+protocol CollectionPushAndPoppable {
+    var sourceCell: UICollectionViewCell? { get }
+    var collectionView: UICollectionView! { get }
+    var view: UIView! { get }
+}
+
 class ExercisesViewController: UIViewController {
     let exercises = try! Realm().objects(Exercise.self).sorted(byKeyPath: "name")
     var token: NotificationToken?
+    var sourceCell: UICollectionViewCell?
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Exercises"
+
+        navigationController?.delegate = self
+
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = .magenta
@@ -89,6 +100,7 @@ extension ExercisesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let createVC = storyboard?.instantiateViewController(withIdentifier: "CreateExerciseViewController") as? CreateExerciseViewController, exercises.indices.contains(indexPath.row) {
             createVC.exercise = exercises[indexPath.row]
+            sourceCell = collectionView.cellForItem(at: indexPath)
             navigationController?.pushViewController(createVC, animated: true)
         }
     }
@@ -100,3 +112,14 @@ extension ExercisesViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.size.width, height: w * 0.5)
     }
 }
+
+extension ExercisesViewController: CollectionPushAndPoppable { }
+
+
+extension ExercisesViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return FTBaseAnimator(operation: operation)
+    }
+}
+
+
