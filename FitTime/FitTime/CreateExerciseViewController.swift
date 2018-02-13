@@ -75,6 +75,12 @@ class CreateExerciseViewController: UIViewController {
         phaseTableView.reloadData()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        
+    }
+
     @objc func savedTapped() {
         guard let name = nameLabel.text else { return }
 

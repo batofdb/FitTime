@@ -37,8 +37,7 @@ class ExercisesViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barTintColor = .white
-
-        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.isTranslucent = true
 
         collectionView.register(UINib(nibName: "ExerciseCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ExerciseCollectionViewCell")
         collectionView.alwaysBounceVertical = true
@@ -49,6 +48,7 @@ class ExercisesViewController: UIViewController {
 
 //        tableView.isEditing = true
 //        tableView.allowsSelectionDuringEditing = true
+
 
         // Observe Realm Notifications
         token = exercises.observe { changes in
