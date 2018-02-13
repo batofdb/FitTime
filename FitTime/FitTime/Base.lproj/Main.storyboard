@@ -539,9 +539,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YE5-6u-xYO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YE5-6u-xYO">
+                                <rect key="frame" x="97" y="122" width="211" height="463"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ul-G1-na7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="173"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gLm-N1-Ask">
                                         <rect key="frame" x="17" y="19" width="334" height="30"/>
                                         <constraints>
@@ -614,9 +618,13 @@
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.73725490199999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="6Kx-1B-kDb" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" id="5f5-bz-BhR"/>
+                                    <constraint firstItem="9ul-G1-na7" firstAttribute="top" secondItem="YE5-6u-xYO" secondAttribute="top" id="71s-QJ-dc9"/>
+                                    <constraint firstItem="6Kx-1B-kDb" firstAttribute="top" secondItem="9ul-G1-na7" secondAttribute="bottom" id="8CM-Mj-2Ad"/>
                                     <constraint firstItem="6Kx-1B-kDb" firstAttribute="top" secondItem="M2M-Vq-deP" secondAttribute="bottom" constant="52" id="HdQ-ki-XjJ"/>
                                     <constraint firstItem="gLm-N1-Ask" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" constant="17" id="KIy-cN-jCn"/>
+                                    <constraint firstAttribute="trailing" secondItem="9ul-G1-na7" secondAttribute="trailing" id="KmP-96-B8v"/>
                                     <constraint firstItem="M2M-Vq-deP" firstAttribute="top" secondItem="gLm-N1-Ask" secondAttribute="bottom" constant="45" id="Ltk-Gx-hje"/>
+                                    <constraint firstItem="9ul-G1-na7" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" id="NfL-hl-Bvg"/>
                                     <constraint firstItem="M2M-Vq-deP" firstAttribute="leading" secondItem="YE5-6u-xYO" secondAttribute="leading" constant="127" id="act-GK-zBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="6Kx-1B-kDb" secondAttribute="trailing" id="gJk-zX-IpT"/>
                                     <constraint firstAttribute="bottom" secondItem="lmE-87-FKs" secondAttribute="bottom" id="gSU-pe-CUl"/>
@@ -625,21 +633,31 @@
                                     <constraint firstItem="lmE-87-FKs" firstAttribute="top" secondItem="6Kx-1B-kDb" secondAttribute="bottom" constant="24" id="ymJ-KN-Xlv"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ep5-9a-d8v">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ep5-9a-d8v" firstAttribute="trailing" secondItem="yVg-oT-TQD" secondAttribute="trailing" id="Poh-7u-6Qs"/>
                             <constraint firstItem="yVg-oT-TQD" firstAttribute="top" secondItem="gLm-N1-Ask" secondAttribute="bottom" constant="-29" id="WjF-db-ip1"/>
                             <constraint firstItem="yVg-oT-TQD" firstAttribute="bottom" secondItem="YE5-6u-xYO" secondAttribute="bottom" id="Y2r-rY-tIr"/>
                             <constraint firstItem="YE5-6u-xYO" firstAttribute="top" secondItem="bK8-Nx-CWt" secondAttribute="top" id="YW6-Na-LAJ"/>
+                            <constraint firstItem="ep5-9a-d8v" firstAttribute="bottom" secondItem="yVg-oT-TQD" secondAttribute="bottom" id="aTQ-AK-d3t"/>
                             <constraint firstItem="YE5-6u-xYO" firstAttribute="leading" secondItem="yVg-oT-TQD" secondAttribute="leading" id="nA4-pY-B1g"/>
+                            <constraint firstItem="ep5-9a-d8v" firstAttribute="leading" secondItem="yVg-oT-TQD" secondAttribute="leading" id="nIS-6Y-HTg"/>
                             <constraint firstItem="yVg-oT-TQD" firstAttribute="trailing" secondItem="YE5-6u-xYO" secondAttribute="trailing" id="uOm-Gl-MJo"/>
+                            <constraint firstItem="ep5-9a-d8v" firstAttribute="top" secondItem="bK8-Nx-CWt" secondAttribute="top" id="vMa-fD-068"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yVg-oT-TQD"/>
                     </view>
                     <connections>
                         <outlet property="muscleTableView" destination="lmE-87-FKs" id="2no-mb-ceb"/>
                         <outlet property="nameLabel" destination="gLm-N1-Ask" id="8wL-KN-hV5"/>
+                        <outlet property="overlayView" destination="ep5-9a-d8v" id="0Vk-Wk-F5r"/>
                         <outlet property="phaseTableView" destination="6Kx-1B-kDb" id="h2v-fc-HZP"/>
+                        <outlet property="transitionView" destination="9ul-G1-na7" id="6C5-hD-x0d"/>
                         <outlet property="typeSegment" destination="M2M-Vq-deP" id="pJr-El-ee5"/>
                     </connections>
                 </viewController>

@@ -12,6 +12,9 @@ import UIKit
 class FTBaseAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private let operationType : UINavigationControllerOperation
     private let transitionDuration : TimeInterval
+    var openingFrame: CGRect = CGRect.zero
+    var topView: UIView = UIView()
+    var bottomView: UIView = UIView()
 
     init(operation: UINavigationControllerOperation) {
         operationType = operation
@@ -36,16 +39,16 @@ class FTBaseAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 
     func performPushTransition(_ transitionContext: UIViewControllerContextTransitioning) {
-        guard let toView = transitionContext.view(forKey: .to) else {
+        guard   let toView = transitionContext.view(forKey: .to),
+                let toViewController = transitionContext.viewController(forKey: .to) as? CreateExerciseViewController else {
                 // Something really bad happend and it is not possible to perform the transition
                 print("ERROR: Transition impossible to perform since either the destination view or the conteiner view are missing!")
                 return
         }
 
-
         let container = transitionContext.containerView
 
-        guard let fromViewController = transitionContext.viewController(forKey: .from) as? CollectionPushAndPoppable,
+        guard let fromViewController = transitionContext.viewController(forKey: .from) as? ExercisesViewController,
             let fromView = fromViewController.collectionView,
             let currentCell = fromViewController.sourceCell else {
                 // There are not enough info to perform the animation but it is still possible
@@ -55,8 +58,54 @@ class FTBaseAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 return
         }
 
+        topView = fromViewController.view.resizableSnapshotView(from: fromViewController.view.frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsMake(openingFrame.origin.y, 0, 0, 0))!
+        topView.frame = CGRect(x: 0, y: 0, width: fromViewController.view.frame.size.width, height: openingFrame.origin.y)
+
+        let animView = UIView(frame: container.frame)
+        animView.backgroundColor = .clear
+        //container.addSubview(topView)
+        animView.addSubview(topView)
+
+        bottomView = fromViewController.view.resizableSnapshotView(from: fromViewController.view.frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsMake(0, 0, fromViewController.view.frame.size.height - openingFrame.origin.y - openingFrame.size.height, 0))!
+        bottomView.frame = CGRect(x: 0, y: openingFrame.origin.y + openingFrame.size.height, width: fromViewController.view.frame.size.width, height: fromViewController.view.frame.size.height - openingFrame.origin.y - openingFrame.size.height)
+
+        //container.addSubview(bottomView)
+        animView.addSubview(bottomView)
+
+        container.addSubview(animView)
+        /*
+        let snapshotView = toViewController.view.resizableSnapshotView(from: fromViewController.view.frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsets.zero)
+        snapshotView?.frame = openingFrame
+
+        container.addSubview(snapshotView!)
+ */
+
+        let snapshotView = fromViewController.view.resizableSnapshotView(from: openingFrame, afterScreenUpdates: true, withCapInsets: UIEdgeInsets.zero)
+        snapshotView?.frame = openingFrame
+        let fakeView = UIView(frame: fromViewController.view.frame)
+        fakeView.backgroundColor = Colors.colorFor(indexPath: fromViewController.selectedIndexPath)
+        fakeView.addSubview(snapshotView!)
+
+        container.insertSubview(fakeView, belowSubview: animView)
+
+        toViewController.view.alpha = 0.0
+        container.addSubview(toViewController.view)
+
+        UIView.animate(withDuration: transitionDuration, animations: {
+            self.topView.frame = CGRect(x: 0, y: -self.topView.frame.height, width: self.topView.frame.size.width, height: self.topView.frame.size.height)
+            self.bottomView.frame = CGRect(x: 0, y: fromViewController.view.frame.size.height, width: self.bottomView.frame.size.width, height: self.bottomView.frame.size.height)
+            fakeView.frame = toViewController.view.frame
+            //snapshotView?.frame = toViewController.view.frame
+        }) { finished in
+            fakeView.removeFromSuperview()
+            //snapshotView?.removeFromSuperview()
+            toViewController.view.alpha = 1.0
+            transitionContext.completeTransition(finished)
+        }
+
+        /*
         // Add to container the destination view
-        container.addSubview(toView)
+        //container.addSubview(toView)
 
 
         // Prepare the screenshot of the destination view for animation
@@ -104,6 +153,7 @@ class FTBaseAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
         }
+        */
     }
 
     internal func performPopTransition(_ transitionContext: UIViewControllerContextTransitioning) {
@@ -116,9 +166,9 @@ class FTBaseAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
         let container = transitionContext.containerView
 
-        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? CollectionPushAndPoppable,
+        guard let toViewController = transitionContext.viewController(forKey: .to) as? CollectionPushAndPoppable,
             let toCollectionView = toViewController.collectionView,
-            let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let fromViewController = transitionContext.viewController(forKey: .from),
             let fromView = fromViewController.view,
             let currentCell = toViewController.sourceCell else {
                 // There are not enough info to perform the animation but it is still possible

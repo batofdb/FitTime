@@ -8,20 +8,44 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CreateExerciseViewController: UIViewController {
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var typeSegment: UISegmentedControl!
     @IBOutlet weak var phaseTableView: UITableView!
     @IBOutlet weak var muscleTableView: UITableView!
-
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var transitionView: UIView!
+    var primaryColor = UIColor() {
+        didSet {
+            guard let o = overlayView else { return }
+            o.backgroundColor = primaryColor
+        }
+    }
     var exercise: Exercise?
     //var phases = List<ExercisePhase>()
     var phases = [ExercisePhase]()
     var muscles = [MuscleTypeWrapper]()
 
+    lazy var gradient: CAGradientLayer = [
+        UIColor(hex: "#FD4340"),
+        UIColor(hex: "#CE2BAE")
+        ].gradient { gradient in
+            gradient.speed = 0
+            gradient.timeOffset = 0
+
+            return gradient
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        overlayView.backgroundColor = primaryColor
+
+        gradient.frame = transitionView.frame
+        transitionView.layer.addSublayer(gradient)
+
         //navigationController?.setNavigationBarHidden(true, animated: false)
 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -78,6 +102,14 @@ class CreateExerciseViewController: UIViewController {
             }
         }
         navigationController?.popViewController(animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.tintColor = ContrastColorOf(primaryColor, returnFlat: true)
+        //navigationItem.rightBarButtonItem?.tintColor = ContrastColorOf(primaryColor, returnFlat: true)
+        //self.navigationController?.navigationBar.barTintColor = ContrastColorOf(primaryColor, returnFlat: true)
     }
 }
 

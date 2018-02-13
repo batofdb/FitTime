@@ -26,6 +26,17 @@ class ExerciseCollectionViewCell: UICollectionViewCell {
     }
 
     override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    func configureWith(exercise: Exercise, and indexPath: IndexPath) {
+        titleLabel.text = exercise.name
+        let color = Colors.colorFor(indexPath: indexPath)
+        backgroundColor = color
+        titleLabel.textColor = ContrastColorOf(color, returnFlat: true)
+    }
+
+    func roundCorner() {
         primaryView.layer.cornerRadius = 10.0
         primaryView.layer.borderWidth = 1.0
         primaryView.layer.borderColor = UIColor.clear.cgColor
