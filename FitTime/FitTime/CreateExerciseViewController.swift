@@ -17,10 +17,10 @@ class CreateExerciseViewController: UIViewController {
     @IBOutlet weak var muscleTableView: UITableView!
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var transitionView: UIView!
-    var primaryColor = UIColor() {
+    var primaryColor: UIColor? {
         didSet {
-            guard let o = overlayView else { return }
-            o.backgroundColor = primaryColor
+            guard let o = overlayView, let p = primaryColor else { return }
+            o.backgroundColor = p
         }
     }
     var exercise: Exercise?
@@ -41,7 +41,9 @@ class CreateExerciseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        overlayView.backgroundColor = primaryColor
+        if let p = primaryColor {
+            overlayView.backgroundColor = p
+        }
 
         gradient.frame = transitionView.frame
         transitionView.layer.addSublayer(gradient)
@@ -113,7 +115,9 @@ class CreateExerciseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.navigationBar.tintColor = ContrastColorOf(primaryColor, returnFlat: true)
+        if let p = primaryColor {
+            navigationController?.navigationBar.tintColor = ContrastColorOf(p, returnFlat: true)
+        }
         //navigationItem.rightBarButtonItem?.tintColor = ContrastColorOf(primaryColor, returnFlat: true)
         //self.navigationController?.navigationBar.barTintColor = ContrastColorOf(primaryColor, returnFlat: true)
     }

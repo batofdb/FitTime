@@ -16,6 +16,7 @@
 		473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A52D6201EF17C008C8CE3 /* FTAnimation.swift */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
+		4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */; };
 		47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */; };
 		47C0A2E41FFB153800C22A2E /* CreateWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */; };
 		47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */; };
@@ -30,7 +31,6 @@
 		47CA6A302031226700E213CF /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA6A2F2031226700E213CF /* ColorLibrary.swift */; };
 		47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */; };
 		47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */; };
-		47DA952D201EAC1D00DCD523 /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */; };
 		B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +48,7 @@
 		473A52D6201EF17C008C8CE3 /* FTAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTAnimation.swift; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
+		4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwipeViewController.swift; sourceTree = "<group>"; };
 		47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitTime.entitlements; sourceTree = "<group>"; };
 		47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +64,6 @@
 		47CA6A2F2031226700E213CF /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
 		47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
-		47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
 		734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,9 +132,9 @@
 				4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */,
 				47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */,
 				47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */,
-				47DA952C201EAC1D00DCD523 /* RoundedCornerView.swift */,
 				473A52D6201EF17C008C8CE3 /* FTAnimation.swift */,
 				47CA6A2F2031226700E213CF /* ColorLibrary.swift */,
+				4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */,
 			);
 			path = FitTime;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,
-				47DA952D201EAC1D00DCD523 /* RoundedCornerView.swift in Sources */,
+				4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */,
 				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
 				4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */,
 				47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */,

@@ -23,6 +23,8 @@ class ExercisesViewController: UIViewController {
     var openingFrame: CGRect?
     var selectedIndexPath = IndexPath(item: 0, section: 0)
 
+    var didTapCell: Bool = false
+
     //var createViewController: CreateExerciseViewController?
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -110,6 +112,7 @@ extension ExercisesViewController: UICollectionViewDataSource, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let createVC = storyboard?.instantiateViewController(withIdentifier: "CreateExerciseViewController") as? CreateExerciseViewController, exercises.indices.contains(indexPath.row) {
+            didTapCell = true
             let attributes = collectionView.layoutAttributesForItem(at: indexPath)
             let attirbutesFrame = attributes?.frame
             let frameToOpenFrom = collectionView.convert(attirbutesFrame!, to: collectionView.superview)
@@ -146,9 +149,14 @@ extension ExercisesViewController: CollectionPushAndPoppable { }
 
 extension ExercisesViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animator = FTBaseAnimator(operation: operation)
-        animator.openingFrame = openingFrame!
-        return animator
+        if toVC.isKind(of: CreateExerciseViewController.self) && didTapCell {
+            let animator = FTBaseAnimator(operation: operation)
+            animator.openingFrame = openingFrame!
+            didTapCell = false
+            return animator
+        }
+
+        return nil
     }
 }
 

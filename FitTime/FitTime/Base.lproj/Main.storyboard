@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dn2-ep-8Fm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dwZ-hD-eOG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -827,6 +827,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1159.2" y="133.5832083958021"/>
+        </scene>
+        <!--Root Swipe View Controller-->
+        <scene sceneID="sSL-6O-q3m">
+            <objects>
+                <viewController id="dwZ-hD-eOG" customClass="RootSwipeViewController" customModule="FitTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RvO-oy-MZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gez-z7-hGa">
+                                <rect key="frame" x="1" y="0.0" width="375" height="667"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Gez-z7-hGa" secondAttribute="trailing" id="3Jk-Dd-um4"/>
+                            <constraint firstItem="Gez-z7-hGa" firstAttribute="top" secondItem="RvO-oy-MZ4" secondAttribute="top" id="Uz0-8m-WJH"/>
+                            <constraint firstAttribute="bottom" secondItem="Gez-z7-hGa" secondAttribute="bottom" id="rfg-Zg-Krq"/>
+                            <constraint firstItem="Gez-z7-hGa" firstAttribute="leading" secondItem="RvO-oy-MZ4" secondAttribute="leading" id="tH2-rz-Qlk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JFC-33-pzs"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="Gez-z7-hGa" id="dXy-Bs-2hI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="noP-ol-i7s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1897" y="-723"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Bxg-C4-xOy">
