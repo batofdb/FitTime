@@ -20,6 +20,7 @@ enum TimerState {
 class OnWorkoutViewController: UIViewController {
     var backgroundTimer: BackgroundTimer = BackgroundTimer()
     var timerSections = [[Timeable]]()
+    var isDragging: Bool = false
     var timerQueue = [Timeable]()
     var workout: Workout?
     var timerState: TimerState = .stopped {
@@ -35,10 +36,11 @@ class OnWorkoutViewController: UIViewController {
                     return
             }
 
-            DispatchQueue.main.async {
-                self.tableView.scrollToRow(at: self.currentIndexPath, at: .top, animated: true)
+            if !isDragging {
+                DispatchQueue.main.async {
+                    self.tableView.scrollToRow(at: self.currentIndexPath, at: .top, animated: true)
+                }
             }
-
         }
     }
     let initialDelayInSeconds: Int = 5
@@ -97,9 +99,13 @@ class OnWorkoutViewController: UIViewController {
     func intro() {
         countdownTime = introCount
 
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-            self.countdownTime -= 1
-        })
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countdownDecremented), userInfo: nil, repeats: true)
+
+        RunLoop.current.add(countdownTimer!, forMode: RunLoopMode.commonModes)
+    }
+
+    @objc func countdownDecremented() {
+        self.countdownTime -= 1
     }
 
     func countdownUpdated() {
@@ -217,17 +223,21 @@ class OnWorkoutViewController: UIViewController {
         timer?.invalidate()
         timer = nil
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-            self.time += 1
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerIncremented), userInfo: nil, repeats: true)
 
-            if self.countdownTime > 0 {
-                self.countdownTime -= 1
-            }
+        RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
+    }
 
-            if self.currentExerciseCount > 0 {
-                self.currentExerciseCount -= 1
-            }
-        })
+    @objc func timerIncremented() {
+        self.time += 1
+
+        if self.countdownTime > 0 {
+            self.countdownTime -= 1
+        }
+
+        if self.currentExerciseCount > 0 {
+            self.currentExerciseCount -= 1
+        }
     }
 
     func pause() {
@@ -339,6 +349,14 @@ extension OnWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         return nil
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isDragging = true
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        isDragging = false
     }
 }
 

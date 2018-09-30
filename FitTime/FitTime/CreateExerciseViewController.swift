@@ -46,7 +46,7 @@ class CreateExerciseViewController: UIViewController {
         }
 
         gradient.frame = transitionView.frame
-        transitionView.layer.addSublayer(gradient)
+        //transitionView.layer.addSublayer(gradient)
 
         //navigationController?.setNavigationBarHidden(true, animated: false)
 

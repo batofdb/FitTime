@@ -35,9 +35,14 @@ class ExercisesViewController: UIViewController {
 
         self.title = "Exercises"
 
-        navigationController?.delegate = self
+        //navigationController?.delegate = self
 
-        navigationController?.navigationBar.prefersLargeTitles = true
+
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = true
 
@@ -146,10 +151,10 @@ extension ExercisesViewController: UICollectionViewDelegateFlowLayout {
 
 extension ExercisesViewController: CollectionPushAndPoppable { }
 
-
+/*
 extension ExercisesViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if toVC.isKind(of: CreateExerciseViewController.self) && didTapCell {
+        if (toVC.isKind(of: CreateExerciseViewController.self) && didTapCell) || toVC.isKind(of: ExercisesViewController.self) {
             let animator = FTBaseAnimator(operation: operation)
             animator.openingFrame = openingFrame!
             didTapCell = false
@@ -159,5 +164,6 @@ extension ExercisesViewController: UINavigationControllerDelegate {
         return nil
     }
 }
+ */
 
 
