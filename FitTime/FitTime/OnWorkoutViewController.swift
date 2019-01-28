@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import HealthKit
+import WatchConnectivity
 
 enum TimerState {
     case intro
@@ -23,6 +25,9 @@ class OnWorkoutViewController: UIViewController {
     var isDragging: Bool = false
     var timerQueue = [Timeable]()
     var workout: Workout?
+    var watchConnectivitySession: WCSession!
+    var watchConnectivityActivationCompletion:((Bool) -> Void)!
+
     var timerState: TimerState = .stopped {
         didSet {
             processTimerState()
@@ -94,7 +99,12 @@ class OnWorkoutViewController: UIViewController {
         }
     }
 
-
+    func finishedWorkout() {
+        let vc: ResultsWorkoutViewController = storyboard?.instantiateViewController(withIdentifier: "ResultsWorkoutViewController") as! ResultsWorkoutViewController
+        vc.observedHeartrateSamples = HealthManager.shared.observedHeartRateSamples
+        HealthManager.shared.clearHeartRateObservedCache()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     func intro() {
         countdownTime = introCount
@@ -117,18 +127,21 @@ class OnWorkoutViewController: UIViewController {
             }
         } else if countdownTime == 5  {
             if let firstExercise = timerSections.first?.first {
-               // speak("\(firstExercise.name) is next")
+               speak("\(firstExercise.name) is next")
             }
         } else if countdownTime == introCount - 1, let name = workout?.name {
-           // speak("\(name)")
+           speak("\(name)")
         }
     }
 
     func timeUpdated() {
         guard   timerSections.indices.contains(currentIndexPath.section),
                 timerSections[currentIndexPath.section].indices.contains(currentIndexPath.row) else {
-                   // speak("Workout Complete")
+                    // edge case stop
+                    speak("Workout Complete")
+                    HealthManager.shared.stopHealthObservation()
                     timerState = .stopped
+                    finishedWorkout()
                 return
         }
 
@@ -154,8 +167,12 @@ class OnWorkoutViewController: UIViewController {
 
                     guard   timerSections.indices.contains(currentIndexPath.section),
                             timerSections[currentIndexPath.section].indices.contains(currentIndexPath.row) else {
-                            //speak("Workout Complete")
+
+                            // Workout has actually finished
+                            speak("Workout Complete")
+                            HealthManager.shared.stopHealthObservation()
                             timerState = .stopped
+                            finishedWorkout()
                             return
                     }
 
@@ -199,6 +216,7 @@ class OnWorkoutViewController: UIViewController {
 
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
+            synthesizer = AVSpeechSynthesizer()
         }
 
         do {
@@ -213,9 +231,10 @@ class OnWorkoutViewController: UIViewController {
 
     @IBOutlet weak var timerLabel: UILabel!
     var timer: Timer? = Timer()
-    let synthesizer = AVSpeechSynthesizer()
+    var synthesizer = AVSpeechSynthesizer()
 
     func start() {
+        HealthManager.shared.startHealthObservation()
         backgroundTimer.startBackgroundTimer {
             print("finished background timer")
         }
@@ -259,7 +278,14 @@ class OnWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(timerSections)
+        initializeWatchConnectivity { activated in
+            if activated {
+                HealthManager.shared.launchWatchCompanion()
+            }
+        }
+
+
+        //print(timerSections)
 
         introUtterance = "\(workout?.name) starts in 10 seconds"
 
@@ -370,4 +396,32 @@ extension OnWorkoutViewController: AVSpeechSynthesizerDelegate {
     }
 }
 
+extension OnWorkoutViewController: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if error == nil, activationState == .activated {
+            watchConnectivityActivationCompletion(true)
+        }
+    }
 
+    func sessionDidBecomeInactive(_ session: WCSession) {
+
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+
+    }
+
+    func initializeWatchConnectivity(completion: @escaping (Bool) -> Void) {
+        guard WCSession.isSupported() else { return }
+
+        watchConnectivitySession = WCSession.default
+        watchConnectivitySession.delegate = self
+
+        if watchConnectivitySession.activationState == .activated {
+            completion(true)
+        } else {
+            watchConnectivitySession.activate()
+            watchConnectivityActivationCompletion = completion
+        }
+    }
+}

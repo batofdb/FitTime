@@ -233,7 +233,8 @@ class CreateWorkoutViewController: UIViewController {
             vc.workout = workout
             vc.timerQueue = timerQueue
             vc.timerSections = sections
-            present(vc, animated: true, completion: {
+            let nvc = UINavigationController(rootViewController: vc)
+            present(nvc, animated: true, completion: {
                 self.savedTapped()
             })
         }

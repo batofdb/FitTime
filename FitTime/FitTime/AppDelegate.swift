@@ -35,7 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         Realm.Configuration.defaultConfiguration = configuration
         do { _ = try Realm() } catch {}
-        
+
+        HealthManager.shared.authorizeHealthKit { (success, error) in
+            if success {
+                print("healthkit authorization granted")
+            } else if let _ = error {
+                print("healthkit authorization error")
+            } else if !success {
+                print("healthkit authorization error")
+            }
+        }
         return true
     }
 

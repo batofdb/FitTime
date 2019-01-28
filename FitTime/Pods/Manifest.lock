@@ -15,6 +15,9 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
   - SnapKit (4.0.0)
+  - SpreadsheetView (0.8.4)
+  - SwiftCharts (0.6.3)
+  - ViewAnimator (2.2.0)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `wip/swift4`)
@@ -25,6 +28,9 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
+  - SpreadsheetView
+  - SwiftCharts (from `https://github.com/i-schuetz/SwiftCharts.git`)
+  - ViewAnimator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -36,16 +42,23 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - SnapKit
+    - SpreadsheetView
+    - ViewAnimator
 
 EXTERNAL SOURCES:
   ChameleonFramework:
     :branch: wip/swift4
     :git: https://github.com/ViccAlexander/Chameleon.git
+  SwiftCharts:
+    :git: https://github.com/i-schuetz/SwiftCharts.git
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: db432ca1b1a3d8f83ee1f881208c0c960a325e73
     :git: https://github.com/ViccAlexander/Chameleon.git
+  SwiftCharts:
+    :commit: 9e80cc9e4785e9c64a5b0d0cce4cae87f3d5635f
+    :git: https://github.com/i-schuetz/SwiftCharts.git
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -57,7 +70,10 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SpreadsheetView: 17c55b6dc82099993cc2ceb818248d19f3220998
+  SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
+  ViewAnimator: a849844cc3698620e1a562b510ed0c28aeafcdc5
 
-PODFILE CHECKSUM: cc58640a354ff9f56cc703a4d16480bb0863d8ea
+PODFILE CHECKSUM: 4128fa81cd8adcd386102cba71e35b6d1bddc3d7
 
 COCOAPODS: 1.5.3

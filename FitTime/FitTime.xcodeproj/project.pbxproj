@@ -13,10 +13,22 @@
 		4701100D1FFB08C100AA4D9D /* FitTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */; };
 		4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4701100E1FFB08C100AA4D9D /* Assets.xcassets */; };
 		470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */; };
+		473029D52161877000B75C98 /* ResultsWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029D42161877000B75C98 /* ResultsWorkoutViewController.swift */; };
+		473029D82163D6A000B75C98 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473029D72163D6A000B75C98 /* HealthKit.framework */; };
+		473029DA2163DC7800B75C98 /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029D92163DC7800B75C98 /* WorkoutInterfaceController.swift */; };
+		473029DC216AF2A500B75C98 /* WorkoutControlInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029DB216AF2A400B75C98 /* WorkoutControlInterfaceController.swift */; };
+		473029DE216AF37300B75C98 /* WorkoutListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029DD216AF37300B75C98 /* WorkoutListInterfaceController.swift */; };
 		473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A52D6201EF17C008C8CE3 /* FTAnimation.swift */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
 		4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */; };
+		479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */; };
+		479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */; };
+		479F871121FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F871021FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib */; };
+		479F871321FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F871221FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib */; };
+		479F871521FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F871421FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib */; };
+		479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */; };
+		47A9D27B217CF06600ABA3C9 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */; };
 		47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */; };
 		47C0A2E41FFB153800C22A2E /* CreateWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */; };
 		47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */; };
@@ -31,8 +43,63 @@
 		47CA6A302031226700E213CF /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA6A2F2031226700E213CF /* ColorLibrary.swift */; };
 		47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */; };
 		47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */; };
+		47DBAE31216098F900CEC2F1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DBAE30216098F900CEC2F1 /* HealthKit.framework */; };
+		47DBAE332160996000CEC2F1 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE322160996000CEC2F1 /* HealthManager.swift */; };
+		47DBAE3A2160A00200CEC2F1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47DBAE382160A00200CEC2F1 /* Interface.storyboard */; };
+		47DBAE3C2160A00A00CEC2F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47DBAE3B2160A00A00CEC2F1 /* Assets.xcassets */; };
+		47DBAE432160A00A00CEC2F1 /* FitRisersWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 47DBAE422160A00A00CEC2F1 /* FitRisersWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		47DBAE482160A00A00CEC2F1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE472160A00A00CEC2F1 /* InterfaceController.swift */; };
+		47DBAE4A2160A00A00CEC2F1 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE492160A00A00CEC2F1 /* ExtensionDelegate.swift */; };
+		47DBAE4C2160A00A00CEC2F1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE4B2160A00A00CEC2F1 /* NotificationController.swift */; };
+		47DBAE4E2160A00A00CEC2F1 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE4D2160A00A00CEC2F1 /* ComplicationController.swift */; };
+		47DBAE502160A00B00CEC2F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47DBAE4F2160A00B00CEC2F1 /* Assets.xcassets */; };
+		47DBAE552160A00B00CEC2F1 /* FitRisersWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 47DBAE362160A00200CEC2F1 /* FitRisersWatch.app */; };
+		47DBAE612160A64700CEC2F1 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE602160A64700CEC2F1 /* WatchConnectivityManager.swift */; };
+		47DBAE622160A64700CEC2F1 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DBAE602160A64700CEC2F1 /* WatchConnectivityManager.swift */; };
 		B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47DBAE442160A00A00CEC2F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47010FF91FFB08C000AA4D9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47DBAE412160A00A00CEC2F1;
+			remoteInfo = "FitRisersWatch Extension";
+		};
+		47DBAE532160A00B00CEC2F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47010FF91FFB08C000AA4D9D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47DBAE352160A00200CEC2F1;
+			remoteInfo = FitRisersWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		47DBAE5A2160A00B00CEC2F1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				47DBAE432160A00A00CEC2F1 /* FitRisersWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47DBAE5F2160A00B00CEC2F1 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				47DBAE552160A00B00CEC2F1 /* FitRisersWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		28BB9713D1EEDE9732A647FD /* Pods-FitTime.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -45,11 +112,24 @@
 		4701100E1FFB08C100AA4D9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		470110111FFB08C100AA4D9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		470110131FFB08C100AA4D9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		473029D42161877000B75C98 /* ResultsWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWorkoutViewController.swift; sourceTree = "<group>"; };
+		473029D62163D69900B75C98 /* FitRisersWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FitRisersWatch Extension.entitlements"; sourceTree = "<group>"; };
+		473029D72163D6A000B75C98 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		473029D92163DC7800B75C98 /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
+		473029DB216AF2A400B75C98 /* WorkoutControlInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutControlInterfaceController.swift; sourceTree = "<group>"; };
+		473029DD216AF37300B75C98 /* WorkoutListInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListInterfaceController.swift; sourceTree = "<group>"; };
 		473A52D6201EF17C008C8CE3 /* FTAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTAnimation.swift; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
 		4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwipeViewController.swift; sourceTree = "<group>"; };
+		479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NestedCollectionTableViewCell.xib; sourceTree = "<group>"; };
+		479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		479F871021FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutNextCollectionViewCell.xib; sourceTree = "<group>"; };
+		479F871221FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryWorkoutsSectionHeader.xib; sourceTree = "<group>"; };
+		479F871421FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryWorkoutCollectionViewCell.xib; sourceTree = "<group>"; };
+		479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCollectableCollectionViewCell.xib; sourceTree = "<group>"; };
 		47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitTime.entitlements; sourceTree = "<group>"; };
+		47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCell.xib; sourceTree = "<group>"; };
 		47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewController.swift; sourceTree = "<group>"; };
 		47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +144,21 @@
 		47CA6A2F2031226700E213CF /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
 		47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
+		47DBAE30216098F900CEC2F1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		47DBAE322160996000CEC2F1 /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
+		47DBAE362160A00200CEC2F1 /* FitRisersWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitRisersWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47DBAE392160A00200CEC2F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		47DBAE3B2160A00A00CEC2F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47DBAE3D2160A00A00CEC2F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47DBAE422160A00A00CEC2F1 /* FitRisersWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "FitRisersWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47DBAE472160A00A00CEC2F1 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		47DBAE492160A00A00CEC2F1 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		47DBAE4B2160A00A00CEC2F1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		47DBAE4D2160A00A00CEC2F1 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		47DBAE4F2160A00B00CEC2F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47DBAE512160A00B00CEC2F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47DBAE522160A00B00CEC2F1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		47DBAE602160A64700CEC2F1 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
 		734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D47FA4B5117B892AAD3C4B /* Pods-FitTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitTime/Pods-FitTime.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +169,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8656E07AE6E989A1E5A96DC /* Pods_FitTime.framework in Frameworks */,
+				47DBAE31216098F900CEC2F1 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47DBAE3F2160A00A00CEC2F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				473029D82163D6A000B75C98 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C8A00BAC315D57FE40C05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +194,8 @@
 		29E0AD8055F6E79E16232D6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				473029D72163D6A000B75C98 /* HealthKit.framework */,
+				47DBAE30216098F900CEC2F1 /* HealthKit.framework */,
 				734F9C112736D50A4B4E3CC3 /* Pods_FitTime.framework */,
 			);
 			name = Frameworks;
@@ -92,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				470110031FFB08C000AA4D9D /* FitTime */,
+				47DBAE372160A00200CEC2F1 /* FitRisersWatch */,
+				47DBAE462160A00A00CEC2F1 /* FitRisersWatch Extension */,
 				470110021FFB08C000AA4D9D /* Products */,
 				5DFD8FB4C923C3F04A123D45 /* Pods */,
 				29E0AD8055F6E79E16232D6C /* Frameworks */,
@@ -102,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				470110011FFB08C000AA4D9D /* FitTime.app */,
+				47DBAE362160A00200CEC2F1 /* FitRisersWatch.app */,
+				47DBAE422160A00A00CEC2F1 /* FitRisersWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +230,9 @@
 				470110041FFB08C000AA4D9D /* AppDelegate.swift */,
 				470110061FFB08C000AA4D9D /* ViewController.swift */,
 				470110081FFB08C000AA4D9D /* Main.storyboard */,
+				479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */,
+				479F871021FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib */,
+				479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */,
 				4701100E1FFB08C100AA4D9D /* Assets.xcassets */,
 				470110101FFB08C100AA4D9D /* LaunchScreen.storyboard */,
 				470110131FFB08C100AA4D9D /* Info.plist */,
@@ -127,6 +247,7 @@
 				47C0A2ED1FFB2A8F00C22A2E /* RootViewController.swift */,
 				47C0A2EF1FFB2ADB00C22A2E /* ExercisesViewController.swift */,
 				47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */,
+				479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */,
 				47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */,
 				4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */,
 				4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */,
@@ -135,8 +256,42 @@
 				473A52D6201EF17C008C8CE3 /* FTAnimation.swift */,
 				47CA6A2F2031226700E213CF /* ColorLibrary.swift */,
 				4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */,
+				47DBAE322160996000CEC2F1 /* HealthManager.swift */,
+				47DBAE602160A64700CEC2F1 /* WatchConnectivityManager.swift */,
+				473029D42161877000B75C98 /* ResultsWorkoutViewController.swift */,
+				47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */,
+				479F871221FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib */,
+				479F871421FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib */,
 			);
 			path = FitTime;
+			sourceTree = "<group>";
+		};
+		47DBAE372160A00200CEC2F1 /* FitRisersWatch */ = {
+			isa = PBXGroup;
+			children = (
+				47DBAE382160A00200CEC2F1 /* Interface.storyboard */,
+				47DBAE3B2160A00A00CEC2F1 /* Assets.xcassets */,
+				47DBAE3D2160A00A00CEC2F1 /* Info.plist */,
+			);
+			path = FitRisersWatch;
+			sourceTree = "<group>";
+		};
+		47DBAE462160A00A00CEC2F1 /* FitRisersWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				473029D62163D69900B75C98 /* FitRisersWatch Extension.entitlements */,
+				47DBAE472160A00A00CEC2F1 /* InterfaceController.swift */,
+				47DBAE492160A00A00CEC2F1 /* ExtensionDelegate.swift */,
+				47DBAE4B2160A00A00CEC2F1 /* NotificationController.swift */,
+				47DBAE4D2160A00A00CEC2F1 /* ComplicationController.swift */,
+				47DBAE4F2160A00B00CEC2F1 /* Assets.xcassets */,
+				47DBAE512160A00B00CEC2F1 /* Info.plist */,
+				47DBAE522160A00B00CEC2F1 /* PushNotificationPayload.apns */,
+				473029D92163DC7800B75C98 /* WorkoutInterfaceController.swift */,
+				473029DB216AF2A400B75C98 /* WorkoutControlInterfaceController.swift */,
+				473029DD216AF37300B75C98 /* WorkoutListInterfaceController.swift */,
+			);
+			path = "FitRisersWatch Extension";
 			sourceTree = "<group>";
 		};
 		5DFD8FB4C923C3F04A123D45 /* Pods */ = {
@@ -162,15 +317,52 @@
 				47010FFF1FFB08C000AA4D9D /* Resources */,
 				47C05886200C43C300C3CBDC /* ShellScript */,
 				DB706A2C6C67245D3277C143 /* [CP] Embed Pods Frameworks */,
+				47DBAE5F2160A00B00CEC2F1 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				47DBAE542160A00B00CEC2F1 /* PBXTargetDependency */,
 			);
 			name = FitTime;
 			productName = FitTime;
 			productReference = 470110011FFB08C000AA4D9D /* FitTime.app */;
 			productType = "com.apple.product-type.application";
+		};
+		47DBAE352160A00200CEC2F1 /* FitRisersWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47DBAE5B2160A00B00CEC2F1 /* Build configuration list for PBXNativeTarget "FitRisersWatch" */;
+			buildPhases = (
+				47DBAE342160A00200CEC2F1 /* Resources */,
+				47DBAE5A2160A00B00CEC2F1 /* Embed App Extensions */,
+				68C8A00BAC315D57FE40C05F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47DBAE452160A00A00CEC2F1 /* PBXTargetDependency */,
+			);
+			name = FitRisersWatch;
+			productName = FitRisersWatch;
+			productReference = 47DBAE362160A00200CEC2F1 /* FitRisersWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		47DBAE412160A00A00CEC2F1 /* FitRisersWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47DBAE562160A00B00CEC2F1 /* Build configuration list for PBXNativeTarget "FitRisersWatch Extension" */;
+			buildPhases = (
+				47DBAE3E2160A00A00CEC2F1 /* Sources */,
+				47DBAE3F2160A00A00CEC2F1 /* Frameworks */,
+				47DBAE402160A00A00CEC2F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FitRisersWatch Extension";
+			productName = "FitRisersWatch Extension";
+			productReference = 47DBAE422160A00A00CEC2F1 /* FitRisersWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -178,15 +370,35 @@
 		47010FF91FFB08C000AA4D9D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = LateRisers;
 				TargetAttributes = {
 					470110001FFB08C000AA4D9D = {
 						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					47DBAE352160A00200CEC2F1 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
+						ProvisioningStyle = Automatic;
+					};
+					47DBAE412160A00A00CEC2F1 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit.watchos = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -210,6 +422,8 @@
 			projectRoot = "";
 			targets = (
 				470110001FFB08C000AA4D9D /* FitTime */,
+				47DBAE352160A00200CEC2F1 /* FitRisersWatch */,
+				47DBAE412160A00A00CEC2F1 /* FitRisersWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -222,7 +436,30 @@
 				470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */,
 				4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */,
 				47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */,
+				47A9D27B217CF06600ABA3C9 /* WorkoutCell.xib in Resources */,
+				479F871321FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib in Resources */,
+				479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */,
+				479F871521FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib in Resources */,
+				479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */,
+				479F871121FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib in Resources */,
 				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47DBAE342160A00200CEC2F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47DBAE3C2160A00A00CEC2F1 /* Assets.xcassets in Resources */,
+				47DBAE3A2160A00200CEC2F1 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47DBAE402160A00A00CEC2F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47DBAE502160A00B00CEC2F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +511,9 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SpreadsheetView/SpreadsheetView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
+				"${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -284,6 +524,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpreadsheetView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewAnimator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -305,11 +548,15 @@
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,
 				4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */,
+				479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */,
 				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
 				4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */,
+				47DBAE612160A64700CEC2F1 /* WatchConnectivityManager.swift in Sources */,
 				47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */,
 				47C0A2F01FFB2ADB00C22A2E /* ExercisesViewController.swift in Sources */,
+				473029D52161877000B75C98 /* ResultsWorkoutViewController.swift in Sources */,
 				47C0A2EC1FFB1A5200C22A2E /* Workout.swift in Sources */,
+				47DBAE332160996000CEC2F1 /* HealthManager.swift in Sources */,
 				4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */,
 				47C0A2F21FFB2AE700C22A2E /* WorkoutsViewController.swift in Sources */,
 				47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */,
@@ -320,7 +567,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47DBAE3E2160A00A00CEC2F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47DBAE4C2160A00A00CEC2F1 /* NotificationController.swift in Sources */,
+				47DBAE4E2160A00A00CEC2F1 /* ComplicationController.swift in Sources */,
+				473029DC216AF2A500B75C98 /* WorkoutControlInterfaceController.swift in Sources */,
+				473029DE216AF37300B75C98 /* WorkoutListInterfaceController.swift in Sources */,
+				473029DA2163DC7800B75C98 /* WorkoutInterfaceController.swift in Sources */,
+				47DBAE4A2160A00A00CEC2F1 /* ExtensionDelegate.swift in Sources */,
+				47DBAE482160A00A00CEC2F1 /* InterfaceController.swift in Sources */,
+				47DBAE622160A64700CEC2F1 /* WatchConnectivityManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47DBAE452160A00A00CEC2F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47DBAE412160A00A00CEC2F1 /* FitRisersWatch Extension */;
+			targetProxy = 47DBAE442160A00A00CEC2F1 /* PBXContainerItemProxy */;
+		};
+		47DBAE542160A00B00CEC2F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47DBAE352160A00200CEC2F1 /* FitRisersWatch */;
+			targetProxy = 47DBAE532160A00B00CEC2F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		470110081FFB08C000AA4D9D /* Main.storyboard */ = {
@@ -337,6 +612,14 @@
 				470110111FFB08C100AA4D9D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		47DBAE382160A00200CEC2F1 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47DBAE392160A00200CEC2F1 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -455,8 +738,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9K6VY5R2A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,7 +759,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ef1106f1-c585-46ef-89f4-9eeb6a51910f";
-				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,8 +771,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9K6VY5R2A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -507,7 +792,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4559d7a0-1162-4e0b-9aa3-42c7b9ecc9a8";
-				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers Release";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -576,8 +861,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitTime/FitTime.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9K6VY5R2A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,11 +882,159 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f7419678-04a5-4aff-8a32-280645576320";
-				PROVISIONING_PROFILE_SPECIFIER = "LR - FitRisers AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
+		};
+		47DBAE572160A00B00CEC2F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = "FitRisersWatch Extension/FitRisersWatch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				INFOPLIST_FILE = "FitRisersWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		47DBAE582160A00B00CEC2F1 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = "FitRisersWatch Extension/FitRisersWatch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				INFOPLIST_FILE = "FitRisersWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = AdHoc;
+		};
+		47DBAE592160A00B00CEC2F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = "FitRisersWatch Extension/FitRisersWatch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				INFOPLIST_FILE = "FitRisersWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		47DBAE5C2160A00B00CEC2F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				IBSC_MODULE = FitRisersWatch_Extension;
+				INFOPLIST_FILE = FitRisersWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		47DBAE5D2160A00B00CEC2F1 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				IBSC_MODULE = FitRisersWatch_Extension;
+				INFOPLIST_FILE = FitRisersWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = AdHoc;
+		};
+		47DBAE5E2160A00B00CEC2F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9K6VY5R2A;
+				IBSC_MODULE = FitRisersWatch_Extension;
+				INFOPLIST_FILE = FitRisersWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LateRisers.FitTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -621,6 +1055,26 @@
 				470110171FFB08C100AA4D9D /* Debug */,
 				47A736CE200D298B00EAAA6E /* AdHoc */,
 				470110181FFB08C100AA4D9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47DBAE562160A00B00CEC2F1 /* Build configuration list for PBXNativeTarget "FitRisersWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47DBAE572160A00B00CEC2F1 /* Debug */,
+				47DBAE582160A00B00CEC2F1 /* AdHoc */,
+				47DBAE592160A00B00CEC2F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47DBAE5B2160A00B00CEC2F1 /* Build configuration list for PBXNativeTarget "FitRisersWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47DBAE5C2160A00B00CEC2F1 /* Debug */,
+				47DBAE5D2160A00B00CEC2F1 /* AdHoc */,
+				47DBAE5E2160A00B00CEC2F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
