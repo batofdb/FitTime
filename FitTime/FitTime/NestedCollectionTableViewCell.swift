@@ -68,11 +68,15 @@ class WorkoutNextCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var workoutLabel: UILabel!
     @IBOutlet weak var detailView: UIView!
-
+    @IBOutlet weak var gradientView: GradientView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 9.0
         layer.masksToBounds = true
+
+        gradientView.gradientLayer.colors = [UIColor(hex: "1c1b1b").cgColor, UIColor(hex: "444141").cgColor]
+        gradientView.gradientLayer.gradient = GradientPoint.topLeftBottomRight.draw()
     }
 
 }

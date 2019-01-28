@@ -81,7 +81,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0e-Up-sDY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workouts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsU-ks-ka8">
                                                             <rect key="frame" x="12" y="25" width="181" height="36"/>
@@ -124,7 +124,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fhV-2R-Uvf" firstAttribute="leading" secondItem="FXc-rz-N2W" secondAttribute="leading" id="JXe-UV-guX"/>
                             <constraint firstAttribute="trailing" secondItem="fhV-2R-Uvf" secondAttribute="trailing" id="PIq-1w-xmU"/>

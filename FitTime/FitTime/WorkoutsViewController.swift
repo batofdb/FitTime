@@ -9,6 +9,96 @@
 import UIKit
 import RealmSwift
 
+extension UIColor {
+    convenience init(_ hex: UInt) {
+        self.init(
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+}
+
+typealias GradientType = (x: CGPoint, y: CGPoint)
+
+enum GradientPoint {
+    case leftRight
+    case rightLeft
+    case topBottom
+    case bottomTop
+    case topLeftBottomRight
+    case bottomRightTopLeft
+    case topRightBottomLeft
+    case bottomLeftTopRight
+
+    func draw() -> GradientType {
+        switch self {
+        case .leftRight:
+            return (x: CGPoint(x: 0, y: 0.5), y: CGPoint(x: 1, y: 0.5))
+        case .rightLeft:
+            return (x: CGPoint(x: 1, y: 0.5), y: CGPoint(x: 0, y: 0.5))
+        case .topBottom:
+            return (x: CGPoint(x: 0.5, y: 0), y: CGPoint(x: 0.5, y: 1))
+        case .bottomTop:
+            return (x: CGPoint(x: 0.5, y: 1), y: CGPoint(x: 0.5, y: 0))
+        case .topLeftBottomRight:
+            return (x: CGPoint(x: 0, y: 0), y: CGPoint(x: 1, y: 1))
+        case .bottomRightTopLeft:
+            return (x: CGPoint(x: 1, y: 1), y: CGPoint(x: 0, y: 0))
+        case .topRightBottomLeft:
+            return (x: CGPoint(x: 1, y: 0), y: CGPoint(x: 0, y: 1))
+        case .bottomLeftTopRight:
+            return (x: CGPoint(x: 0, y: 1), y: CGPoint(x: 1, y: 0))
+        }
+    }
+}
+
+class GradientLayer : CAGradientLayer {
+    var gradient: GradientType? {
+        didSet {
+            startPoint = gradient?.x ?? CGPoint.zero
+            endPoint = gradient?.y ?? CGPoint.zero
+        }
+    }
+}
+
+class GradientView: UIView {
+    override public class var layerClass: Swift.AnyClass {
+        get {
+            return GradientLayer.self
+        }
+    }
+}
+
+extension UIView: GradientViewProvider {
+    typealias GradientViewType = GradientLayer
+}
+
+protocol GradientViewProvider {
+    associatedtype GradientViewType
+}
+
+extension GradientViewProvider where Self: UIView {
+    var gradientLayer: Self.GradientViewType {
+        return layer as! Self.GradientViewType
+    }
+}
+
+
+
+struct ThemeProvider {
+    static let PrimaryColor: UIColor = UIColor(displayP3Red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
+    static let HighlightColor: UIColor = .white
+    static let TitleTextColor: UIColor = .black
+    static let SubTitleTextColor: UIColor = .lightGray
+    static func gradientForWorkoutNow(for bounds: CGRect) -> CAGradientLayer {
+        let grad = CAGradientLayer()
+        return grad
+    }
+
+}
+
 class WorkoutsViewController: UIViewController {
     let workouts = try! Realm().objects(Workout.self).sorted(byKeyPath: "name")
     var token: NotificationToken?
@@ -32,7 +122,7 @@ class WorkoutsViewController: UIViewController {
 
 
         if #available(iOS 11.0, *) {
-            //navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationBar.prefersLargeTitles = true
         } else {
             // Fallback on earlier versions
         }
@@ -40,11 +130,14 @@ class WorkoutsViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .clear
-        //navigationController?.navigationBar.barTintColor = .clear
+
+        //navigationController?.view.backgroundColor = UIColor(displayP3Red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
+
+        //navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
         navigationController?.navigationBar.tintColor = .magenta
         
-        view.backgroundColor = UIColor(displayP3Red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
+        view.backgroundColor = ThemeProvider.PrimaryColor
+        tableView.backgroundColor = ThemeProvider.PrimaryColor
 
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         navigationItem.rightBarButtonItems = [add]
