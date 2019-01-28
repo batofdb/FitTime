@@ -32,7 +32,7 @@ class WorkoutsViewController: UIViewController {
 
 
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
+            //navigationController?.navigationBar.prefersLargeTitles = true
         } else {
             // Fallback on earlier versions
         }
@@ -151,7 +151,7 @@ extension WorkoutsViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         case 1:
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "LibraryWorkoutsSectionHeader") as! LibraryWorkoutsSectionHeader
-            view.titleLabel.text = "Library"
+            view.titleLabel.text = "Recent"
             view.contentView.backgroundColor = .clear
             return view
         case 2:

@@ -29,7 +29,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SpreadsheetView
-  - SwiftCharts (from `https://github.com/i-schuetz/SwiftCharts.git`)
+  - SwiftCharts (from `https://github.com/i-schuetz/SwiftCharts.git`, branch `master`)
   - ViewAnimator
 
 SPEC REPOS:
@@ -50,6 +50,7 @@ EXTERNAL SOURCES:
     :branch: wip/swift4
     :git: https://github.com/ViccAlexander/Chameleon.git
   SwiftCharts:
+    :branch: master
     :git: https://github.com/i-schuetz/SwiftCharts.git
 
 CHECKOUT OPTIONS:
@@ -74,6 +75,6 @@ SPEC CHECKSUMS:
   SwiftCharts: 1535b5e228702af2c9c4d60c2a408f2f0f579fa8
   ViewAnimator: a849844cc3698620e1a562b510ed0c28aeafcdc5
 
-PODFILE CHECKSUM: 4128fa81cd8adcd386102cba71e35b6d1bddc3d7
+PODFILE CHECKSUM: 314168aa933431066dce09afa936aed2d7884bfd
 
 COCOAPODS: 1.5.3
