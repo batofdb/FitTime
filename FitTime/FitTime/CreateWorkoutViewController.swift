@@ -62,7 +62,13 @@ extension UIViewController {
     }
 }
 
-class CreateWorkoutViewController: UIViewController {
+class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
+    var navigationHeightConstraint: NSLayoutConstraint?
+    var navigationView: FitTimeNavigationBar = FitTimeNavigationBar()
+    var searchButton: UIButton = UIButton()
+
+
+
     @IBOutlet weak var name: UITextField!
 
     var warmCount: Int = 0
@@ -119,65 +125,110 @@ class CreateWorkoutViewController: UIViewController {
 
     @IBOutlet weak var exerciseTableView: UITableView!
 
+    @IBOutlet weak var exerciseCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboard()
 
+        if #available(iOS 11.0, *) {
+            exerciseCollectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            // Fallback on earlier versions
+        }
+        //automaticallyAdjustsScrollViewInsets = false
+
+        exerciseCollectionView.contentInset = UIEdgeInsetsMake(FitTimeNavigationBar.InitialHeight, 0, 0, 0)
+
+        addNavigationView()
+        navigationView.leftButtonTappedHandler = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+
+        navigationView.rightButtonTappedHandler = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+
+
         resetRepsCache()
 
-        cooldown.delegate = self
-        warmup.delegate = self
-        repRest.delegate = self
-        setRest.delegate = self
-        sets.delegate = self
-        
+//        cooldown.delegate = self
+//        warmup.delegate = self
+//        repRest.delegate = self
+//        setRest.delegate = self
+//        sets.delegate = self
+//
+//
+//        sets.text = "1"
 
-        sets.text = "1"
-
-        exerciseTableView.rowHeight = 44
+//        exerciseTableView.rowHeight = 44
 
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedTapped))
         saveButton.isEnabled = true
         navigationItem.rightBarButtonItems = [saveButton]
 
-        exerciseTableView.isEditing = true
-        exerciseTableView.allowsSelectionDuringEditing = true
+//        exerciseTableView.isEditing = true
+//        exerciseTableView.allowsSelectionDuringEditing = true
 
-        workoutFormat.setTitle("Edit", forSegmentAt: WorkoutFormat.basic.rawValue)
-        workoutFormat.setTitle("View", forSegmentAt: WorkoutFormat.advanced.rawValue)
+//        workoutFormat.setTitle("Edit", forSegmentAt: WorkoutFormat.basic.rawValue)
+//        workoutFormat.setTitle("View", forSegmentAt: WorkoutFormat.advanced.rawValue)
 
-        workoutFormat.selectedSegmentIndex = 0
+//        workoutFormat.selectedSegmentIndex = 0
 
         if let w = workout {
             preExercises = Array(w.preExercises)
             mainExercises = Array(w.mainExercises)
             postExercises = Array(w.postExercises)
 
-            name.text = w.name
+//            name.text = w.name
 
             if w.cooldown == 0 {
-                cooldown.text = ""
+//                cooldown.text = ""
             } else {
-                cooldown.text = "\(w.cooldown)"
+//                cooldown.text = "\(w.cooldown)"
                 coolCount = w.cooldown
             }
 
 
             if w.warmup == 0 {
-                warmup.text = ""
+//                warmup.text = ""
             } else {
-                warmup.text = "\(w.warmup)"
+//                warmup.text = "\(w.warmup)"
                 warmCount = w.warmup
             }
 
-            setRest.text = "\(w.setRest)"
-            repRest.text = "\(w.repRest)"
-
-            sets.text = "\(w.sets)"
+//            setRest.text = "\(w.setRest)"
+//            repRest.text = "\(w.repRest)"
+//
+//            sets.text = "\(w.sets)"
         }
 
-        exerciseTableView.reloadData()
+        exerciseCollectionView.register(UINib(nibName: "CreateWorkoutExerciseCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell")
+//        exerciseCollectionView.reloadData()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
+    func addNavigationView() {
+        navigationView = FitTimeNavigationBar()
+        navigationView.backgroundColor = .black
+        navigationView.alpha = 0.5
+        view.addSubview(navigationView)
+
+        navigationView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        navigationView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        navigationView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        navigationHeightConstraint = navigationView.heightAnchor.constraint(equalToConstant: FitTimeNavigationBar.InitialHeight)
+        navigationHeightConstraint?.isActive = true
+    }
+
 
     func resetRepsCache() {
         exercisePhaseCount[.warmup] = 0
@@ -299,6 +350,26 @@ extension CreateWorkoutViewController {
     }
 }
 
+extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell", for: indexPath)
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 139)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateNavigationHeight(with: scrollView.contentOffset.y)
+    }
+}
+
+/*
 extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if workoutType == .basic {
@@ -592,7 +663,7 @@ extension CreateWorkoutViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
 }
-
+*/
 extension CreateWorkoutViewController: ExerciseRefinementViewControllerDelegate {
     func selected(exercise: ExerciseToWorkoutBridge, for type: ExerciseIntervalType) {
         func selectIn(exercises: inout [ExerciseToWorkoutBridge]) {
@@ -877,4 +948,146 @@ extension CreateWorkoutViewController: UITextFieldDelegate {
         resetRepsCache()
         timerQueue.removeAll()
     }
+}
+
+protocol AnimatableNavigationBar {
+    var navigationView: FitTimeNavigationBar { get set }
+    var navigationHeightConstraint: NSLayoutConstraint? { get set }
+    func addNavigationView()
+}
+
+extension AnimatableNavigationBar where Self: UIViewController {
+    func updateNavigationHeight(with offset: CGFloat) {
+        guard let currentHeight = navigationHeightConstraint?.constant else { return }
+        let distance = FitTimeNavigationBar.InitialHeight - FitTimeNavigationBar.EndHeight
+        let currentDistance = offset + FitTimeNavigationBar.InitialHeight
+        navigationHeightConstraint?.constant = min(max(FitTimeNavigationBar.InitialHeight - currentDistance, FitTimeNavigationBar.EndHeight), FitTimeNavigationBar.InitialHeight)
+
+
+        print("offset: \(offset)")
+    }
+}
+
+class FitTimeNavigationBar: UIView {
+    static let InitialHeight: CGFloat = 250
+    static let EndHeight: CGFloat = 150
+
+    weak var heightConstraint: NSLayoutConstraint?
+    var leftButtonTappedHandler: (()->Void)? = nil
+    var rightButtonTappedHandler: (()->Void)? = nil
+    var filterButtonTappedHandler: (()->Void)? = nil
+
+    var titleLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = UIFont.preferredFont(forTextStyle: .title2)
+        l.textColor = .white
+        l.numberOfLines = 0
+        l.textAlignment = .left
+        return l
+    }()
+
+    var subTitleLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = UIFont.preferredFont(forTextStyle: .title3)
+        l.textColor = .white
+        l.numberOfLines = 0
+        l.textAlignment = .left
+        return l
+    }()
+
+    var leftButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        return b
+    }()
+
+    var rightButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        return b
+    }()
+
+    var searchBar: UISearchBar =  {
+        let s = UISearchBar(frame: .zero)
+        s.translatesAutoresizingMaskIntoConstraints = false
+        s.placeholder = "Search"
+        s.searchBarStyle = .minimal
+        return s
+    }()
+
+    var filterButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        return b
+    }()
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+
+    private func commonInit() {
+        translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(rightButton)
+        addSubview(leftButton)
+
+        leftButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
+        leftButton.topAnchor.constraint(equalTo: topAnchor, constant: 54).isActive = true
+
+        rightButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
+        rightButton.centerYAnchor.constraint(equalTo: leftButton.centerYAnchor, constant: 0).isActive = true
+
+        leftButton.setImage(UIImage(named: "close_button"), for: .normal)
+        rightButton.setTitle("Next", for: .normal)
+        rightButton.titleLabel?.textColor = .white
+
+        leftButton.addTarget(self, action: #selector(leftButtonTapped), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
+
+        addSubview(titleLabel)
+        addSubview(subTitleLabel)
+
+        titleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: leftButton.bottomAnchor, constant: 35).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
+
+        subTitleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
+        subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
+        subTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
+
+        titleLabel.text = "Add Exercises"
+        subTitleLabel.text = "Workout Creation"
+
+        addSubview(searchBar)
+        addSubview(filterButton)
+
+        filterButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
+        filterButton.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor, constant: 0).isActive = true
+
+        searchBar.leftAnchor.constraint(equalTo: leftButton.leftAnchor, constant: -14).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -19).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: filterButton.leftAnchor, constant: -20).isActive = true
+
+        filterButton.setImage(UIImage(named: "filter_button"), for: .normal)
+        filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func leftButtonTapped() {
+        leftButtonTappedHandler?()
+    }
+    @objc func rightButtonTapped() {
+        rightButtonTappedHandler?()
+    }
+    @objc func filterButtonTapped() {
+        filterButtonTappedHandler?()
+    }
+
 }

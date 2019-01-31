@@ -19,6 +19,8 @@
 		473029DA2163DC7800B75C98 /* WorkoutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029D92163DC7800B75C98 /* WorkoutInterfaceController.swift */; };
 		473029DC216AF2A500B75C98 /* WorkoutControlInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029DB216AF2A400B75C98 /* WorkoutControlInterfaceController.swift */; };
 		473029DE216AF37300B75C98 /* WorkoutListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473029DD216AF37300B75C98 /* WorkoutListInterfaceController.swift */; };
+		4734FF842200356F0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */; };
+		4734FF8622003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */; };
 		473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A52D6201EF17C008C8CE3 /* FTAnimation.swift */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
@@ -117,6 +119,8 @@
 		473029D92163DC7800B75C98 /* WorkoutInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInterfaceController.swift; sourceTree = "<group>"; };
 		473029DB216AF2A400B75C98 /* WorkoutControlInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutControlInterfaceController.swift; sourceTree = "<group>"; };
 		473029DD216AF37300B75C98 /* WorkoutListInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListInterfaceController.swift; sourceTree = "<group>"; };
+		4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateWorkoutExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
+		4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		473A52D6201EF17C008C8CE3 /* FTAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTAnimation.swift; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */,
 				479F871221FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib */,
 				479F871421FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib */,
+				4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */,
+				4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */,
 			);
 			path = FitTime;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				479F871521FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib in Resources */,
 				479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */,
 				479F871121FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib in Resources */,
+				4734FF842200356F0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib in Resources */,
 				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +562,7 @@
 				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,
+				4734FF8622003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift in Sources */,
 				4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */,
 				479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */,
 				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
