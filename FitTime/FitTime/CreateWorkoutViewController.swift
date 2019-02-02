@@ -965,25 +965,39 @@ extension AnimatableNavigationBar where Self: UIViewController {
 
         let primaryTitleDistance: CGFloat = 40.0
         if offset > -(FitTimeNavigationBar.EndHeight) {
+            //Top
             navigationView.titleLabelToTop.constant = 0
             navigationView.titleLabelLeading.constant = navigationView.leftButtonWidth.constant + 15.0
-        } else if offset > -(FitTimeNavigationBar.InitialHeight) && offset < -(FitTimeNavigationBar.EndHeight) {
+            navigationView.subtitleLabelToTop.constant = 0
+            navigationView.subTitleLabel.alpha = 0
+        } else if offset > -(FitTimeNavigationBar.InitialHeight) && offset <= -(FitTimeNavigationBar.EndHeight) {
+            // Animating
             let pct = min(1 - (currentDistance / (FitTimeNavigationBar.InitialHeight - FitTimeNavigationBar.EndHeight)), 1.0)
             let leadingPct = min(currentDistance / (FitTimeNavigationBar.InitialHeight - FitTimeNavigationBar.EndHeight), 1.0)
             let offset = navigationView.leftButtonHeight.constant + 15.0
             let leadingOffset = navigationView.leftButtonWidth.constant + 15.0
             navigationView.titleLabelToTop.constant = pct * offset
             navigationView.titleLabelLeading.constant = leadingPct * leadingOffset
+
+            let distanceToGo: CGFloat = 10.0
+            let distanceToAlpha: CGFloat = 10.0
+            let dPct = (currentDistance / distanceToAlpha)
+            let aPct = 1 - (currentDistance / distanceToAlpha)
+            navigationView.subtitleLabelToTop.constant = 10 - (distanceToGo * dPct)
+            navigationView.subTitleLabel.alpha = max(min(aPct, 1.0), 0.0)
         } else {
+            //Bottom
+            navigationView.subTitleLabel.alpha = 1.0
             navigationView.titleLabelToTop.constant = navigationView.leftButtonHeight.constant + 15.0
             navigationView.titleLabelLeading.constant = 0
+            navigationView.subtitleLabelToTop.constant = 10
         }
         print("offset: \(offset)")
     }
 }
 
 class FitTimeNavigationBar: UIView {
-    static let InitialHeight: CGFloat = 250
+    static let InitialHeight: CGFloat = 220
     static let EndHeight: CGFloat = 150
 
     weak var heightConstraint: NSLayoutConstraint?
@@ -992,6 +1006,8 @@ class FitTimeNavigationBar: UIView {
     var filterButtonTappedHandler: (()->Void)? = nil
 
     var titleLabelToTop: NSLayoutConstraint!
+    var subtitleLabelToTop: NSLayoutConstraint!
+    var subtitleLabelLeading: NSLayoutConstraint!
     var titleLabelLeading: NSLayoutConstraint!
     var primaryTitleHeight: NSLayoutConstraint!
     var subtitleHeight: NSLayoutConstraint!
@@ -1086,7 +1102,7 @@ class FitTimeNavigationBar: UIView {
         searchBar.leftAnchor.constraint(equalTo: leftButton.leftAnchor, constant: -14).isActive = true
         searchBarHeight = searchBar.heightAnchor.constraint(equalToConstant: 56)
         searchBarHeight.isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -19).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -7).isActive = true
         searchBar.rightAnchor.constraint(equalTo: filterButton.leftAnchor, constant: -20).isActive = true
 
         filterButton.setImage(UIImage(named: "filter_button"), for: .normal)
@@ -1098,14 +1114,16 @@ class FitTimeNavigationBar: UIView {
         titleLabelLeading = titleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor)
         titleLabelLeading.isActive = true
 
-        primaryTitleHeight = titleLabel.heightAnchor.constraint(equalToConstant: 40)
+        primaryTitleHeight = titleLabel.heightAnchor.constraint(equalToConstant: 32)
         primaryTitleHeight.isActive = true
         titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
 
-        subTitleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
+        subtitleLabelLeading = subTitleLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor)
+        subtitleLabelLeading.isActive = true
         subtitleHeight = subTitleLabel.heightAnchor.constraint(equalToConstant: 20)
         subtitleHeight.isActive = true
-        subTitleLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -15).isActive = true
+        subtitleLabelToTop = subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+        subtitleLabelToTop.isActive = true
         subTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
 
         titleLabel.text = "Add Exercises"
