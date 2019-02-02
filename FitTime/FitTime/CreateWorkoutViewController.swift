@@ -963,7 +963,21 @@ extension AnimatableNavigationBar where Self: UIViewController {
         let currentDistance = offset + FitTimeNavigationBar.InitialHeight
         navigationHeightConstraint?.constant = min(max(FitTimeNavigationBar.InitialHeight - currentDistance, FitTimeNavigationBar.EndHeight), FitTimeNavigationBar.InitialHeight)
 
-
+        let primaryTitleDistance: CGFloat = 40.0
+        if offset > -(FitTimeNavigationBar.EndHeight) {
+            navigationView.titleLabelToTop.constant = 0
+            navigationView.titleLabelLeading.constant = navigationView.leftButtonWidth.constant + 15.0
+        } else if offset > -(FitTimeNavigationBar.InitialHeight) && offset < -(FitTimeNavigationBar.EndHeight) {
+            let pct = min(1 - (currentDistance / (FitTimeNavigationBar.InitialHeight - FitTimeNavigationBar.EndHeight)), 1.0)
+            let leadingPct = min(currentDistance / (FitTimeNavigationBar.InitialHeight - FitTimeNavigationBar.EndHeight), 1.0)
+            let offset = navigationView.leftButtonHeight.constant + 15.0
+            let leadingOffset = navigationView.leftButtonWidth.constant + 15.0
+            navigationView.titleLabelToTop.constant = pct * offset
+            navigationView.titleLabelLeading.constant = leadingPct * leadingOffset
+        } else {
+            navigationView.titleLabelToTop.constant = navigationView.leftButtonHeight.constant + 15.0
+            navigationView.titleLabelLeading.constant = 0
+        }
         print("offset: \(offset)")
     }
 }
@@ -977,10 +991,18 @@ class FitTimeNavigationBar: UIView {
     var rightButtonTappedHandler: (()->Void)? = nil
     var filterButtonTappedHandler: (()->Void)? = nil
 
+    var titleLabelToTop: NSLayoutConstraint!
+    var titleLabelLeading: NSLayoutConstraint!
+    var primaryTitleHeight: NSLayoutConstraint!
+    var subtitleHeight: NSLayoutConstraint!
+    var searchBarHeight: NSLayoutConstraint!
+    var leftButtonHeight: NSLayoutConstraint!
+    var leftButtonWidth: NSLayoutConstraint!
+
     var titleLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.font = UIFont.preferredFont(forTextStyle: .title2)
+        l.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         l.textColor = .white
         l.numberOfLines = 0
         l.textAlignment = .left
@@ -990,7 +1012,7 @@ class FitTimeNavigationBar: UIView {
     var subTitleLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.font = UIFont.preferredFont(forTextStyle: .title3)
+        l.font = UIFont.preferredFont(forTextStyle: .headline)
         l.textColor = .white
         l.numberOfLines = 0
         l.textAlignment = .left
@@ -1041,7 +1063,10 @@ class FitTimeNavigationBar: UIView {
 
         leftButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
         leftButton.topAnchor.constraint(equalTo: topAnchor, constant: 54).isActive = true
-
+        leftButtonHeight = leftButton.heightAnchor.constraint(equalToConstant: 22)
+        leftButtonHeight.isActive = true
+        leftButtonWidth = leftButton.widthAnchor.constraint(equalToConstant: 22)
+        leftButtonWidth.isActive = true
         rightButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
         rightButton.centerYAnchor.constraint(equalTo: leftButton.centerYAnchor, constant: 0).isActive = true
 
@@ -1052,20 +1077,6 @@ class FitTimeNavigationBar: UIView {
         leftButton.addTarget(self, action: #selector(leftButtonTapped), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
 
-        addSubview(titleLabel)
-        addSubview(subTitleLabel)
-
-        titleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: leftButton.bottomAnchor, constant: 35).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
-
-        subTitleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
-        subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
-        subTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
-
-        titleLabel.text = "Add Exercises"
-        subTitleLabel.text = "Workout Creation"
-
         addSubview(searchBar)
         addSubview(filterButton)
 
@@ -1073,11 +1084,35 @@ class FitTimeNavigationBar: UIView {
         filterButton.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor, constant: 0).isActive = true
 
         searchBar.leftAnchor.constraint(equalTo: leftButton.leftAnchor, constant: -14).isActive = true
+        searchBarHeight = searchBar.heightAnchor.constraint(equalToConstant: 56)
+        searchBarHeight.isActive = true
         searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -19).isActive = true
         searchBar.rightAnchor.constraint(equalTo: filterButton.leftAnchor, constant: -20).isActive = true
 
         filterButton.setImage(UIImage(named: "filter_button"), for: .normal)
         filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+
+        addSubview(titleLabel)
+        addSubview(subTitleLabel)
+
+        titleLabelLeading = titleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor)
+        titleLabelLeading.isActive = true
+
+        primaryTitleHeight = titleLabel.heightAnchor.constraint(equalToConstant: 40)
+        primaryTitleHeight.isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
+
+        subTitleLabel.leftAnchor.constraint(equalTo: leftButton.leftAnchor).isActive = true
+        subtitleHeight = subTitleLabel.heightAnchor.constraint(equalToConstant: 20)
+        subtitleHeight.isActive = true
+        subTitleLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -15).isActive = true
+        subTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 24).isActive = true
+
+        titleLabel.text = "Add Exercises"
+        subTitleLabel.text = "Workout Creation"
+
+        titleLabelToTop = titleLabel.topAnchor.constraint(equalTo: leftButton.topAnchor, constant: 15 + leftButtonHeight.constant)
+        titleLabelToTop.isActive = true
     }
 
     @objc func leftButtonTapped() {
