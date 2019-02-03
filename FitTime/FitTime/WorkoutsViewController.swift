@@ -177,7 +177,7 @@ extension WorkoutsViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             cell.set(with: [1])
         } else {
-            cell.set(with: [1, 2, 3])
+            cell.set(with: [1, 2, 3, 4, 5, 6])
         }
 
         return cell

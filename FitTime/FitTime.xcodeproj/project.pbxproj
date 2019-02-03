@@ -44,6 +44,18 @@
 		47C0A2F41FFB396200C22A2E /* ExercisePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */; };
 		47C0A2F61FFB4A8100C22A2E /* CreatePhaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */; };
 		47CA6A302031226700E213CF /* ColorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA6A2F2031226700E213CF /* ColorLibrary.swift */; };
+		47CCC04B22068B24007CB338 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04122068B1F007CB338 /* Rubik-BlackItalic.ttf */; };
+		47CCC04C22068B24007CB338 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04222068B20007CB338 /* Rubik-Italic.ttf */; };
+		47CCC04D22068B24007CB338 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04322068B20007CB338 /* Rubik-Medium.ttf */; };
+		47CCC04E22068B24007CB338 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04422068B20007CB338 /* Rubik-Regular.ttf */; };
+		47CCC04F22068B24007CB338 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04522068B21007CB338 /* Rubik-MediumItalic.ttf */; };
+		47CCC05022068B24007CB338 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04622068B21007CB338 /* Rubik-Light.ttf */; };
+		47CCC05122068B24007CB338 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04722068B22007CB338 /* Rubik-BoldItalic.ttf */; };
+		47CCC05222068B24007CB338 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04822068B22007CB338 /* Rubik-Black.ttf */; };
+		47CCC05322068B24007CB338 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04922068B23007CB338 /* Rubik-Bold.ttf */; };
+		47CCC05422068B24007CB338 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC04A22068B23007CB338 /* Rubik-LightItalic.ttf */; };
+		47CCC05622068B2D007CB338 /* Questrial-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC05522068B2C007CB338 /* Questrial-Regular.ttf */; };
+		47CCC05922068C76007CB338 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CCC05822068C76007CB338 /* Fonts.swift */; };
 		47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */; };
 		47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */; };
 		47DBAE31216098F900CEC2F1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DBAE30216098F900CEC2F1 /* HealthKit.framework */; };
@@ -145,6 +157,18 @@
 		47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePhase.swift; sourceTree = "<group>"; };
 		47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhaseViewController.swift; sourceTree = "<group>"; };
 		47CA6A2F2031226700E213CF /* ColorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLibrary.swift; sourceTree = "<group>"; };
+		47CCC04122068B1F007CB338 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
+		47CCC04222068B20007CB338 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		47CCC04322068B20007CB338 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		47CCC04422068B20007CB338 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		47CCC04522068B21007CB338 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
+		47CCC04622068B21007CB338 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		47CCC04722068B22007CB338 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
+		47CCC04822068B22007CB338 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
+		47CCC04922068B23007CB338 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		47CCC04A22068B23007CB338 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
+		47CCC05522068B2C007CB338 /* Questrial-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Questrial-Regular.ttf"; sourceTree = "<group>"; };
+		47CCC05822068C76007CB338 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
 		47DBAE30216098F900CEC2F1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -230,6 +254,9 @@
 		470110031FFB08C000AA4D9D /* FitTime */ = {
 			isa = PBXGroup;
 			children = (
+				47CCC05722068C67007CB338 /* Utility */,
+				47CCC04022068AF7007CB338 /* Fonts */,
+				47CCC03F22068AD9007CB338 /* Create Workout */,
 				47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */,
 				470110041FFB08C000AA4D9D /* AppDelegate.swift */,
 				470110061FFB08C000AA4D9D /* ViewController.swift */,
@@ -242,7 +269,6 @@
 				470110131FFB08C100AA4D9D /* Info.plist */,
 				4701100B1FFB08C100AA4D9D /* FitTime.xcdatamodeld */,
 				47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */,
-				47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */,
 				47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */,
 				47C0A2E71FFB155E00C22A2E /* OffWorkoutViewController.swift */,
 				47C0A2E91FFB177100C22A2E /* Exercise.swift */,
@@ -266,10 +292,44 @@
 				47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */,
 				479F871221FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib */,
 				479F871421FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib */,
+			);
+			path = FitTime;
+			sourceTree = "<group>";
+		};
+		47CCC03F22068AD9007CB338 /* Create Workout */ = {
+			isa = PBXGroup;
+			children = (
+				47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */,
 				4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */,
 				4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */,
 			);
-			path = FitTime;
+			path = "Create Workout";
+			sourceTree = "<group>";
+		};
+		47CCC04022068AF7007CB338 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				47CCC04822068B22007CB338 /* Rubik-Black.ttf */,
+				47CCC05522068B2C007CB338 /* Questrial-Regular.ttf */,
+				47CCC04122068B1F007CB338 /* Rubik-BlackItalic.ttf */,
+				47CCC04922068B23007CB338 /* Rubik-Bold.ttf */,
+				47CCC04722068B22007CB338 /* Rubik-BoldItalic.ttf */,
+				47CCC04222068B20007CB338 /* Rubik-Italic.ttf */,
+				47CCC04622068B21007CB338 /* Rubik-Light.ttf */,
+				47CCC04A22068B23007CB338 /* Rubik-LightItalic.ttf */,
+				47CCC04322068B20007CB338 /* Rubik-Medium.ttf */,
+				47CCC04522068B21007CB338 /* Rubik-MediumItalic.ttf */,
+				47CCC04422068B20007CB338 /* Rubik-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		47CCC05722068C67007CB338 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				47CCC05822068C76007CB338 /* Fonts.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		47DBAE372160A00200CEC2F1 /* FitRisersWatch */ = {
@@ -441,15 +501,26 @@
 			files = (
 				470110121FFB08C100AA4D9D /* LaunchScreen.storyboard in Resources */,
 				4701100F1FFB08C100AA4D9D /* Assets.xcassets in Resources */,
+				47CCC04B22068B24007CB338 /* Rubik-BlackItalic.ttf in Resources */,
+				47CCC05022068B24007CB338 /* Rubik-Light.ttf in Resources */,
+				47CCC04F22068B24007CB338 /* Rubik-MediumItalic.ttf in Resources */,
 				47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */,
 				47A9D27B217CF06600ABA3C9 /* WorkoutCell.xib in Resources */,
+				47CCC05122068B24007CB338 /* Rubik-BoldItalic.ttf in Resources */,
 				479F871321FE7A3700A61C9B /* LibraryWorkoutsSectionHeader.xib in Resources */,
+				47CCC05422068B24007CB338 /* Rubik-LightItalic.ttf in Resources */,
+				47CCC05322068B24007CB338 /* Rubik-Bold.ttf in Resources */,
 				479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */,
+				47CCC05622068B2D007CB338 /* Questrial-Regular.ttf in Resources */,
 				479F871521FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib in Resources */,
 				479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */,
 				479F871121FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib in Resources */,
+				47CCC05222068B24007CB338 /* Rubik-Black.ttf in Resources */,
+				47CCC04C22068B24007CB338 /* Rubik-Italic.ttf in Resources */,
 				4734FF842200356F0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib in Resources */,
 				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
+				47CCC04E22068B24007CB338 /* Rubik-Regular.ttf in Resources */,
+				47CCC04D22068B24007CB338 /* Rubik-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +628,7 @@
 			files = (
 				47C0A2EE1FFB2A8F00C22A2E /* RootViewController.swift in Sources */,
 				47CA6A302031226700E213CF /* ColorLibrary.swift in Sources */,
+				47CCC05922068C76007CB338 /* Fonts.swift in Sources */,
 				47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */,
 				473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */,
 				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
