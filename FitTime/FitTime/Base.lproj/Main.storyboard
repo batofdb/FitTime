@@ -153,13 +153,13 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ev-vz-IWx" userLabel="ContainerView" customClass="PagingContainerView" customModule="FitTime" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1110" height="667"/>
                                 <subviews>
-                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-h8-cfG">
+                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-h8-cfG" customClass="OutsideScrollView" customModule="FitTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="832.5" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFD-8b-cMf">
                                                 <rect key="frame" x="0.0" y="0.0" width="1942.5" height="667"/>
                                                 <subviews>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0B-Rm-g0o">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0B-Rm-g0o">
                                                         <rect key="frame" x="0.0" y="0.0" width="832.5" height="667"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HpJ-OG-eBS">
@@ -183,7 +183,7 @@
                                                             <outlet property="delegate" destination="D80-r3-XZY" id="eIB-ov-e2W"/>
                                                         </connections>
                                                     </collectionView>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dHZ-Dy-lNS">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dHZ-Dy-lNS">
                                                         <rect key="frame" x="832.5" y="0.0" width="1110" height="667"/>
                                                         <color key="backgroundColor" red="0.26274509800000001" green="0.85490196080000003" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xbV-lz-EVu">
@@ -212,7 +212,7 @@
                                                 <constraints>
                                                     <constraint firstItem="dHZ-Dy-lNS" firstAttribute="leading" secondItem="P0B-Rm-g0o" secondAttribute="trailing" id="JTJ-1x-wvd"/>
                                                     <constraint firstAttribute="trailing" secondItem="dHZ-Dy-lNS" secondAttribute="trailing" id="QOn-Pz-iMY"/>
-                                                    <constraint firstItem="dHZ-Dy-lNS" firstAttribute="top" secondItem="PFD-8b-cMf" secondAttribute="top" id="TuH-JV-att"/>
+                                                    <constraint firstItem="dHZ-Dy-lNS" firstAttribute="top" secondItem="PFD-8b-cMf" secondAttribute="top" placeholder="YES" id="TuH-JV-att"/>
                                                     <constraint firstAttribute="bottom" secondItem="dHZ-Dy-lNS" secondAttribute="bottom" id="exL-hr-99y"/>
                                                     <constraint firstItem="P0B-Rm-g0o" firstAttribute="leading" secondItem="PFD-8b-cMf" secondAttribute="leading" id="fHY-Oa-E5p"/>
                                                     <constraint firstAttribute="bottom" secondItem="P0B-Rm-g0o" secondAttribute="bottom" id="t9I-sm-M6C"/>
