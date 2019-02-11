@@ -75,6 +75,45 @@ class CreateWorkoutExerciseCollectionViewCell: UICollectionViewCell {
         l3.bottomAnchor.constraint(equalTo: l2.bottomAnchor).isActive = true
 
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let point = touches.first?.location(in: self)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let pageContainerView = superview?.superview?.superview?.superview else {
+            return super.hitTest(point, with: event)
+        }
+
+        if !self.isHidden && self.alpha > 0 {
+            for sub in subviews.reversed() {
+                let subPoint = pageContainerView.convert(point, to: self)
+                if let result = sub.hitTest(subPoint, with: event) {
+                    return result
+                }
+            }
+        }
+        return super.hitTest(point, with: event)
+    }
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let inside = super.point(inside: point, with: event)
+
+        if let pageContainerView = superview?.superview?.superview?.superview {
+            let realPoint = pageContainerView.convert(point, to: self)
+            if frame.contains(realPoint) {
+                return true
+            }
+
+
+        }
+        return inside
+    }
 }
 
 class AddButton: UIButton {
@@ -110,3 +149,4 @@ class AddButton: UIButton {
                       height: size.height + topInset + bottomInset)
     }
 }
+

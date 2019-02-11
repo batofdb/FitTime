@@ -156,8 +156,8 @@
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-h8-cfG" customClass="OutsideScrollView" customModule="FitTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="832.5" height="667"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFD-8b-cMf">
-                                                <rect key="frame" x="0.0" y="0.0" width="1942.5" height="667"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFD-8b-cMf" customClass="OutsideContentView" customModule="FitTime" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="1665" height="667"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0B-Rm-g0o">
                                                         <rect key="frame" x="0.0" y="0.0" width="832.5" height="667"/>
@@ -183,8 +183,8 @@
                                                             <outlet property="delegate" destination="D80-r3-XZY" id="eIB-ov-e2W"/>
                                                         </connections>
                                                     </collectionView>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dHZ-Dy-lNS">
-                                                        <rect key="frame" x="832.5" y="0.0" width="1110" height="667"/>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dHZ-Dy-lNS" customClass="OutsideCollectionView" customModule="FitTime" customModuleProvider="target">
+                                                        <rect key="frame" x="832.5" y="0.0" width="832.5" height="667"/>
                                                         <color key="backgroundColor" red="0.26274509800000001" green="0.85490196080000003" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xbV-lz-EVu">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -235,7 +235,7 @@
                                 <constraints>
                                     <constraint firstItem="KEs-h8-cfG" firstAttribute="leading" secondItem="3ev-vz-IWx" secondAttribute="leading" id="6Be-9g-LNk"/>
                                     <constraint firstItem="P0B-Rm-g0o" firstAttribute="width" secondItem="3ev-vz-IWx" secondAttribute="width" multiplier="0.75" id="7tV-JR-XkA"/>
-                                    <constraint firstItem="dHZ-Dy-lNS" firstAttribute="width" secondItem="3ev-vz-IWx" secondAttribute="width" id="Ifi-2O-Qf7"/>
+                                    <constraint firstItem="dHZ-Dy-lNS" firstAttribute="width" secondItem="3ev-vz-IWx" secondAttribute="width" multiplier="0.75" id="Ifi-2O-Qf7"/>
                                     <constraint firstItem="PFD-8b-cMf" firstAttribute="height" secondItem="3ev-vz-IWx" secondAttribute="height" id="LoL-lK-9L9"/>
                                     <constraint firstItem="KEs-h8-cfG" firstAttribute="top" secondItem="3ev-vz-IWx" secondAttribute="top" id="fOh-g4-Ifn"/>
                                     <constraint firstItem="KEs-h8-cfG" firstAttribute="height" secondItem="3ev-vz-IWx" secondAttribute="height" id="jM4-cU-Z5e"/>

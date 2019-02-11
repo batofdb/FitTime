@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1310" height="366"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCL-UM-zWB">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCL-UM-zWB" customClass="OutsideSelectedExerciseContentView" customModule="FitTime" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="553" height="196"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="body_icon" translatesAutoresizingMaskIntoConstraints="NO" id="WdJ-8j-dZK">

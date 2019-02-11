@@ -72,7 +72,7 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     @IBOutlet weak var contentViewWidth: NSLayoutConstraint!
     
     @IBOutlet weak var selectedExerciseCollectionViewWidth: NSLayoutConstraint!
-    @IBOutlet weak var selectedExercisesCollectionView: UICollectionView!
+    @IBOutlet weak var selectedExercisesCollectionView: OutsideCollectionView!
     
     @IBOutlet weak var name: UITextField!
 
@@ -153,6 +153,8 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
             }
         }
 
+        selectedExercisesCollectionView.clipsToBounds = false
+
         exerciseCollectionView.contentInset = UIEdgeInsetsMake(FitTimeNavigationBar.InitialHeight, 0, bottomInset, 0)
         exerciseCollectionView.contentInsetAdjustmentBehavior = .never
 
@@ -164,11 +166,13 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
         selectedExercisesCollectionView.topAnchor.constraint(equalTo: navigationView.bottomAnchor).isActive = true
 
         navigationView.leftButtonTappedHandler = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            //self?.navigationController?.popViewController(animated: true)
+            self?.dismiss(animated: true, completion: nil)
         }
 
         navigationView.rightButtonTappedHandler = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+//            self?.navigationController?.popViewController(animated: true)
+            self?.dismiss(animated: true, completion: nil)
         }
 
         resetRepsCache()
@@ -377,6 +381,7 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell", for: indexPath) as! CreateWorkoutExerciseCollectionViewCell
         cell.titleLabel.text = "Bent Over Two-Arm Long Bar Row"
+        cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: cell.frame.width, height: cell.frame.height)
         return cell
     }
 
@@ -385,6 +390,10 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == selectedExercisesCollectionView {
+            return CGSize(width: UIScreen.main.bounds.width, height: 139)
+        }
+
         return CGSize(width: collectionView.frame.width, height: 139)
     }
 
@@ -392,9 +401,13 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
         if scrollView == exerciseCollectionView {
             updateNavigationHeight(with: scrollView.contentOffset.y)
         } else if scrollView == parentScrollView {
-            print("scroll: \(scrollView.contentOffset)")
             if scrollView.contentOffset.y > 0 {
                 scrollView.contentOffset = CGPoint(x: scrollView.contentOffset.x, y: 0)
+            }
+
+            let xLimit: CGFloat = scrollView.frame.width
+            if scrollView.contentOffset.x > xLimit {
+                scrollView.contentOffset = CGPoint(x: xLimit, y: 0)
             }
         }
     }
@@ -1038,7 +1051,6 @@ extension AnimatableNavigationBar where Self: UIViewController {
             //navigationView.titleLabelLeading.constant = 0
             navigationView.subtitleLabelToTop.constant = 10
         }
-        //print("offset: \(offset)")
     }
 }
 
@@ -1200,10 +1212,13 @@ class PagingContainerView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let child = super.hitTest(point, with: event)
 
-        if child == self && self.subviews.count > 0 {
-            return subviews.first!
-        }
+        if let scroll = subviews.first as? OutsideScrollView, child == self && self.subviews.count > 0 {
+            if scroll.contentOffset.x < scroll.frame.width {
+                return scroll
+            }
 
+            return scroll.hitTest(point, with: event)
+        }
         return child
     }
 }
@@ -1212,10 +1227,87 @@ class OutsideScrollView: UIScrollView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let inside = super.point(inside: point, with: event)
 
-        if frame.width == contentOffset.x {
-            return true
-        }
+//        if frame.width == contentOffset.x {
+//            return true
+//        }
 
         return inside
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let v = super.hitTest(point, with: event)
+
+//        if let contentView = subviews.first, point.x > contentView.frame.width {
+//            return contentView.hitTest(point, with: event)
+//        }
+
+        return v
+    }
+}
+
+class OutsideContentView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let inside = super.point(inside: point, with: event)
+
+//        if point.x > frame.width {
+//            return true
+//        }
+
+        return inside
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let selectedCollectionView = subviews.last as? UICollectionView, let realPoint = superview?.superview?.convert(point, to: selectedCollectionView) {
+
+            for cell in selectedCollectionView.visibleCells {
+                if cell.frame.contains(realPoint) {
+                    return cell.hitTest(point, with: event)
+                }
+            }
+
+        }
+
+        let v = super.hitTest(point, with: event)
+//        if v == nil {
+//            if let selectedView = subviews.last, point.x > frame.width {
+//                return selectedView.hitTest(point, with: event)
+//            }
+//
+//        }
+        return v
+    }
+}
+
+class OutsideCollectionView: UICollectionView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let inside = super.point(inside: point, with: event)
+
+//        if point.x > frame.width {
+//            return true
+//        }
+
+        return inside
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let v = super.hitTest(point, with: event)
+
+        return v
+    }
+}
+
+class OutsideSelectedExerciseContentView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let inside = super.point(inside: point, with: event)
+
+
+
+        return inside
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let v = super.hitTest(point, with: event)
+
+        return v
     }
 }
