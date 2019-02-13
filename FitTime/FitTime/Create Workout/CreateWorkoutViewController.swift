@@ -479,13 +479,23 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == exerciseCollectionView {
-            let height = scrollIndicatorContainerView.frame.height
             var hind: CGFloat = 0
             if let h = scrollIndicatorHeight?.constant {
                 hind = h
             }
-            let maxDistance = height - hind - 5
-            scrollIndicatorTopOffsetConstraint?.constant = min(5.0 + FitTimeNavigationBar.InitialHeight + scrollView.contentOffset.y, maxDistance)
+            let maxScrollOffset = exerciseCollectionView.contentSize.height - exerciseCollectionView.frame.height
+            let maxDistance = scrollIndicatorContainerView.frame.height - hind - 5
+            let height = scrollIndicatorContainerView.frame.height - hind - 5//maxScrollOffset - hind - 5
+            let realOffset = scrollView.contentOffset.y + navigationView.frame.height
+            let num = (realOffset * height)
+            var offset: CGFloat = 0.0
+            if num != 0 {
+                offset = num / (exerciseCollectionView.contentInset.top + (exerciseCollectionView.contentSize.height - exerciseCollectionView.frame.height) - exerciseCollectionView.contentInset.bottom)
+            }
+
+
+
+            scrollIndicatorTopOffsetConstraint?.constant = min(5.0 + offset, maxDistance)
             updateNavigationHeight(with: scrollView.contentOffset.y)
         } else if scrollView == parentScrollView {
             if scrollView.contentOffset.y > 0 {
