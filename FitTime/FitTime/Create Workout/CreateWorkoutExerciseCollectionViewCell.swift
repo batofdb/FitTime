@@ -43,11 +43,11 @@ class CreateWorkoutExerciseCollectionViewCell: UICollectionViewCell {
         for _ in 1...4 {
             let l = PaddingLabel()
             l.backgroundColor = .white
-            l.layer.borderColor = UIColor.lightGray.cgColor
-            l.layer.borderWidth = 2.0
+            l.layer.borderColor = UIColor(displayP3Red: 223/255.0, green: 223/255.0, blue: 230/255.0, alpha: 1.0).cgColor
+            l.layer.borderWidth = 1.0
             l.adjustsFontForContentSizeCategory = true
             l.textAlignment = NSTextAlignment.center
-            l.textColor = .black
+            l.textColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58.0/255.0, alpha: 1.0)
             l.translatesAutoresizingMaskIntoConstraints = false
             addSubview(l)
             muscleViews.append(l)
@@ -150,3 +150,18 @@ class AddButton: UIButton {
     }
 }
 
+class CreateWorkoutSectionHeaderView: UICollectionViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.titleLabel.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .light)
+        self.titleLabel.textColor = UIColor(displayP3Red: 60/255.0, green: 60/255.0, blue: 224/255.0, alpha: 1.0)
+    }
+
+    func configure(title: String) {
+        self.titleLabel.text = title
+        self.titleLabel.adjustsFontForContentSizeCategory = true
+    }
+    
+}

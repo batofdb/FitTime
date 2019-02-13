@@ -22,6 +22,7 @@
 		4734FF842200356F0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */; };
 		4734FF8622003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */; };
 		473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A52D6201EF17C008C8CE3 /* FTAnimation.swift */; };
+		4761EAB822129DBE00113088 /* CreateWorkoutSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4761EAB722129DBD00113088 /* CreateWorkoutSectionHeaderView.xib */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
 		4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */; };
@@ -134,6 +135,7 @@
 		4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateWorkoutExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
 		4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		473A52D6201EF17C008C8CE3 /* FTAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTAnimation.swift; sourceTree = "<group>"; };
+		4761EAB722129DBD00113088 /* CreateWorkoutSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateWorkoutSectionHeaderView.xib; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
 		4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwipeViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */,
 				4734FF832200356E0083A2E4 /* CreateWorkoutExerciseCollectionViewCell.xib */,
 				4734FF8522003B990083A2E4 /* CreateWorkoutExerciseCollectionViewCell.swift */,
+				4761EAB722129DBD00113088 /* CreateWorkoutSectionHeaderView.xib */,
 			);
 			path = "Create Workout";
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				4701100A1FFB08C100AA4D9D /* Main.storyboard in Resources */,
 				47CCC04E22068B24007CB338 /* Rubik-Regular.ttf in Resources */,
 				47CCC04D22068B24007CB338 /* Rubik-Medium.ttf in Resources */,
+				4761EAB822129DBE00113088 /* CreateWorkoutSectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

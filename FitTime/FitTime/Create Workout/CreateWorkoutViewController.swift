@@ -67,10 +67,12 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     var navigationView: FitTimeNavigationBar = FitTimeNavigationBar()
     var searchButton: UIButton = UIButton()
 
+    @IBOutlet weak var containerView: PagingContainerView!
     @IBOutlet weak var parentScrollView: OutsideScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentViewWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var exerciseCollectionWidth: NSLayoutConstraint!
     @IBOutlet weak var selectedExerciseCollectionViewWidth: NSLayoutConstraint!
     @IBOutlet weak var selectedExercisesCollectionView: OutsideCollectionView!
     
@@ -87,6 +89,20 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
 
     var timerQueue = [Timeable]()
 
+    var parentScrollViewWidth: NSLayoutConstraint!
+    var exerciseCollectionViewWidth: NSLayoutConstraint!
+    var scrollIndicatorTopOffsetConstraint: NSLayoutConstraint?
+    var scrollIndicatorHeight: NSLayoutConstraint?
+
+    var scrollIndicator: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
+        v.layer.cornerRadius = 2.0
+        return v
+    }()
+
+    @IBOutlet weak var scrollIndicatorContainerView: UIView!
     @IBOutlet weak var addPost: UIButton!
     @IBOutlet weak var addMain: UIButton!
     @IBOutlet weak var addPre: UIButton!
@@ -111,7 +127,10 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     }
 
     @IBOutlet weak var sets: UITextField!
-    
+
+    let pagingProportion: CGFloat = 0.80
+    let cellHeight: CGFloat = 139.0
+
     var mainExercises = [ExerciseToWorkoutBridge]()
     var preExercises = [ExerciseToWorkoutBridge]()
     var postExercises = [ExerciseToWorkoutBridge]()
@@ -138,6 +157,14 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
         //selectedExerciseCollectionViewWidth.constant = UIScreen.main.bounds.width * 1.15
         //contentViewWidth.constant = UIScreen.main.bounds.width * (2.0 - 0.15)
 
+        parentScrollViewWidth = parentScrollView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: pagingProportion)
+        parentScrollViewWidth.isActive = true
+
+        exerciseCollectionWidth = exerciseCollectionView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: pagingProportion)
+        exerciseCollectionWidth.isActive = true
+
+
+
         if #available(iOS 11.0, *) {
             exerciseCollectionView.contentInsetAdjustmentBehavior = .never
         } else {
@@ -162,6 +189,16 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
         selectedExercisesCollectionView.contentInsetAdjustmentBehavior = .never
 
         addNavigationView()
+
+        scrollIndicatorContainerView.topAnchor.constraint(equalTo: navigationView.bottomAnchor).isActive = true
+        scrollIndicatorContainerView.addSubview(scrollIndicator)
+        scrollIndicator.leftAnchor.constraint(equalTo: scrollIndicatorContainerView.leftAnchor).isActive = true
+        scrollIndicator.rightAnchor.constraint(equalTo: scrollIndicatorContainerView.rightAnchor).isActive = true
+        scrollIndicatorTopOffsetConstraint = scrollIndicator.topAnchor.constraint(equalTo: scrollIndicatorContainerView.topAnchor)
+        scrollIndicatorTopOffsetConstraint?.isActive = true
+
+        scrollIndicatorHeight = scrollIndicator.heightAnchor.constraint(equalToConstant: 0)
+        scrollIndicatorHeight?.isActive = true
 
         selectedExercisesCollectionView.topAnchor.constraint(equalTo: navigationView.bottomAnchor).isActive = true
 
@@ -229,8 +266,28 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
         }
 
         exerciseCollectionView.register(UINib(nibName: "CreateWorkoutExerciseCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell")
+        exerciseCollectionView.register(UINib(nibName: "CreateWorkoutSectionHeaderView", bundle: nil), forCellWithReuseIdentifier: "CreateWorkoutSectionHeaderView")
+
+
         selectedExercisesCollectionView.register(UINib(nibName: "CreateWorkoutExerciseCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell")
-//        exerciseCollectionView.reloadData()
+        selectedExercisesCollectionView.register(UINib(nibName: "CreateWorkoutSectionHeaderView", bundle: nil), forCellWithReuseIdentifier: "CreateWorkoutSectionHeaderView")
+        exerciseCollectionView.reloadData()
+
+        let contentSize = exerciseCollectionView.collectionViewLayout.collectionViewContentSize.height
+        let frame = exerciseCollectionView.frame.height - FitTimeNavigationBar.InitialHeight
+        if contentSize > 0 {
+            scrollIndicatorHeight?.constant = (frame / contentSize) * frame
+        }
+
+        let height = scrollIndicatorContainerView.frame.height
+        var hind: CGFloat = 0
+        if let h = scrollIndicatorHeight?.constant {
+            hind = h
+        }
+        let maxDistance = height - hind - 5
+        scrollIndicatorTopOffsetConstraint?.constant = min(5.0 + FitTimeNavigationBar.InitialHeight + exerciseCollectionView.contentOffset.y, maxDistance)
+
+        //scrollIndicatorTopOffsetConstraint?.constant = FitTimeNavigationBar.InitialHeight + 5.0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -379,26 +436,56 @@ extension CreateWorkoutViewController {
 
 extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.row == 0 {
+            if collectionView == selectedExercisesCollectionView {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateWorkoutSectionHeaderView", for: indexPath) as! CreateWorkoutSectionHeaderView
+                cell.titleLabel.text = "Selected".uppercased()
+                return cell
+
+            }
+
+            if collectionView == exerciseCollectionView {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateWorkoutSectionHeaderView", for: indexPath) as! CreateWorkoutSectionHeaderView
+                cell.titleLabel.text = "Library".uppercased()
+                return cell
+            }
+
+        }
+
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreateWorkoutExerciseCollectionViewCell", for: indexPath) as! CreateWorkoutExerciseCollectionViewCell
-        cell.titleLabel.text = "Bent Over Two-Arm Long Bar Row"
+        cell.titleLabel.text = "Bench Press"
         cell.frame = CGRect(x: 0, y: cell.frame.origin.y, width: cell.frame.width, height: cell.frame.height)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 10 + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == selectedExercisesCollectionView {
-            return CGSize(width: UIScreen.main.bounds.width, height: 139)
+
+
+        if indexPath.row == 0 {
+            return CGSize(width: collectionView.frame.width, height: 50)
         }
 
-        return CGSize(width: collectionView.frame.width, height: 139)
+        if collectionView == selectedExercisesCollectionView {
+            return CGSize(width: UIScreen.main.bounds.width, height: cellHeight)
+        }
+
+        return CGSize(width:collectionView.frame.width, height: cellHeight)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == exerciseCollectionView {
+            let height = scrollIndicatorContainerView.frame.height
+            var hind: CGFloat = 0
+            if let h = scrollIndicatorHeight?.constant {
+                hind = h
+            }
+            let maxDistance = height - hind - 5
+            scrollIndicatorTopOffsetConstraint?.constant = min(5.0 + FitTimeNavigationBar.InitialHeight + scrollView.contentOffset.y, maxDistance)
             updateNavigationHeight(with: scrollView.contentOffset.y)
         } else if scrollView == parentScrollView {
             if scrollView.contentOffset.y > 0 {
@@ -737,6 +824,8 @@ extension CreateWorkoutViewController: ExerciseRefinementViewControllerDelegate 
         }
 
         exerciseTableView.reloadData()
+
+
     }
 }
 
@@ -1007,6 +1096,13 @@ extension AnimatableNavigationBar where Self: UIViewController {
         let currentDistance = offset + FitTimeNavigationBar.InitialHeight
         navigationHeightConstraint?.constant = min(max(FitTimeNavigationBar.InitialHeight - currentDistance, FitTimeNavigationBar.EndHeight), FitTimeNavigationBar.InitialHeight)
 
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        if let h = navigationHeightConstraint {
+            navigationView.gradientLayer.frame = CGRect(x: navigationView.frame.origin.x, y: navigationView.frame.origin.y, width: navigationView.frame.width, height: h.constant)
+        }
+        CATransaction.commit()
+
         let primaryTitleDistance: CGFloat = 40.0
         if offset > -(FitTimeNavigationBar.EndHeight) {
             //Top
@@ -1124,6 +1220,14 @@ class FitTimeNavigationBar: UIView {
         return b
     }()
 
+    var gradientLayer: CAGradientLayer = {
+        let g = CAGradientLayer()
+        g.colors = [UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
+        g.startPoint = CGPoint(x: 0, y: 0)
+        g.endPoint = CGPoint(x: 1.0, y: 1.0)
+        return g
+    }()
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
@@ -1194,6 +1298,9 @@ class FitTimeNavigationBar: UIView {
 
         titleLabelToTop = titleLabel.topAnchor.constraint(equalTo: leftButton.topAnchor, constant: 15 + leftButtonHeight.constant)
         titleLabelToTop.isActive = true
+
+        layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.frame = frame
     }
 
     @objc func leftButtonTapped() {
@@ -1204,6 +1311,11 @@ class FitTimeNavigationBar: UIView {
     }
     @objc func filterButtonTapped() {
         filterButtonTappedHandler?()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = frame
     }
 
 }
