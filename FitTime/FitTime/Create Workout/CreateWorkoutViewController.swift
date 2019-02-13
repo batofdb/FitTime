@@ -479,21 +479,18 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == exerciseCollectionView {
-            var hind: CGFloat = 0
+            var indicatorHeight: CGFloat = 0
             if let h = scrollIndicatorHeight?.constant {
-                hind = h
+                indicatorHeight = h
             }
-            let maxScrollOffset = exerciseCollectionView.contentSize.height - exerciseCollectionView.frame.height
-            let maxDistance = scrollIndicatorContainerView.frame.height - hind - 5
-            let height = scrollIndicatorContainerView.frame.height - hind - 5//maxScrollOffset - hind - 5
+            let maxDistance = scrollIndicatorContainerView.frame.height - indicatorHeight - 5
+            let height = scrollIndicatorContainerView.frame.height - indicatorHeight - 5
             let realOffset = scrollView.contentOffset.y + navigationView.frame.height
             let num = (realOffset * height)
             var offset: CGFloat = 0.0
             if num != 0 {
                 offset = num / (exerciseCollectionView.contentInset.top + (exerciseCollectionView.contentSize.height - exerciseCollectionView.frame.height) - exerciseCollectionView.contentInset.bottom)
             }
-
-
 
             scrollIndicatorTopOffsetConstraint?.constant = min(5.0 + offset, maxDistance)
             updateNavigationHeight(with: scrollView.contentOffset.y)
@@ -1379,7 +1376,15 @@ class OutsideContentView: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if let selectedCollectionView = subviews.last as? UICollectionView, let realPoint = superview?.superview?.convert(point, to: selectedCollectionView) {
+        var outsideCollectionView: OutsideCollectionView?
+
+        for sub in subviews {
+            if let s = sub as? OutsideCollectionView {
+                outsideCollectionView = s
+            }
+        }
+
+        if let selectedCollectionView = outsideCollectionView, let realPoint = superview?.superview?.convert(point, to: selectedCollectionView) {
 
             for cell in selectedCollectionView.visibleCells {
                 if cell.frame.contains(realPoint) {
@@ -1390,12 +1395,6 @@ class OutsideContentView: UIView {
         }
 
         let v = super.hitTest(point, with: event)
-//        if v == nil {
-//            if let selectedView = subviews.last, point.x > frame.width {
-//                return selectedView.hitTest(point, with: event)
-//            }
-//
-//        }
         return v
     }
 }
