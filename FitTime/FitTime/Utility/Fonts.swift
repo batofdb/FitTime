@@ -84,6 +84,10 @@ class Fonts {
         return ("", 0.0)
     }
 
+    static func attributes(for font: UIFont) -> [NSAttributedStringKey : Any] {
+        return [NSAttributedStringKey.font : font]
+    }
+
     static func getScaledFont(textStyle: UIFontTextStyle, mode: Fonts.Mode) -> UIFont {
         let (font, size) = Fonts.fontMapping(for: textStyle, and: mode)
         guard let customFont = UIFont(name: font, size: size) else {
