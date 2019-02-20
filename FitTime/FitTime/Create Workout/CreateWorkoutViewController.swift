@@ -212,8 +212,21 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
             self?.dismiss(animated: true, completion: nil)
         }
 
+        let muscles = FilterDatasource(title: "Muscle group", datasource: [FilterObject(title: "Abs"), FilterObject(title: "Back"), FilterObject(title: "Biceps"), FilterObject(title: "Calves"),
+            FilterObject(title: "Chest"),
+            FilterObject(title: "Forearms"),
+            FilterObject(title: "Glutes"),
+            FilterObject(title: "Hamstrings"),
+            FilterObject(title: "Neck"),
+            FilterObject(title: "Quadriceps"),
+            FilterObject(title: "Shoulders"),
+            FilterObject(title: "Trapezius"),
+            FilterObject(title: "Triceps")])
+
+        let equipment = FilterDatasource(title: "Equipment Type", datasource: [FilterObject(title: "Barbell"), FilterObject(title: "Dumbbell"), FilterObject(title: "Cable"), FilterObject(title: "Bodyweight"), FilterObject(title: "Hammer"), FilterObject(title: "TRX"), FilterObject(title: "Kettlebell")])
+
         navigationView.filterButtonTappedHandler = { [weak self] in
-            let v = FilterViewController(datasource: ["Abs", "Back", "Pectoral", "Chest", "Triceps", "Forearms", "Calves", "Biceps", "Traps", "Lower Back", "Upper Back", "Shoulders", "Quads", "Hamstrings", "Neck"])
+            let v = FilterViewController(datasource: [muscles, equipment])
             self?.present(v, animated: true, completion: nil)
         }
 
