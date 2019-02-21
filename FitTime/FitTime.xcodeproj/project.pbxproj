@@ -27,6 +27,7 @@
 		4761EABC2217DBAD00113088 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4761EABB2217DBAD00113088 /* Filter.swift */; };
 		4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */; };
 		4763B1F91FFDE01100C94216 /* ExerciseRefinementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */; };
+		477859BC221E89BF00115C05 /* Exercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477859BB221E89BF00115C05 /* Exercise.storyboard */; };
 		4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */; };
 		479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */; };
 		479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */; };
@@ -60,6 +61,7 @@
 		47CCC05622068B2D007CB338 /* Questrial-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CCC05522068B2C007CB338 /* Questrial-Regular.ttf */; };
 		47CCC05922068C76007CB338 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CCC05822068C76007CB338 /* Fonts.swift */; };
 		47CFD26E221BC89300F57F9B /* BasicHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47CFD26D221BC89300F57F9B /* BasicHeaderView.xib */; };
+		47CFD271221E88BA00F57F9B /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD270221E88B900F57F9B /* ExerciseDetail.swift */; };
 		47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */; };
 		47DA952B201EA70C00DCD523 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */; };
 		47DBAE31216098F900CEC2F1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DBAE30216098F900CEC2F1 /* HealthKit.framework */; };
@@ -143,6 +145,7 @@
 		4761EABB2217DBAD00113088 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBuilder.swift; sourceTree = "<group>"; };
 		4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRefinementViewController.swift; sourceTree = "<group>"; };
+		477859BB221E89BF00115C05 /* Exercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercise.storyboard; sourceTree = "<group>"; };
 		4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwipeViewController.swift; sourceTree = "<group>"; };
 		479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NestedCollectionTableViewCell.xib; sourceTree = "<group>"; };
 		479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		47CCC05522068B2C007CB338 /* Questrial-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Questrial-Regular.ttf"; sourceTree = "<group>"; };
 		47CCC05822068C76007CB338 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		47CFD26D221BC89300F57F9B /* BasicHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicHeaderView.xib; sourceTree = "<group>"; };
+		47CFD270221E88B900F57F9B /* ExerciseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		47DA9528201EA6FB00DCD523 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		47DA952A201EA70C00DCD523 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
 		47DBAE30216098F900CEC2F1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -262,6 +266,7 @@
 		470110031FFB08C000AA4D9D /* FitTime */ = {
 			isa = PBXGroup;
 			children = (
+				47CFD26F221E888500F57F9B /* Exercise */,
 				47CCC05722068C67007CB338 /* Utility */,
 				47CCC04022068AF7007CB338 /* Fonts */,
 				47CCC03F22068AD9007CB338 /* Create Workout */,
@@ -342,6 +347,16 @@
 				47CCC05822068C76007CB338 /* Fonts.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		47CFD26F221E888500F57F9B /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				47CFD270221E88B900F57F9B /* ExerciseDetail.swift */,
+				477859BB221E89BF00115C05 /* Exercise.storyboard */,
+			);
+			name = Exercise;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		47DBAE372160A00200CEC2F1 /* FitRisersWatch */ = {
@@ -525,6 +540,7 @@
 				4761EABA2217DAAE00113088 /* FilterCollectionViewCell.xib in Resources */,
 				47CCC05322068B24007CB338 /* Rubik-Bold.ttf in Resources */,
 				479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */,
+				477859BC221E89BF00115C05 /* Exercise.storyboard in Resources */,
 				47CCC05622068B2D007CB338 /* Questrial-Regular.ttf in Resources */,
 				479F871521FE80DF00A61C9B /* LibraryWorkoutCollectionViewCell.xib in Resources */,
 				479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */,
@@ -646,6 +662,7 @@
 				47CCC05922068C76007CB338 /* Fonts.swift in Sources */,
 				47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */,
 				473A52D7201EF17C008C8CE3 /* FTAnimation.swift in Sources */,
+				47CFD271221E88BA00F57F9B /* ExerciseDetail.swift in Sources */,
 				47DA9529201EA6FC00DCD523 /* ExerciseCollectionViewCell.swift in Sources */,
 				47C0A2EA1FFB177100C22A2E /* Exercise.swift in Sources */,
 				47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */,

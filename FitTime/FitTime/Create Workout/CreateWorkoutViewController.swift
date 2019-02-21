@@ -319,7 +319,7 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     }
 
     func addNavigationView() {
-        navigationView = FitTimeNavigationBar()
+        //navigationView = FitTimeNavigationBar(config: .filter)
         navigationView.backgroundColor = .black
         //navigationView.alpha = 0.5
         view.addSubview(navigationView)
@@ -521,6 +521,14 @@ extension CreateWorkoutViewController: UICollectionViewDelegate, UICollectionVie
             if scrollView.contentOffset.x > xLimit {
                 scrollView.contentOffset = CGPoint(x: xLimit, y: 0)
             }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let vc = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: "ExerciseDetailViewController") as! ExerciseDetailViewController
+        present(vc, animated: true) {
+
         }
     }
 }
@@ -1176,6 +1184,11 @@ extension AnimatableNavigationBar where Self: UIViewController {
 }
 
 class FitTimeNavigationBar: UIView {
+    enum Configuration {
+        case basic
+        case filter
+    }
+
     static let InitialHeight: CGFloat = 220
     static let EndHeight: CGFloat = 150
 
@@ -1193,6 +1206,8 @@ class FitTimeNavigationBar: UIView {
     var searchBarHeight: NSLayoutConstraint!
     var leftButtonHeight: NSLayoutConstraint!
     var leftButtonWidth: NSLayoutConstraint!
+
+    var type: Configuration
 
     var titleLabel: FTLabel = {
         let l = FTLabel()
@@ -1254,13 +1269,27 @@ class FitTimeNavigationBar: UIView {
     }()
 
     required init?(coder aDecoder: NSCoder) {
+        self.type = .basic
         super.init(coder: aDecoder)
         commonInit()
     }
 
     override init(frame: CGRect) {
+        self.type = .filter
         super.init(frame: frame)
         commonInit()
+    }
+
+    public func update(type: Configuration) {
+        self.type = type
+        switch self.type {
+        case .basic:
+            searchBar.isHidden = true
+            filterButton.isHidden = true
+        case .filter:
+            searchBar.isHidden = false
+            filterButton.isHidden = false
+        }
     }
 
     private func commonInit() {
@@ -1342,13 +1371,11 @@ class FitTimeNavigationBar: UIView {
         super.layoutSubviews()
         gradientLayer.frame = frame
     }
-
 }
 
 class PagingContainerView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let child = super.hitTest(point, with: event)
-
         if let scroll = subviews.first as? OutsideScrollView, child == self && self.subviews.count > 0 {
             if scroll.contentOffset.x < scroll.frame.width {
                 return scroll
@@ -1363,21 +1390,11 @@ class PagingContainerView: UIView {
 class OutsideScrollView: UIScrollView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let inside = super.point(inside: point, with: event)
-
-//        if frame.width == contentOffset.x {
-//            return true
-//        }
-
         return inside
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let v = super.hitTest(point, with: event)
-
-//        if let contentView = subviews.first, point.x > contentView.frame.width {
-//            return contentView.hitTest(point, with: event)
-//        }
-
         return v
     }
 }
@@ -1385,17 +1402,11 @@ class OutsideScrollView: UIScrollView {
 class OutsideContentView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let inside = super.point(inside: point, with: event)
-
-//        if point.x > frame.width {
-//            return true
-//        }
-
         return inside
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         var outsideCollectionView: OutsideCollectionView?
-
         for sub in subviews {
             if let s = sub as? OutsideCollectionView {
                 outsideCollectionView = s
@@ -1403,13 +1414,11 @@ class OutsideContentView: UIView {
         }
 
         if let selectedCollectionView = outsideCollectionView, let realPoint = superview?.superview?.convert(point, to: selectedCollectionView) {
-
             for cell in selectedCollectionView.visibleCells {
                 if cell.frame.contains(realPoint) {
                     return cell.hitTest(point, with: event)
                 }
             }
-
         }
 
         let v = super.hitTest(point, with: event)
@@ -1420,11 +1429,6 @@ class OutsideContentView: UIView {
 class OutsideCollectionView: UICollectionView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let inside = super.point(inside: point, with: event)
-
-//        if point.x > frame.width {
-//            return true
-//        }
-
         return inside
     }
 
@@ -1438,15 +1442,11 @@ class OutsideCollectionView: UICollectionView {
 class OutsideSelectedExerciseContentView: UIView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let inside = super.point(inside: point, with: event)
-
-
-
         return inside
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let v = super.hitTest(point, with: event)
-
         return v
     }
 }
