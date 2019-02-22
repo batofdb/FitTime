@@ -17,13 +17,69 @@
                     <view key="view" contentMode="scaleToFill" id="oxv-JK-ELj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0k8-bk-OSC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N79-T9-igj">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V83-Gr-Xa0">
+                                                <rect key="frame" x="0.0" y="52" width="414" height="430"/>
+                                                <connections>
+                                                    <segue destination="lgd-H8-nwU" kind="embed" id="1kn-8U-adb"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="V83-Gr-Xa0" firstAttribute="top" secondItem="N79-T9-igj" secondAttribute="top" constant="52" id="A84-9M-0Fe"/>
+                                            <constraint firstItem="V83-Gr-Xa0" firstAttribute="leading" secondItem="N79-T9-igj" secondAttribute="leading" id="fxN-7y-SBk"/>
+                                            <constraint firstAttribute="trailing" secondItem="V83-Gr-Xa0" secondAttribute="trailing" id="n8e-0H-MEp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="N79-T9-igj" firstAttribute="top" secondItem="0k8-bk-OSC" secondAttribute="top" id="6GF-CY-4Uw"/>
+                                    <constraint firstAttribute="trailing" secondItem="N79-T9-igj" secondAttribute="trailing" id="bxu-Sa-QAr"/>
+                                    <constraint firstAttribute="bottom" secondItem="N79-T9-igj" secondAttribute="bottom" id="hab-VZ-XGa"/>
+                                    <constraint firstItem="N79-T9-igj" firstAttribute="leading" secondItem="0k8-bk-OSC" secondAttribute="leading" id="vsK-ms-PUM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="XpM-a0-QtA" id="eh8-jE-fTa"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0k8-bk-OSC" secondAttribute="bottom" id="TO8-pB-9dM"/>
+                            <constraint firstItem="0k8-bk-OSC" firstAttribute="top" secondItem="oxv-JK-ELj" secondAttribute="top" id="UnF-oS-aRe"/>
+                            <constraint firstItem="N79-T9-igj" firstAttribute="width" secondItem="oxv-JK-ELj" secondAttribute="width" id="aUl-SG-zXh"/>
+                            <constraint firstItem="0k8-bk-OSC" firstAttribute="leading" secondItem="oxv-JK-ELj" secondAttribute="leading" id="bzC-qt-uEs"/>
+                            <constraint firstItem="V83-Gr-Xa0" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" multiplier="0.48" id="fPv-Yq-3Tc"/>
+                            <constraint firstItem="N79-T9-igj" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" id="rvH-i3-EbU"/>
+                            <constraint firstAttribute="trailing" secondItem="0k8-bk-OSC" secondAttribute="trailing" id="zCD-3X-MGA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="y3W-Da-5GI"/>
                     </view>
+                    <connections>
+                        <outlet property="containerToTop" destination="A84-9M-0Fe" id="InH-Xt-Bzs"/>
+                        <outlet property="containerView" destination="V83-Gr-Xa0" id="RVC-2O-sT8"/>
+                        <outlet property="contentView" destination="N79-T9-igj" id="cjD-Vz-FMK"/>
+                        <outlet property="scrollView" destination="0k8-bk-OSC" id="iTw-XC-ICe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWR-nA-jO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52" y="-84"/>
+        </scene>
+        <!--Exercise Detail Page View Controller-->
+        <scene sceneID="Xq0-ls-viA">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lgd-H8-nwU" customClass="ExerciseDetailPageViewController" customModule="FitTime" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IwT-th-3IN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925" y="-295"/>
         </scene>
     </scenes>
 </document>
