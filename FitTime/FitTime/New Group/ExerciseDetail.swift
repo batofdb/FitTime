@@ -37,6 +37,7 @@ class ExerciseDetailViewController: UIViewController {
         s.append("Neck")
         s.append("Quad")
         s.append("Calves")
+        s.append("Lower Back")
         return s
     }()
 
@@ -64,15 +65,17 @@ class ExerciseDetailViewController: UIViewController {
 
     var musclesTitle: UILabel = {
         let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = true
+        l.translatesAutoresizingMaskIntoConstraints = false
         l.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .dark)
         l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
         l.text = "muscles involved".uppercased()
         return l
     }()
 
-    var muscleViews = [PaddingLabel]()
+    var musclesInvolvedHeight: NSLayoutConstraint!
 
+    var muscleViews = [PaddingLabel]()
+    var muscleOrder = [[String]]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -90,7 +93,7 @@ class ExerciseDetailViewController: UIViewController {
         containerToTop.constant = 140.0
 
         view.addSubview(pageControl)
-        pageControl.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
+        pageControl.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 
         if let vc = pageViewController {
@@ -98,7 +101,7 @@ class ExerciseDetailViewController: UIViewController {
         }
 
         view.addSubview(musclesInvolvedView)
-        musclesInvolvedView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 23.0).isActive = true
+        musclesInvolvedView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 0).isActive = true
         musclesInvolvedView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.1).isActive = true
         musclesInvolvedView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 
@@ -107,56 +110,119 @@ class ExerciseDetailViewController: UIViewController {
         musclesTitle.topAnchor.constraint(equalTo: musclesInvolvedView.topAnchor, constant: 24).isActive = true
         musclesTitle.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         musclesTitle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24.0).isActive = true
+        musclesTitle.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
 
-        for _ in 1...4 {
-            let l = PaddingLabel()
-            l.topInset = 10.0
-            l.bottomInset = 10.0
-            l.leftInset = 20.0
-            l.rightInset = 20.0
-            l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
-            l.backgroundColor = .white
-            l.layer.borderColor = UIColor(displayP3Red: 223/255.0, green: 223/255.0, blue: 230/255.0, alpha: 1.0).cgColor
-            l.layer.borderWidth = 1.0
-            l.adjustsFontForContentSizeCategory = true
-            l.textAlignment = NSTextAlignment.center
-            l.textColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58.0/255.0, alpha: 1.0)
-            l.translatesAutoresizingMaskIntoConstraints = false
-            musclesInvolvedView.addSubview(l)
-            muscleViews.append(l)
-        }
+        layoutMuscleViews()
 
+        musclesInvolvedHeight = musclesInvolvedView.heightAnchor.constraint(equalToConstant: 0)
+        musclesInvolvedHeight.isActive = true
+
+        let multiLineSpacing: CGFloat = (CGFloat(muscleOrder.count) - 1) * 10
+        let labelHeight: CGFloat = CGFloat(muscleOrder.count) * 38
+        musclesInvolvedHeight.constant = 25 /*top*/ + 20 /*muscle title height */+ 16 /* to involved */ + multiLineSpacing + labelHeight + 16 /* to bottom*/
+    }
+
+    private func layoutMuscleViews() {
         var newLineWidth: CGFloat = view.bounds.width - 24 - 24 // left and right padding
-        var muscleOrder = [[String]]()
         var stringWidths = [String : CGFloat]()
 
-        for m in muscles {
-            let s = NSString(string: m)
-            let bounds = s.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 18), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: Fonts.attributes(for: Fonts.getScaledFont(textStyle: .body, mode: .light)), context: nil)
-            stringWidths[s as String] = bounds.width + 5
+        func createMuscleViews() {
+            for m in muscles {
+                let l = PaddingLabel()
+                l.topInset = 10.0
+                l.bottomInset = 10.0
+                l.leftInset = 20.0
+                l.rightInset = 20.0
+                l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
+                l.backgroundColor = UIColor(displayP3Red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
+                l.layer.cornerRadius = 2.0
+                l.clipsToBounds = true
+                l.adjustsFontForContentSizeCategory = true
+                l.textAlignment = NSTextAlignment.center
+                l.textColor = .white
+                l.translatesAutoresizingMaskIntoConstraints = false
+                l.text = m
+                musclesInvolvedView.addSubview(l)
+                muscleViews.append(l)
+            }
         }
 
-        var muscleTemp = [String]()
-        for m in muscles {
-            var width: CGFloat = 0
-            if let mWidth = stringWidths[m] {
-                width = mWidth + 20.0 + 20.0
-            }
-            newLineWidth -= width
-            if newLineWidth < 0 {
-                muscleOrder.append(muscleTemp)
-                newLineWidth = view.bounds.width - 24 - 24
-                muscleTemp = [String]()
-                muscleTemp.append(m)
-            } else {
-                muscleTemp.append(m)
+        func createMuscleOrder() {
+            var muscleTemp = [String]()
+            for m in muscles {
+                var width: CGFloat = 0
+                if let mWidth = stringWidths[m] {
+                    width = mWidth + 20.0 + 20.0
+                }
+
+                if newLineWidth - width < 0 {
+                    muscleOrder.append(muscleTemp)
+                    newLineWidth = view.bounds.width - 24 - 24
+                    muscleTemp = [String]()
+                    muscleTemp.append(m)
+                } else {
+                    muscleTemp.append(m)
+                }
+                newLineWidth -= width
                 newLineWidth -= 10
             }
+            muscleOrder.append(muscleTemp)
         }
 
-        muscleOrder.append(muscleTemp)
+        func calculateMuscleViewWidths() {
+            for m in muscles {
+                let s = NSString(string: m)
+                let bounds = s.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 18), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: Fonts.attributes(for: Fonts.getScaledFont(textStyle: .body, mode: .light)), context: nil)
+                stringWidths[s as String] = bounds.width + 5
+            }
+        }
 
-        print("Ere")
+        func createConstraints() {
+            var musclesLabelIdx: Int = 0
+            var leftAlignedViews = [PaddingLabel]()
+            for (row, muscles) in muscleOrder.enumerated() {
+                for (idx, string) in muscles.enumerated() {
+                    let currView = muscleViews[musclesLabelIdx]
+
+                    if row == 0 && idx == 0 {
+                        // First line, first item
+                        currView.topAnchor.constraint(equalTo: musclesTitle.bottomAnchor, constant: 16).isActive = true
+                        currView.leftAnchor.constraint(equalTo: musclesTitle.leftAnchor, constant: 0).isActive = true
+                        currView.widthAnchor.constraint(equalToConstant: stringWidths[string]! + 20 + 20).isActive = true
+                        currView.heightAnchor.constraint(equalToConstant: 38).isActive = true
+                    } else if row > 0 && idx == 0, let lastAlignedLeftView = leftAlignedViews.last {
+                        // all other lines, first item
+                        currView.topAnchor.constraint(equalTo: lastAlignedLeftView.bottomAnchor, constant: 10).isActive = true
+                        currView.leftAnchor.constraint(equalTo: lastAlignedLeftView.leftAnchor, constant: 0).isActive = true
+                        currView.widthAnchor.constraint(equalToConstant: stringWidths[string]! + 20 + 20).isActive = true
+                        currView.heightAnchor.constraint(equalToConstant: 38).isActive = true
+                    } else if musclesLabelIdx > 0 {
+                        let prevView = muscleViews[musclesLabelIdx - 1]
+
+                        // Same line, not first
+                        currView.leftAnchor.constraint(equalTo: prevView.rightAnchor, constant: 10).isActive = true
+                        currView.bottomAnchor.constraint(equalTo: prevView.bottomAnchor, constant: 0).isActive = true
+                        currView.heightAnchor.constraint(equalToConstant: 38).isActive = true
+                        currView.widthAnchor.constraint(equalToConstant: stringWidths[string]! + 20 + 20).isActive = true
+                    }
+
+                    if idx == 0 {
+                        leftAlignedViews.append(currView)
+                    }
+
+                    musclesLabelIdx += 1
+
+                    if musclesLabelIdx >= self.muscles.count {
+                        return
+                    }
+                }
+            }
+        }
+
+        createMuscleViews()
+        calculateMuscleViewWidths()
+        createMuscleOrder()
+        createConstraints()
     }
 
     override func viewDidAppear(_ animated: Bool) {
