@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V83-Gr-Xa0">
-                                                <rect key="frame" x="0.0" y="52" width="414" height="430"/>
+                                                <rect key="frame" x="0.0" y="52" width="414" height="403"/>
                                                 <connections>
                                                     <segue destination="lgd-H8-nwU" kind="embed" id="1kn-8U-adb"/>
                                                 </connections>
@@ -52,12 +52,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="V83-Gr-Xa0" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" multiplier="0.45" id="I7g-Ux-Dnx"/>
                             <constraint firstAttribute="bottom" secondItem="0k8-bk-OSC" secondAttribute="bottom" id="TO8-pB-9dM"/>
                             <constraint firstItem="0k8-bk-OSC" firstAttribute="top" secondItem="oxv-JK-ELj" secondAttribute="top" id="UnF-oS-aRe"/>
                             <constraint firstItem="N79-T9-igj" firstAttribute="width" secondItem="oxv-JK-ELj" secondAttribute="width" id="aUl-SG-zXh"/>
                             <constraint firstItem="0k8-bk-OSC" firstAttribute="leading" secondItem="oxv-JK-ELj" secondAttribute="leading" id="bzC-qt-uEs"/>
-                            <constraint firstItem="V83-Gr-Xa0" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" multiplier="0.48" id="fPv-Yq-3Tc"/>
-                            <constraint firstItem="N79-T9-igj" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" id="rvH-i3-EbU"/>
+                            <constraint firstItem="N79-T9-igj" firstAttribute="height" secondItem="oxv-JK-ELj" secondAttribute="height" priority="250" id="rvH-i3-EbU"/>
                             <constraint firstAttribute="trailing" secondItem="0k8-bk-OSC" secondAttribute="trailing" id="zCD-3X-MGA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y3W-Da-5GI"/>

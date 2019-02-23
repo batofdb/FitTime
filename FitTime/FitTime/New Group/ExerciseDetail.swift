@@ -63,12 +63,55 @@ class ExerciseDetailViewController: UIViewController {
         return v
     }()
 
+    var aboutView: UIView = {
+    let v = UIView()
+    v.translatesAutoresizingMaskIntoConstraints = false
+    return v
+    }()
+
+    var aboutLabel: UILabel =  {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.text = "The bench press is a basic upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps. A barbell is generally"
+        l.numberOfLines = 0
+        l.adjustsFontForContentSizeCategory = true
+        l.lineBreakMode = .byWordWrapping
+        l.textAlignment = .left
+        l.font = Fonts.getScaledFont(textStyle: .body, mode: .dark)
+        l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        return l
+    }()
+
     var musclesTitle: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .dark)
         l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
         l.text = "muscles involved".uppercased()
+        return l
+    }()
+
+    var bottomGradientLayer: CAGradientLayer = {
+        let g = CAGradientLayer()
+        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor.white.cgColor]
+        g.startPoint = CGPoint(x: 0, y: 0)
+        g.endPoint = CGPoint(x: 0, y: 1.0)
+        return g
+    }()
+
+    var bottomGradientView: UIView =  {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = .clear
+        return v
+    }()
+
+    var aboutTitle: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .dark)
+        l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        l.text = "about".uppercased()
         return l
     }()
 
@@ -92,15 +135,17 @@ class ExerciseDetailViewController: UIViewController {
         exercise = "Deadlift"
         containerToTop.constant = 140.0
 
-        view.addSubview(pageControl)
+        contentView.addSubview(pageControl)
         pageControl.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        pageControl.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1.0).isActive = true
 
         if let vc = pageViewController {
             pageControl.numberOfPages = vc.orderedViewControllers.count
         }
 
-        view.addSubview(musclesInvolvedView)
+        contentView.addSubview(musclesInvolvedView)
         musclesInvolvedView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 0).isActive = true
         musclesInvolvedView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.1).isActive = true
         musclesInvolvedView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
@@ -120,6 +165,49 @@ class ExerciseDetailViewController: UIViewController {
         let multiLineSpacing: CGFloat = (CGFloat(muscleOrder.count) - 1) * 10
         let labelHeight: CGFloat = CGFloat(muscleOrder.count) * 38
         musclesInvolvedHeight.constant = 25 /*top*/ + 20 /*muscle title height */+ 16 /* to involved */ + multiLineSpacing + labelHeight + 16 /* to bottom*/
+
+
+        contentView.addSubview(aboutView)
+        aboutView.topAnchor.constraint(equalTo: musclesInvolvedView.bottomAnchor, constant: 0).isActive = true
+        aboutView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0).isActive = true
+        aboutView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0.0).isActive = true
+
+        aboutView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+
+        aboutView.addSubview(aboutTitle)
+
+        aboutTitle.topAnchor.constraint(equalTo: aboutView.topAnchor, constant: 24).isActive = true
+        aboutTitle.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        aboutTitle.leftAnchor.constraint(equalTo: aboutView.leftAnchor, constant: 24.0).isActive = true
+        aboutTitle.rightAnchor.constraint(equalTo: aboutView.rightAnchor, constant: -24.0).isActive = true
+
+        aboutView.addSubview(aboutLabel)
+        aboutLabel.topAnchor.constraint(equalTo: aboutTitle.bottomAnchor, constant: 10).isActive = true
+        aboutLabel.leftAnchor.constraint(equalTo: aboutView.leftAnchor, constant: 24.0).isActive = true
+        aboutLabel.rightAnchor.constraint(equalTo: aboutView.rightAnchor, constant: -24.0).isActive = true
+        aboutLabel.bottomAnchor.constraint(equalTo: aboutView.bottomAnchor, constant: -24.0).isActive = true
+
+        var aboutHeight: CGFloat = 24.0 + 10.0 + 20.0
+        if let t = aboutLabel.text {
+            let s = NSString(string: t)
+            let bounds = s.boundingRect(with: CGSize(width: view.bounds.width - 24 - 24, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: Fonts.attributes(for: Fonts.getScaledFont(textStyle: .body, mode: .light)), context: nil)
+            aboutHeight += bounds.height + 20
+        }
+        aboutView.heightAnchor.constraint(equalToConstant: aboutHeight).isActive = true
+
+        view.addSubview(bottomGradientView)
+        bottomGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        bottomGradientView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        bottomGradientView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        bottomGradientView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        bottomGradientView.layer.insertSublayer(bottomGradientLayer, at: 0)
+
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, view.bounds.height * 0.10, 0)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        bottomGradientLayer.frame = bottomGradientView.bounds
     }
 
     private func layoutMuscleViews() {
