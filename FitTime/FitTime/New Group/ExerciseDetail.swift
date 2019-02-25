@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class ExerciseDetailViewController: UIViewController {
+class ExerciseDetailViewController: UIViewController, PopUpable {
     var navigationView: FitTimeNavigationBar = {
         let nav = FitTimeNavigationBar()
         nav.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +130,19 @@ class ExerciseDetailViewController: UIViewController {
 
         navigationView.leftButtonTappedHandler = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
+        }
+
+        navigationView.rightButtonTappedHandler = { [weak self] in
+            if let button = self?.navigationView.rightButton {
+                button.isSelected = !button.isSelected
+
+                if button.isSelected {
+                    button.setImage(UIImage(named: "added")!, for: .normal)
+                } else {
+                    button.setImage(UIImage(named: "add")!, for: .normal)
+                }
+            }
+            self?.showSavedAlert()
         }
 
         exercise = "Deadlift"
@@ -572,5 +585,80 @@ class FitTimePageControl: UIPageControl {
         }
 
         return dot
+    }
+}
+
+enum AlertStyle {
+    case saved
+    case removed
+}
+
+protocol PopUpable where Self: UIViewController { }
+
+extension PopUpable {
+    func showSavedAlert(style: AlertStyle) {
+        let alert = UIView()
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        alert.backgroundColor = .white
+        alert.layer.cornerRadius = 16.0
+        alert.alpha = 0.0
+        alert.clipsToBounds = true
+
+        view.addSubview(alert)
+        view.bringSubview(toFront: alert)
+
+        alert.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.77).isActive = true
+        alert.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        alert.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -75).isActive = true
+        alert.heightAnchor.constraint(equalTo: alert.widthAnchor, multiplier: 1.0).isActive = true
+
+        let title: UILabel = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+
+        var text: String = ""
+        switch style {
+        case .saved:
+            text = "Exercise Added"
+        case .removed:
+            text = "Exercise Removed"
+        }
+
+        title.text = text
+        title.font = Fonts.getScaledFont(textStyle: .title3, mode: .dark)
+        title.textColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
+        title.numberOfLines = 1
+        title.textAlignment = .center
+
+        alert.addSubview(title)
+        title.bottomAnchor.constraint(equalTo: alert.bottomAnchor, constant: -51).isActive = true
+        title.leftAnchor.constraint(equalTo: alert.leftAnchor, constant: 25).isActive = true
+        title.rightAnchor.constraint(equalTo: alert.rightAnchor, constant: -25).isActive = true
+        title.heightAnchor.constraint(equalToConstant: 35).isActive = true
+
+        let check = UIView()
+        check.translatesAutoresizingMaskIntoConstraints = false
+        check.backgroundColor = .black
+
+        alert.addSubview(check)
+        check.widthAnchor.constraint(equalTo: alert.widthAnchor, multiplier: 0.5).isActive = true
+        check.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        check.centerXAnchor.constraint(equalTo: alert.centerXAnchor).isActive = true
+        check.centerYAnchor.constraint(equalTo: alert.centerYAnchor, constant: -45).isActive = true
+
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+            alert.alpha = 1.0
+        }) { [weak self] fin in
+            DispatchQueue.global().asyncAfter(deadline: .now() + 3.5, execute: { [weak self] in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+                        alert.alpha = 0.0
+                    }, completion: { [weak self] fin in
+                        if fin {
+                            alert.removeFromSuperview()
+                        }
+                    })
+                }
+            })
+        }
     }
 }
