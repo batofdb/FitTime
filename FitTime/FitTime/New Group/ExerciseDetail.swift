@@ -93,7 +93,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
 
     var bottomGradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor.white.cgColor]
+        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0)
         g.endPoint = CGPoint(x: 0, y: 1.0)
         return g
@@ -122,7 +122,12 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
+        contentView.backgroundColor = .clear
+
         view.addSubview(navigationView)
+        navigationView.backgroundColor = .clear
+
         navigationView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         navigationView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         navigationView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -138,11 +143,13 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
 
                 if button.isSelected {
                     button.setImage(UIImage(named: "added")!, for: .normal)
+                    self?.showSavedAlert(style: .saved)
                 } else {
                     button.setImage(UIImage(named: "add")!, for: .normal)
+                    self?.showSavedAlert(style: .removed)
                 }
             }
-            self?.showSavedAlert()
+
         }
 
         exercise = "Deadlift"
@@ -429,14 +436,6 @@ extension ExerciseDetailPageViewController: UIPageViewControllerDataSource {
 
         return orderedViewControllers[nextIndex]
     }
-
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return orderedViewControllers.count
-    }
-
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return currentIndex
-    }
 }
 
 class ExerciseVideoViewController: UIViewController {
@@ -660,5 +659,42 @@ extension PopUpable {
                 }
             })
         }
+    }
+}
+
+class AddSetComplicationViewController: UIViewController {
+    var navigationView: FitTimeNavigationBar = {
+        let nav = FitTimeNavigationBar()
+        nav.translatesAutoresizingMaskIntoConstraints = false
+        //nav.backgroundColor = .white
+        //nav.titleLabel.textColor = .black
+        //nav.subTitleLabel.isHidden = true
+        //nav.gradientLayer.removeFromSuperlayer()
+        nav.update(type: .sets)
+        nav.titleLabel.text = "Add Sets"
+        nav.subTitleLabel.text = "Workout creation"
+        nav.leftButton.setImage(UIImage(named: "back_button"), for: .normal)
+        nav.rightButton.setImage(UIImage(named: "add"), for: .normal)
+        nav.rightButton.setTitle(nil, for: .normal)
+        return nav
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(navigationView)
+        navigationView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        navigationView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        navigationView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        navigationView.heightAnchor.constraint(equalToConstant: FitTimeNavigationBar.InitialHeight).isActive = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }

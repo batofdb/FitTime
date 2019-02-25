@@ -152,6 +152,8 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     @IBOutlet weak var exerciseCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.setNavigationBarHidden(true, animated: false)
         hideKeyboard()
         parentScrollView.contentInset = .zero
         //selectedExerciseCollectionViewWidth.constant = UIScreen.main.bounds.width * 1.15
@@ -208,8 +210,8 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
         }
 
         navigationView.rightButtonTappedHandler = { [weak self] in
-//            self?.navigationController?.popViewController(animated: true)
-            self?.dismiss(animated: true, completion: nil)
+            let vc = AddSetComplicationViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
 
         let muscles = FilterDatasource(title: "Muscle group", datasource: [FilterObject(title: "Abs"), FilterObject(title: "Back"), FilterObject(title: "Biceps"), FilterObject(title: "Calves"),
@@ -319,9 +321,8 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     }
 
     func addNavigationView() {
-        //navigationView = FitTimeNavigationBar(config: .filter)
         navigationView.backgroundColor = .black
-        //navigationView.alpha = 0.5
+        navigationView.update(type: .filter)
         view.addSubview(navigationView)
 
         navigationView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
@@ -1187,6 +1188,7 @@ class FitTimeNavigationBar: UIView {
     enum Configuration {
         case basic
         case filter
+        case sets
     }
 
     static let InitialHeight: CGFloat = 220
@@ -1260,6 +1262,22 @@ class FitTimeNavigationBar: UIView {
         return b
     }()
 
+    var enableRestLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = Fonts.getScaledFont(textStyle: .caption1, mode: .light)
+        l.textColor = UIColor(white: 1.0, alpha: 0.7)
+        l.textAlignment = .right
+        l.text = "Enable rest time"
+        return l
+    }()
+
+    var toggle: UISwitch = {
+        let s = UISwitch()
+        s.translatesAutoresizingMaskIntoConstraints = false
+        return s
+    }()
+
     var gradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
         g.colors = [UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
@@ -1286,9 +1304,18 @@ class FitTimeNavigationBar: UIView {
         case .basic:
             searchBar.isHidden = true
             filterButton.isHidden = true
+            toggle.isHidden = true
+            enableRestLabel.isHidden = true
         case .filter:
             searchBar.isHidden = false
             filterButton.isHidden = false
+            toggle.isHidden = true
+            enableRestLabel.isHidden = true
+        case .sets:
+            searchBar.isHidden = true
+            filterButton.isHidden = true
+            toggle.isHidden = false
+            enableRestLabel.isHidden = false
         }
     }
 
@@ -1355,6 +1382,23 @@ class FitTimeNavigationBar: UIView {
 
         layer.insertSublayer(gradientLayer, at: 0)
         gradientLayer.frame = frame
+
+
+        toggle.transform = CGAffineTransform(scaleX: 0.86, y: 0.86)
+
+        addSubview(toggle)
+        addSubview(enableRestLabel)
+
+        toggle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24).isActive = true
+        toggle.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
+//        toggle.heightAnchor.constraint(equalToConstant: 24).isActive = true
+//        toggle.widthAnchor.constraint(equalToConstant: 44).isActive = true
+
+        enableRestLabel.rightAnchor.constraint(equalTo: toggle.leftAnchor, constant: -7).isActive = true
+        enableRestLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.30).isActive = true
+        enableRestLabel.topAnchor.constraint(equalTo: toggle.topAnchor).isActive = true
+        enableRestLabel.bottomAnchor.constraint(equalTo: toggle.bottomAnchor).isActive = true
+
     }
 
     @objc func leftButtonTapped() {

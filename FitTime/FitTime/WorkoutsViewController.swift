@@ -158,7 +158,8 @@ class WorkoutsViewController: UIViewController {
 
     @objc func addTapped() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "CreateWorkoutViewController") as! CreateWorkoutViewController
-        present(vc, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true, completion: nil)
         //navigationController?.pushViewController(vc!, animated: true)
     }
 }
