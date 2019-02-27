@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="448" height="122"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mum-Pa-EhA">
+                    <rect key="frame" x="52" y="0.0" width="392" height="112"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="sbx-bg-PkC">
+                            <rect key="frame" x="0.0" y="1" width="392" height="111"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3j-ke-MDh">
+                                    <rect key="frame" x="0.0" y="0.0" width="195.5" height="111"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                    <state key="normal" title="REMOVE SET">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UD-MM-b1I">
+                                    <rect key="frame" x="196.5" y="0.0" width="195.5" height="111"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                    <state key="normal" title="ADD SET">
+                                        <color key="titleColor" red="0.31372549019607843" green="0.38823529411764707" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.91764705882352937" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="sbx-bg-PkC" secondAttribute="bottom" id="0Gt-Bb-cuG"/>
+                        <constraint firstItem="sbx-bg-PkC" firstAttribute="leading" secondItem="mum-Pa-EhA" secondAttribute="leading" id="cop-rO-TDX"/>
+                        <constraint firstItem="sbx-bg-PkC" firstAttribute="top" secondItem="mum-Pa-EhA" secondAttribute="top" constant="1" id="jTa-n2-hqB"/>
+                        <constraint firstAttribute="trailing" secondItem="sbx-bg-PkC" secondAttribute="trailing" id="vHQ-sx-qE3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="mum-Pa-EhA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="52" id="H4B-gu-yxz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mum-Pa-EhA" secondAttribute="trailing" constant="4" id="Sb8-WG-qBJ"/>
+                <constraint firstItem="mum-Pa-EhA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pD0-hy-GeN"/>
+                <constraint firstAttribute="bottom" secondItem="mum-Pa-EhA" secondAttribute="bottom" constant="10" id="zVj-B1-QpI"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="75.362318840579718" y="312.72321428571428"/>
+        </view>
+    </objects>
+</document>
