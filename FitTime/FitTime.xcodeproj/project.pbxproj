@@ -32,6 +32,7 @@
 		477A7535222660B800438226 /* AddSetsRowTableviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 477A7534222660B800438226 /* AddSetsRowTableviewCell.xib */; };
 		477A75372226651800438226 /* AddSetsAddRemoveTableviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 477A75362226651800438226 /* AddSetsAddRemoveTableviewCell.xib */; };
 		477A75392226684F00438226 /* AddSetsKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 477A75382226684F00438226 /* AddSetsKeyboardAccessoryView.xib */; };
+		477A753B2229039000438226 /* AddSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477A753A2229039000438226 /* AddSets.swift */; };
 		4797DA642033F70C00FFB4F8 /* RootSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */; };
 		479F870D21FD8C5A00A61C9B /* NestedCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */; };
 		479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */; };
@@ -154,6 +155,7 @@
 		477A7534222660B800438226 /* AddSetsRowTableviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSetsRowTableviewCell.xib; sourceTree = "<group>"; };
 		477A75362226651800438226 /* AddSetsAddRemoveTableviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSetsAddRemoveTableviewCell.xib; sourceTree = "<group>"; };
 		477A75382226684F00438226 /* AddSetsKeyboardAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSetsKeyboardAccessoryView.xib; sourceTree = "<group>"; };
+		477A753A2229039000438226 /* AddSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSets.swift; sourceTree = "<group>"; };
 		4797DA632033F70C00FFB4F8 /* RootSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwipeViewController.swift; sourceTree = "<group>"; };
 		479F870C21FD8C5900A61C9B /* NestedCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NestedCollectionTableViewCell.xib; sourceTree = "<group>"; };
 		479F870E21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				477A7534222660B800438226 /* AddSetsRowTableviewCell.xib */,
 				477A75362226651800438226 /* AddSetsAddRemoveTableviewCell.xib */,
 				477A75382226684F00438226 /* AddSetsKeyboardAccessoryView.xib */,
+				477A753A2229039000438226 /* AddSets.swift */,
 			);
 			name = "Add Sets";
 			path = "New Group1";
@@ -696,6 +699,7 @@
 				479F870F21FD8D9F00A61C9B /* NestedCollectionTableViewCell.swift in Sources */,
 				470110071FFB08C000AA4D9D /* ViewController.swift in Sources */,
 				4762C4C81FFF54AE006BDDC0 /* TimerBuilder.swift in Sources */,
+				477A753B2229039000438226 /* AddSets.swift in Sources */,
 				47DBAE612160A64700CEC2F1 /* WatchConnectivityManager.swift in Sources */,
 				47C0A2E81FFB155E00C22A2E /* OffWorkoutViewController.swift in Sources */,
 				47C0A2F01FFB2ADB00C22A2E /* ExercisesViewController.swift in Sources */,

@@ -679,6 +679,12 @@ class AddSetComplicationViewController: UIViewController {
         return nav
     }()
 
+    var tableView: UITableView = {
+        let t = UITableView(frame: .zero, style: .grouped)
+        t.translatesAutoresizingMaskIntoConstraints = false
+        return t
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(navigationView)
@@ -686,6 +692,39 @@ class AddSetComplicationViewController: UIViewController {
         navigationView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
         navigationView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         navigationView.heightAnchor.constraint(equalToConstant: FitTimeNavigationBar.InitialHeight).isActive = true
+
+        navigationView.leftButtonTappedHandler = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+
+        tableView.register(UINib(nibName: "AddSetsHeaderTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsHeaderTableviewCell")
+        tableView.register(UINib(nibName: "AddSetsRowTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsRowTableviewCell")
+        tableView.register(UINib(nibName: "AddSetsAddRemoveTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsAddRemoveTableviewCell")
+
+        edgesForExtendedLayout = []
+
+        tableView.separatorStyle = .none
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.allowsSelection = false
+        tableView.dataSource = self
+        tableView.delegate = self
+
+        view.insertSubview(tableView, belowSubview: navigationView)
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+
+        tableView.reloadData()
+
+        tableView.contentInset = UIEdgeInsets(top: FitTimeNavigationBar.InitialHeight, left: 0, bottom: UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: FitTimeNavigationBar.InitialHeight, left: 0, bottom: 0, right: 0)
+        tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -696,5 +735,61 @@ class AddSetComplicationViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+}
+
+extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsHeaderTableviewCell", for: indexPath)
+            cell.backgroundColor = .clear
+            return cell
+        }
+
+        if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsAddRemoveTableviewCell", for: indexPath)
+            cell.backgroundColor = .clear
+            return cell
+        }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsRowTableviewCell", for: indexPath)
+        cell.backgroundColor = .clear
+        return cell
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 95   
+        }
+
+        if indexPath.row == 4 {
+            return 70
+        }
+
+        return 110
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
 }
