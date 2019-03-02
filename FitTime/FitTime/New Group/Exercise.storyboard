@@ -10,6 +10,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Example Collection View Controller-->
+        <scene sceneID="37C-bq-gqQ">
+            <objects>
+                <viewController storyboardIdentifier="ExampleCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9VN-T5-jWn" customClass="ExampleCollectionViewController" customModule="FitTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j7x-Bj-w4T">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l6v-PG-bzI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ieo-h7-2wg">
+                                    <size key="itemSize" width="181" height="238"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xWm-SX-5Vs">
+                                        <rect key="frame" x="0.0" y="0.0" width="181" height="238"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="181" height="238"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="9VN-T5-jWn" id="dGh-U9-gUR"/>
+                                    <outlet property="delegate" destination="9VN-T5-jWn" id="Sct-3t-UIL"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="l6v-PG-bzI" firstAttribute="leading" secondItem="get-nP-VAt" secondAttribute="leading" id="R2X-Ku-2dx"/>
+                            <constraint firstItem="l6v-PG-bzI" firstAttribute="top" secondItem="get-nP-VAt" secondAttribute="top" id="WQF-fk-8vE"/>
+                            <constraint firstItem="get-nP-VAt" firstAttribute="bottom" secondItem="l6v-PG-bzI" secondAttribute="bottom" id="gk9-Mf-cP2"/>
+                            <constraint firstItem="get-nP-VAt" firstAttribute="trailing" secondItem="l6v-PG-bzI" secondAttribute="trailing" id="tcd-VB-wDE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="get-nP-VAt"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="l6v-PG-bzI" id="bM7-dm-sNx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ax-mP-hP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-663.768115942029" y="-82.366071428571431"/>
+        </scene>
         <!--Exercise Detail View Controller-->
         <scene sceneID="kg1-tm-hAD">
             <objects>

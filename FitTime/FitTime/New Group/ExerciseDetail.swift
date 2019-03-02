@@ -697,6 +697,11 @@ class AddSetComplicationViewController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
 
+        navigationView.rightButtonTappedHandler = { [weak self] in
+            let vc = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: "ExampleCollectionViewController")
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+
         tableView.register(UINib(nibName: "AddSetsHeaderTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsHeaderTableviewCell")
         tableView.register(UINib(nibName: "AddSetsRowTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsRowTableviewCell")
         tableView.register(UINib(nibName: "AddSetsAddRemoveTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsAddRemoveTableviewCell")
@@ -791,5 +796,171 @@ extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+class JumpListView: UIView, UIGestureRecognizerDelegate {
+    var datasource: [String] = [String]() {
+        didSet {
+            generateIndexLabels()
+        }
+    }
+
+    //var centers: Set<CGPoint> = Set<CGPoint>()
+    var labels = [UILabel]()
+    var previousIndex: Int?
+    var selectedIndexHandler: ((Int)->Void)?
+    var panGesture: TouchDownPanGesture?
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        panGesture = TouchDownPanGesture(target: self, action: #selector(panned(gesture:)))
+        panGesture?.delegate = self
+        addGestureRecognizer(panGesture!)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func selected(index: Int) {
+        let feedback = UISelectionFeedbackGenerator()
+        feedback.selectionChanged()
+
+        previousIndex = index
+        selectedIndexHandler?(index)
+        print("selected index:\(index)")
+    }
+
+    private func isInIndexTitleRange(touch: CGPoint, index: Int) -> Bool {
+        guard labels.indices.contains(index) else {
+            return false
+        }
+        let label = labels[index]
+        return touch.y >= label.frame.origin.y && touch.y <= label.frame.origin.y + label.frame.height
+    }
+
+    @objc func panned(gesture: UIPanGestureRecognizer) {
+        let location = gesture.location(in: self)
+        for (idx, label) in labels.enumerated() {
+            if isInIndexTitleRange(touch: location, index: idx) {
+                if let prev = previousIndex {
+                    if prev != idx {
+                        selected(index: idx)
+                    }
+                } else {
+                    selected(index: idx)
+                }
+                break
+            }
+        }
+    }
+
+    public func setDatasource(with items:[String]) {
+        datasource.removeAll()
+        labels.removeAll()
+
+        for label in labels {
+            label.removeFromSuperview()
+        }
+        //center
+        datasource = items
+    }
+
+    private func generateIndexLabels() {
+        for (idx, title) in datasource.enumerated() {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = title
+            label.textAlignment = .right
+            label.textColor = .white
+
+            addSubview(label)
+
+            if idx == 0 {
+                label.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            } else {
+                // grab previous label
+                let prevLabel = labels[idx - 1]
+                label.topAnchor.constraint(equalTo: prevLabel.bottomAnchor).isActive = true
+            }
+
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+
+            labels.append(label)
+        }
+    }
+}
+
+class TouchDownPanGesture: UIPanGestureRecognizer {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesBegan(touches, with: event)
+        self.state = .began
+    }
+}
+
+class ExampleCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    var datasource: [String] = [String]()
+    var jumplist: JumpListView = {
+        let j = JumpListView()
+        j.translatesAutoresizingMaskIntoConstraints = false
+        j.backgroundColor = .blue
+        return j
+    }()
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        datasource = ["A","B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L" ,"M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"]
+
+        collectionView.register(UINib(nibName: "BasicHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "BasicHeaderView")
+
+        view.addSubview(jumplist)
+        view.bringSubview(toFront: jumplist)
+        jumplist.heightAnchor.constraint(equalTo: collectionView.heightAnchor, multiplier: 0.5).isActive = true
+        jumplist.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        jumplist.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        jumplist.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor).isActive = true
+
+        jumplist.setDatasource(with: datasource)
+
+        jumplist.selectedIndexHandler = { [weak self] index in
+            if let attributes = self?.collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: index)) {
+
+                let inset = self?.collectionView.contentInset.top ?? 0
+                self?.collectionView.setContentOffset(CGPoint(x: 0, y: attributes.frame.origin.y - inset), animated: false)
+            }
+        }
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 25
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        let v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "BasicHeaderView", for: indexPath) as! BasicHeaderView
+        let section = datasource[indexPath.section]
+        v.titleLabel.text = section
+        v.titleLabel.textColor = .black
+        v.leadingTitleLabelConstraint.constant = 20
+        return v
     }
 }
