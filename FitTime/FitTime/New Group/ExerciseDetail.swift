@@ -800,27 +800,73 @@ extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDe
 }
 
 class JumpListView: UIView, UIGestureRecognizerDelegate {
+    static let Width: CGFloat = 15.0
+
     var datasource: [String] = [String]() {
         didSet {
             generateIndexLabels()
         }
     }
+    var font: UIFont = UIFont.systemFont(ofSize: 8.0) {
+        didSet {
+            for l in labels {
+                l.font = font
+            }
 
-    //var centers: Set<CGPoint> = Set<CGPoint>()
+            calculatedHeightForLabel = heightForFont()
+            updateFrameHeight()
+        }
+    }
+
+    var calculatedHeightForLabel: CGFloat = 0.0 {
+        didSet {
+            for constraint in heightConstraints {
+                constraint.constant = calculatedHeightForLabel
+            }
+        }
+    }
+    var heightConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+    var topConstraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+    var padding: CGFloat = 0.0 {
+        didSet {
+            for constraint in topConstraints {
+                constraint.constant = padding
+            }
+
+            updateFrameHeight()
+        }
+    }
     var labels = [UILabel]()
     var previousIndex: Int?
     var selectedIndexHandler: ((Int)->Void)?
     var panGesture: TouchDownPanGesture?
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    var frameHeightConstraint: NSLayoutConstraint?
+
+    init(datasource: [String], padding: CGFloat, font: UIFont?) {
+        self.datasource = datasource
+        self.padding = padding
+        if let f = font {
+            self.font = f
+        }
+        super.init(frame: .zero)
 
         panGesture = TouchDownPanGesture(target: self, action: #selector(panned(gesture:)))
         panGesture?.delegate = self
         addGestureRecognizer(panGesture!)
+        calculatedHeightForLabel = heightForFont()
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        generateIndexLabels()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func heightForFont() -> CGFloat {
+        let string = NSString(string: "A")
+        let bounds = string.boundingRect(with: CGSize(width: JumpListView.Width, height: .greatestFiniteMagnitude), options: [.usesLineFragmentOrigin], attributes: [.font: font], context: nil)
+        return bounds.height
     }
 
     private func selected(index: Int) {
@@ -842,7 +888,7 @@ class JumpListView: UIView, UIGestureRecognizerDelegate {
 
     @objc func panned(gesture: UIPanGestureRecognizer) {
         let location = gesture.location(in: self)
-        for (idx, label) in labels.enumerated() {
+        for (idx, _) in labels.enumerated() {
             if isInIndexTitleRange(touch: location, index: idx) {
                 if let prev = previousIndex {
                     if prev != idx {
@@ -858,39 +904,75 @@ class JumpListView: UIView, UIGestureRecognizerDelegate {
 
     public func setDatasource(with items:[String]) {
         datasource.removeAll()
-        labels.removeAll()
 
         for label in labels {
             label.removeFromSuperview()
         }
-        //center
         datasource = items
     }
 
     private func generateIndexLabels() {
+        labels.removeAll()
+        heightConstraints.removeAll()
+        topConstraints.removeAll()
+
+        calculatedHeightForLabel = heightForFont()
+
         for (idx, title) in datasource.enumerated() {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = title
-            label.textAlignment = .right
+            label.font = font
+            label.numberOfLines = 1
+            label.textAlignment = .center
             label.textColor = .white
 
             addSubview(label)
 
             if idx == 0 {
-                label.topAnchor.constraint(equalTo: topAnchor).isActive = true
+                label.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
             } else {
                 // grab previous label
                 let prevLabel = labels[idx - 1]
-                label.topAnchor.constraint(equalTo: prevLabel.bottomAnchor).isActive = true
+                let top = label.topAnchor.constraint(equalTo: prevLabel.bottomAnchor, constant: padding)
+                top.isActive = true
+                topConstraints.append(top)
             }
 
             label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            let height = label.heightAnchor.constraint(equalToConstant: calculatedHeightForLabel)
+            height.isActive = true
             label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
 
             labels.append(label)
+            heightConstraints.append(height)
         }
+
+        updateFrameHeight()
+    }
+
+    public func createConstraints() {
+        guard let parentView = self.superview else {
+            return
+        }
+
+        if frameHeightConstraint == nil {
+            frameHeightConstraint = heightAnchor.constraint(equalToConstant: 0)
+            frameHeightConstraint?.isActive = true
+            widthAnchor.constraint(equalToConstant: JumpListView.Width).isActive = true
+            rightAnchor.constraint(equalTo: parentView.rightAnchor).isActive = true
+            centerYAnchor.constraint(equalTo: parentView.centerYAnchor).isActive = true
+        }
+
+        updateFrameHeight()
+    }
+
+    private func updateFrameHeight() {
+        var calculatedFrameHeight: CGFloat = 0.0
+        calculatedHeightForLabel = heightForFont()
+        let labelHeights = (CGFloat(datasource.count) * calculatedHeightForLabel)
+        calculatedFrameHeight = labelHeights + (padding * (CGFloat(datasource.count) - 1))
+        frameHeightConstraint?.constant = calculatedFrameHeight
     }
 }
 
@@ -903,12 +985,7 @@ class TouchDownPanGesture: UIPanGestureRecognizer {
 
 class ExampleCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var datasource: [String] = [String]()
-    var jumplist: JumpListView = {
-        let j = JumpListView()
-        j.translatesAutoresizingMaskIntoConstraints = false
-        j.backgroundColor = .blue
-        return j
-    }()
+    var jumplist: JumpListView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -917,14 +994,11 @@ class ExampleCollectionViewController: UIViewController, UICollectionViewDataSou
 
         collectionView.register(UINib(nibName: "BasicHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "BasicHeaderView")
 
+        jumplist = JumpListView(datasource: datasource, padding: 8, font: UIFont.systemFont(ofSize: 8))
+        jumplist.backgroundColor = .blue
         view.addSubview(jumplist)
         view.bringSubview(toFront: jumplist)
-        jumplist.heightAnchor.constraint(equalTo: collectionView.heightAnchor, multiplier: 0.5).isActive = true
-        jumplist.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        jumplist.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        jumplist.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor).isActive = true
-
-        jumplist.setDatasource(with: datasource)
+        jumplist.createConstraints()
 
         jumplist.selectedIndexHandler = { [weak self] index in
             if let attributes = self?.collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: index)) {
@@ -936,7 +1010,7 @@ class ExampleCollectionViewController: UIViewController, UICollectionViewDataSou
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 25
+        return datasource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
