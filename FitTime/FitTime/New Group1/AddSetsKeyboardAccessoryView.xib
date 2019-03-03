@@ -15,9 +15,15 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddSetsKeyboardAccessoryView" customModule="FitTime" customModuleProvider="target">
+            <connections>
+                <outlet property="firstButton" destination="osa-DT-58i" id="GvT-zu-TV2"/>
+                <outlet property="secondButton" destination="dEV-cm-rsf" id="IBN-N6-udU"/>
+                <outlet property="thirdButton" destination="qLb-rw-DnM" id="pcb-7t-100"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AddSetsKeyboardAccessoryView" customModule="FitTime" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="404" height="152"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -34,7 +40,7 @@
                                         <color key="titleColor" red="0.31372549019607843" green="0.38823529411764707" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="firstTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5d1-kB-UdO"/>
+                                        <action selector="firstTapped:" destination="-1" eventType="touchUpInside" id="8yx-88-yQH"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUt-Wh-yy3">
@@ -66,7 +72,7 @@
                                         <color key="titleColor" red="0.31372549020000001" green="0.38823529410000002" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="secondTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="cDX-pe-Xk8"/>
+                                        <action selector="secondTapped:" destination="-1" eventType="touchUpInside" id="lkF-KX-LUB"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -95,7 +101,7 @@
                                         <color key="titleColor" red="0.31372549020000001" green="0.38823529410000002" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="thirdButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="2uv-8p-Jr3"/>
+                                        <action selector="thirdButton:" destination="-1" eventType="touchUpInside" id="hsb-KO-5Lx"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -123,11 +129,6 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <connections>
-                <outlet property="firstButton" destination="osa-DT-58i" id="xZY-Ry-bg6"/>
-                <outlet property="secondButton" destination="dEV-cm-rsf" id="XoZ-DA-vZB"/>
-                <outlet property="thirdButton" destination="qLb-rw-DnM" id="1Rg-eE-Meu"/>
-            </connections>
             <point key="canvasLocation" x="130.43478260869566" y="367.63392857142856"/>
         </view>
     </objects>

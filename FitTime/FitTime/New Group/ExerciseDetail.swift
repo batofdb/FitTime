@@ -679,11 +679,42 @@ class AddSetComplicationViewController: UIViewController {
         return nav
     }()
 
+    var keyboardAccessory: AddSetsKeyboardAccessoryView = {
+        let view = AddSetsKeyboardAccessoryView()
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
+        return view
+    }()
+
     var tableView: UITableView = {
         let t = UITableView(frame: .zero, style: .grouped)
         t.translatesAutoresizingMaskIntoConstraints = false
         return t
     }()
+
+    var showCommands: Bool = false {
+        didSet {
+            let bottomInset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            let hideOffset = showCommands ? 0 : bottomInset + 50
+
+            commandViewBottomConstraint.constant = hideOffset
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+
+    var addSetCommandView: UIStackView = {
+        let stack = UIStackView(frame: .zero)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
+        stack.axis = .horizontal
+        return stack
+    }()
+
+    var commandViewBottomConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -725,8 +756,61 @@ class AddSetComplicationViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: FitTimeNavigationBar.InitialHeight, left: 0, bottom: UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top: FitTimeNavigationBar.InitialHeight, left: 0, bottom: 0, right: 0)
         tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        view.addSubview(containerView)
+        containerView.addSubview(addSetCommandView)
+        let bottomInset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        containerView.heightAnchor.constraint(equalToConstant: bottomInset + 50).isActive = true
+        containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        containerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        commandViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomInset + 50)
+        commandViewBottomConstraint.isActive = true
+
+        addSetCommandView.topAnchor.constraint(equalTo: containerView.topAnchor)
+        addSetCommandView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        addSetCommandView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+        addSetCommandView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -bottomInset).isActive = true
+
+        let delete = UIButton()
+        delete.translatesAutoresizingMaskIntoConstraints = false
+        delete.setTitle("Delete", for: .normal)
+        delete.setTitleColor(.white, for: .normal)
+        delete.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        delete.addTarget(self, action: #selector(deleteTapped(sender:)), for: .touchUpInside)
+        let duplicate = UIButton()
+        duplicate.setTitle("Duplicate", for: .normal)
+        duplicate.setTitleColor(.white, for: .normal)
+        duplicate.translatesAutoresizingMaskIntoConstraints = false
+        duplicate.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        duplicate.addTarget(self, action: #selector(duplicateTapped(sender:)), for: .touchUpInside)
+        let superset = UIButton()
+        superset.addTarget(self, action: #selector(supersetTapped(sender:)), for: .touchUpInside)
+        superset.setTitleColor(.white, for: .normal)
+        superset.setTitle("Superset", for: .normal)
+        superset.translatesAutoresizingMaskIntoConstraints = false
+        superset.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        addSetCommandView.addArrangedSubview(delete)
+        addSetCommandView.addArrangedSubview(duplicate)
+        addSetCommandView.addArrangedSubview(superset)
+
+        
+
     }
 
+    @objc func deleteTapped(sender: UIButton) {
+
+    }
+
+    @objc func duplicateTapped(sender: UIButton) {
+
+    }
+
+    @objc func supersetTapped(sender: UIButton) {
+
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -746,7 +830,7 @@ class AddSetComplicationViewController: UIViewController {
 extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsHeaderTableviewCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsHeaderTableviewCell", for: indexPath) as! AddSetsHeaderTableviewCell
             cell.backgroundColor = .clear
             return cell
         }
@@ -760,6 +844,17 @@ extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsRowTableviewCell", for: indexPath)
         cell.backgroundColor = .clear
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let c = cell as? AddSetsHeaderTableviewCell {
+            c.checkboxTapped = { [weak self] selected, cell in
+                self?.showCommands = selected
+            }
+        } else if let c = cell as? AddSetsRowTableviewCell {
+            c.repsTextField.inputAccessoryView = self.keyboardAccessory
+
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
