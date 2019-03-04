@@ -662,7 +662,7 @@ extension PopUpable {
     }
 }
 
-class AddSetComplicationViewController: UIViewController {
+class AddSetComplicationViewController: UIViewController, UIScrollViewDelegate {
     var navigationView: FitTimeNavigationBar = {
         let nav = FitTimeNavigationBar()
         nav.translatesAutoresizingMaskIntoConstraints = false
@@ -678,6 +678,8 @@ class AddSetComplicationViewController: UIViewController {
         nav.rightButton.setTitle(nil, for: .normal)
         return nav
     }()
+
+    var previousContentOffsetY: CGFloat = -FitTimeNavigationBar.InitialHeight
 
     var keyboardAccessory: AddSetsKeyboardAccessoryView = {
         let view = AddSetsKeyboardAccessoryView()
@@ -713,6 +715,35 @@ class AddSetComplicationViewController: UIViewController {
         stack.axis = .horizontal
         return stack
     }()
+
+    var supersetView: SupersetBackgroundView = {
+        let b = SupersetBackgroundView()
+        return b
+    }()
+
+    var isSupersetEnabled: Bool = false {
+        didSet {
+            animateSuperset(enabled: isSupersetEnabled)
+        }
+    }
+
+    private func animateSuperset(enabled: Bool) {
+        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+            self.supersetView.supersetLabel.alpha = enabled ? 0.10 : 0.0
+        }, completion: nil)
+
+
+        /*
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut], animations: {
+            if enabled {
+                self.supersetView.supersetLabel.transform = self.supersetView.supersetLabel.transform.concatenating(CGAffineTransform.init(translationX: 0.01, y: -10))
+            } else {
+                self.supersetView.supersetLabel.transform = self.supersetView.supersetLabel.transform.concatenating(CGAffineTransform.init(translationX: 0.01, y: 10))
+            }
+            self.supersetView.layoutIfNeeded()
+        }, completion: nil)
+        */
+    }
 
     var commandViewBottomConstraint: NSLayoutConstraint!
 
@@ -796,8 +827,8 @@ class AddSetComplicationViewController: UIViewController {
         addSetCommandView.addArrangedSubview(duplicate)
         addSetCommandView.addArrangedSubview(superset)
 
-        
-
+        tableView.backgroundView = supersetView
+        supersetView.supersetLabel.transform = CGAffineTransform.init(translationX: SupersetBackgroundView.SupersetTranslateX, y: -(tableView.contentOffset.y) + SupersetBackgroundView.SupersetTranslateY).rotated(by: SupersetBackgroundView.SupersetRotation)
     }
 
     @objc func deleteTapped(sender: UIButton) {
@@ -809,8 +840,9 @@ class AddSetComplicationViewController: UIViewController {
     }
 
     @objc func supersetTapped(sender: UIButton) {
-
+        isSupersetEnabled = !isSupersetEnabled
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -824,6 +856,52 @@ class AddSetComplicationViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let delta = previousContentOffsetY - scrollView.contentOffset.y
+        supersetView.supersetLabel.transform = supersetView.supersetLabel.transform.concatenating(CGAffineTransform.init(translationX: 0, y: delta))
+
+            /*CGAffineTransform.init(translationX: SupersetBackgroundView.SupersetTranslateX, y: -(scrollView.contentOffset.y) + SupersetBackgroundView.SupersetTranslateY).rotated(by: SupersetBackgroundView.SupersetRotation)*/
+
+        previousContentOffsetY = scrollView.contentOffset.y
+    }
+}
+
+class SupersetBackgroundView: UIView {
+    static let SupersetWidth: CGFloat = 323.0
+    static let SupersetHeight: CGFloat = 67.0
+    static let SupersetTranslateX: CGFloat = -((SupersetBackgroundView.SupersetWidth/2) - (SupersetBackgroundView.SupersetHeight/2))
+    static let SupersetTranslateXHidden: CGFloat = -((SupersetBackgroundView.SupersetWidth/2) - (SupersetBackgroundView.SupersetHeight/2)) + 15.0
+    static let SupersetTranslateY: CGFloat = (SupersetBackgroundView.SupersetHeight/2) + 78 + 65
+    static let SupersetRotation: CGFloat = -.pi / 2
+
+
+    var supersetLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.text = "superset".uppercased()
+        l.font = UIFont(name: Fonts.FontFamily.rubikRegular.rawValue, size: 57.0)
+        l.textColor = UIColor(displayP3Red: 35/255.0, green: 39/255.0, blue: 64/255.0, alpha: 1.0)
+        l.alpha = 0.1
+        return l
+    }()
+
+    var didSetupConstraints: Bool = false
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        addSubview(supersetLabel)
+
+        supersetLabel.heightAnchor.constraint(equalToConstant: SupersetBackgroundView.SupersetHeight).isActive = true
+        supersetLabel.widthAnchor.constraint(equalToConstant: SupersetBackgroundView.SupersetWidth).isActive = true
+        supersetLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        supersetLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
