@@ -883,7 +883,7 @@ class SupersetBackgroundView: UIView {
         l.text = "superset".uppercased()
         l.font = UIFont(name: Fonts.FontFamily.rubikRegular.rawValue, size: 57.0)
         l.textColor = UIColor(displayP3Red: 35/255.0, green: 39/255.0, blue: 64/255.0, alpha: 1.0)
-        l.alpha = 0.1
+        l.alpha = 0.0
         return l
     }()
 
