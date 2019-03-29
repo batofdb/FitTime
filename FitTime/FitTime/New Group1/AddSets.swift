@@ -116,7 +116,11 @@ extension UIView {
     }
 }
 
+class AddSetsSecondaryHeaderTableviewCell: UITableViewCell {
+    @IBOutlet weak var muscleImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
 
+}
 
 class AddSetsKeyboardAccessoryView: UIView {
     @IBOutlet weak var firstButton: UIButton!

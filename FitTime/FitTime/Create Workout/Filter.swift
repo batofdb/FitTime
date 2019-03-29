@@ -487,10 +487,8 @@ fileprivate extension UICollectionViewLayoutAttributes {
 }
 
 class BasicHeaderView: UICollectionReusableView {
-
     @IBOutlet weak var leadingTitleLabelConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
-
     override func awakeFromNib() {
         super.awakeFromNib()
 

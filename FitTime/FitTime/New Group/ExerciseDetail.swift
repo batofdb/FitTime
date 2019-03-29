@@ -760,13 +760,15 @@ class AddSetComplicationViewController: UIViewController, UIScrollViewDelegate {
         }
 
         navigationView.rightButtonTappedHandler = { [weak self] in
-            let vc = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: "ExampleCollectionViewController")
+            //let vc = UIStoryboard(name: "Exercise", bundle: nil).instantiateViewController(withIdentifier: "ExampleCollectionViewController")
+            let vc = SummaryViewController()
             self?.navigationController?.pushViewController(vc, animated: true)
         }
 
         tableView.register(UINib(nibName: "AddSetsHeaderTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsHeaderTableviewCell")
         tableView.register(UINib(nibName: "AddSetsRowTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsRowTableviewCell")
         tableView.register(UINib(nibName: "AddSetsAddRemoveTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsAddRemoveTableviewCell")
+        tableView.register(UINib(nibName: "AddSetsSecondaryHeaderTableviewCell", bundle: nil), forCellReuseIdentifier: "AddSetsSecondaryHeaderTableviewCell")
 
         edgesForExtendedLayout = []
 
@@ -911,6 +913,13 @@ extension AddSetComplicationViewController: UITableViewDataSource, UITableViewDe
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddSetsHeaderTableviewCell", for: indexPath) as! AddSetsHeaderTableviewCell
             cell.backgroundColor = .clear
             return cell
+        }
+
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AddSetsSecondaryHeaderTableviewCell", for: indexPath) as! AddSetsSecondaryHeaderTableviewCell
+            cell.backgroundColor = .clear
+            return cell
+
         }
 
         if indexPath.row == 4 {
