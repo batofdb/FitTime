@@ -13,13 +13,19 @@ class SummaryViewController: UIViewController, MusclesInvolvedCalculate {
         let nav = FitTimeNavigationBar()
         nav.translatesAutoresizingMaskIntoConstraints = false
         nav.backgroundColor = .white
-        nav.titleLabel.textColor = .black
+        //nav.titleLabel.textColor = .black
         nav.subTitleLabel.isHidden = true
-        nav.gradientLayer.removeFromSuperlayer()
-        nav.update(type: .basic)
+        //nav.gradientLayer.removeFromSuperlayer()
+        nav.update(type: .summary)
+        nav.titleLabel.text = "Summary"
+        nav.summaryTitleLabel.text = "Workout name"
+        nav.summaryNameLabel.text = "Back & Legs"
+        nav.titleLabel.textColor = .white
         nav.leftButton.setImage(UIImage(named: "back_button"), for: .normal)
-        nav.rightButton.setImage(UIImage(named: "add"), for: .normal)
-        nav.rightButton.setTitle(nil, for: .normal)
+//        nav.ri
+        //nav.rightButton.setImage(UIImage(named: "add"), for: .normal)
+        nav.rightButton.setTitle("Finish", for: .normal)
+        nav.rightButton.setTitleColor(UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0), for: .normal)
         return nav
     }()
 
@@ -55,7 +61,7 @@ class SummaryViewController: UIViewController, MusclesInvolvedCalculate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCount = sets.reduce(0, +)
-        view.backgroundColor = UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
 
         view.addSubview(tableView)
 
@@ -68,7 +74,7 @@ class SummaryViewController: UIViewController, MusclesInvolvedCalculate {
         navigationView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         navigationView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         navigationView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        navigationView.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        navigationView.heightAnchor.constraint(equalToConstant: 253).isActive = true
 
         navigationView.leftButtonTappedHandler = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
@@ -179,10 +185,10 @@ extension SummaryViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         if indexPath.row == 0 {
-            return 65
+            return 75
         }
 
-        return 70
+        return 90
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -223,8 +229,8 @@ class BasicTableHeaderView: UITableViewHeaderFooterView {
         super.awakeFromNib()
 
         titleLabel.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .light)
-        titleLabel.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
-        backgroundColor = UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
+        titleLabel.textColor = UIColor(red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        backgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
     }
 }
 
@@ -247,14 +253,14 @@ class MusclesInvolvedCell: UITableViewCell {
     var musclesInvolvedView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        //v.layer.borderColor = UIColor(displayP3Red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0).cgColor
+        //v.layer.borderColor = UIColor(red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0).cgColor
         //v.layer.borderWidth = 1.0
         return v
     }()
 
     var bottomGradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0).cgColor]
+        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0)
         g.endPoint = CGPoint(x: 0, y: 1.0)
         return g
@@ -302,7 +308,7 @@ class MusclesInvolvedCell: UITableViewCell {
         //stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: musclesLabelContainerView.topAnchor).isActive = true
 
-        backgroundColor = .clear//UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
+        backgroundColor = .clear//UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
         musclesLabelContainerView.backgroundColor = .clear
 
         musclesLabelContainerView.addSubview(musclesInvolvedView)
@@ -330,7 +336,7 @@ class MusclesInvolvedCell: UITableViewCell {
 
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = UIColor(displayP3Red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0)
+        line.backgroundColor = UIColor(red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0)
         addSubview(line)
         line.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
         line.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -377,7 +383,7 @@ class MusclesInvolvedCell: UITableViewCell {
                 l.leftInset = 20.0
                 l.rightInset = 20.0
                 l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
-                l.backgroundColor = UIColor(displayP3Red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
+                l.backgroundColor = UIColor(red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
                 l.layer.cornerRadius = 2.0
                 l.clipsToBounds = true
                 l.adjustsFontForContentSizeCategory = true
@@ -530,7 +536,7 @@ extension MusclesInvolvedLayout {
             l.leftInset = 20.0
             l.rightInset = 20.0
             l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
-            l.backgroundColor = UIColor(displayP3Red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
+            l.backgroundColor = UIColor(red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
             l.layer.cornerRadius = 2.0
             l.clipsToBounds = true
             l.adjustsFontForContentSizeCategory = true

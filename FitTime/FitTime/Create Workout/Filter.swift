@@ -18,9 +18,9 @@ struct FilterObject {
 }
 
 class FilterCollectionViewCell: UICollectionViewCell {
-    static let UnselectedColor: UIColor = UIColor(displayP3Red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
-    static let SelectedColor: UIColor = UIColor(displayP3Red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0)
-    static let SelectedTextColor: UIColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+    static let UnselectedColor: UIColor = UIColor(red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
+    static let SelectedColor: UIColor = UIColor(red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0)
+    static let SelectedTextColor: UIColor = UIColor(red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
     static let UnselectedTextColor: UIColor = .white
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -97,7 +97,7 @@ class FilterViewController: UIViewController {
 
     var gradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
+        g.colors = [UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0)
         g.endPoint = CGPoint(x: 1.0, y: 1.0)
         return g
@@ -105,7 +105,7 @@ class FilterViewController: UIViewController {
 
     var buttonGradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
+        g.colors = [UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0.5)
         g.endPoint = CGPoint(x: 1.0, y: 0.5)
         return g

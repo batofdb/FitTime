@@ -58,7 +58,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
     var musclesInvolvedView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.layer.borderColor = UIColor(displayP3Red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0).cgColor
+        v.layer.borderColor = UIColor(red: 233/255.0, green: 234/255.0, blue: 242/255.0, alpha: 1.0).cgColor
         v.layer.borderWidth = 1.0
         return v
     }()
@@ -78,7 +78,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
         l.lineBreakMode = .byWordWrapping
         l.textAlignment = .left
         l.font = Fonts.getScaledFont(textStyle: .body, mode: .dark)
-        l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        l.textColor = UIColor(red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
         return l
     }()
 
@@ -86,14 +86,14 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .dark)
-        l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        l.textColor = UIColor(red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
         l.text = "muscles involved".uppercased()
         return l
     }()
 
     var bottomGradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0).cgColor]
+        g.colors = [UIColor(white: 1.0, alpha: 0.0).cgColor, UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0)
         g.endPoint = CGPoint(x: 0, y: 1.0)
         return g
@@ -110,7 +110,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.font = Fonts.getScaledFont(textStyle: .subheadline, mode: .dark)
-        l.textColor = UIColor(displayP3Red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
+        l.textColor = UIColor(red: 38/255.0, green: 38/255.0, blue: 43/255.0, alpha: 1.0)
         l.text = "about".uppercased()
         return l
     }()
@@ -122,7 +122,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(displayP3Red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 248/255.0, alpha: 1.0)
         contentView.backgroundColor = .clear
 
         view.addSubview(navigationView)
@@ -242,7 +242,7 @@ class ExerciseDetailViewController: UIViewController, PopUpable {
                 l.leftInset = 20.0
                 l.rightInset = 20.0
                 l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
-                l.backgroundColor = UIColor(displayP3Red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
+                l.backgroundColor = UIColor(red: 112/255.0, green: 129/255.0, blue: 255/255.0, alpha: 1.0)
                 l.layer.cornerRadius = 2.0
                 l.clipsToBounds = true
                 l.adjustsFontForContentSizeCategory = true
@@ -624,7 +624,7 @@ extension PopUpable {
 
         title.text = text
         title.font = Fonts.getScaledFont(textStyle: .title3, mode: .dark)
-        title.textColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
+        title.textColor = UIColor(red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
         title.numberOfLines = 1
         title.textAlignment = .center
 
@@ -709,7 +709,7 @@ class AddSetComplicationViewController: UIViewController, UIScrollViewDelegate {
     var addSetCommandView: UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        stack.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
         stack.distribution = .fillEqually
         stack.alignment = .fill
         stack.axis = .horizontal
@@ -792,7 +792,7 @@ class AddSetComplicationViewController: UIViewController, UIScrollViewDelegate {
 
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        containerView.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
         view.addSubview(containerView)
         containerView.addSubview(addSetCommandView)
         let bottomInset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
@@ -811,20 +811,20 @@ class AddSetComplicationViewController: UIViewController, UIScrollViewDelegate {
         delete.translatesAutoresizingMaskIntoConstraints = false
         delete.setTitle("Delete", for: .normal)
         delete.setTitleColor(.white, for: .normal)
-        delete.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        delete.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
         delete.addTarget(self, action: #selector(deleteTapped(sender:)), for: .touchUpInside)
         let duplicate = UIButton()
         duplicate.setTitle("Duplicate", for: .normal)
         duplicate.setTitleColor(.white, for: .normal)
         duplicate.translatesAutoresizingMaskIntoConstraints = false
-        duplicate.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        duplicate.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
         duplicate.addTarget(self, action: #selector(duplicateTapped(sender:)), for: .touchUpInside)
         let superset = UIButton()
         superset.addTarget(self, action: #selector(supersetTapped(sender:)), for: .touchUpInside)
         superset.setTitleColor(.white, for: .normal)
         superset.setTitle("Superset", for: .normal)
         superset.translatesAutoresizingMaskIntoConstraints = false
-        superset.backgroundColor = UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        superset.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
         addSetCommandView.addArrangedSubview(delete)
         addSetCommandView.addArrangedSubview(duplicate)
         addSetCommandView.addArrangedSubview(superset)
@@ -884,7 +884,7 @@ class SupersetBackgroundView: UIView {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.text = "superset".uppercased()
         l.font = UIFont(name: Fonts.FontFamily.rubikRegular.rawValue, size: 57.0)
-        l.textColor = UIColor(displayP3Red: 35/255.0, green: 39/255.0, blue: 64/255.0, alpha: 1.0)
+        l.textColor = UIColor(red: 35/255.0, green: 39/255.0, blue: 64/255.0, alpha: 1.0)
         l.alpha = 0.0
         return l
     }()

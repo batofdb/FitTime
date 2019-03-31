@@ -97,7 +97,7 @@ class CreateWorkoutViewController: UIViewController, AnimatableNavigationBar {
     var scrollIndicator: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
+        v.backgroundColor = UIColor(red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0)
         v.layer.cornerRadius = 2.0
         return v
     }()
@@ -1189,6 +1189,7 @@ class FitTimeNavigationBar: UIView {
         case basic
         case filter
         case sets
+        case summary
     }
 
     static let InitialHeight: CGFloat = 220
@@ -1280,10 +1281,33 @@ class FitTimeNavigationBar: UIView {
 
     var gradientLayer: CAGradientLayer = {
         let g = CAGradientLayer()
-        g.colors = [UIColor(displayP3Red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(displayP3Red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
+        g.colors = [UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0).cgColor, UIColor(red: 35/255.0, green: 37/255.0, blue: 58/255.0, alpha: 1.0).cgColor]
         g.startPoint = CGPoint(x: 0, y: 0)
         g.endPoint = CGPoint(x: 1.0, y: 1.0)
         return g
+    }()
+
+    var summaryTitleLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = Fonts.getScaledFont(textStyle: .caption2, mode: .light)
+        l.textColor = UIColor(red: 254/255.0, green: 254/255.0, blue: 254/255.0, alpha: 0.60)
+        return l
+    }()
+
+    var summaryNameLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = Fonts.getScaledFont(textStyle: .body, mode: .light)
+        l.textColor = .white
+        return l
+    }()
+
+    var bottomSeperator: UIView = {
+        let u = UIView()
+        u.translatesAutoresizingMaskIntoConstraints = false
+        u.backgroundColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
+        return u
     }()
 
     required init?(coder aDecoder: NSCoder) {
@@ -1306,16 +1330,33 @@ class FitTimeNavigationBar: UIView {
             filterButton.isHidden = true
             toggle.isHidden = true
             enableRestLabel.isHidden = true
+            summaryNameLabel.isHidden = true
+            summaryTitleLabel.isHidden = true
+            bottomSeperator.isHidden = true
         case .filter:
             searchBar.isHidden = false
             filterButton.isHidden = false
             toggle.isHidden = true
             enableRestLabel.isHidden = true
+            summaryNameLabel.isHidden = true
+            summaryTitleLabel.isHidden = true
+            bottomSeperator.isHidden = true
         case .sets:
             searchBar.isHidden = true
             filterButton.isHidden = true
             toggle.isHidden = false
             enableRestLabel.isHidden = false
+            summaryNameLabel.isHidden = true
+            summaryTitleLabel.isHidden = true
+            bottomSeperator.isHidden = true
+        case .summary:
+            searchBar.isHidden = true
+            filterButton.isHidden = true
+            toggle.isHidden = true
+            enableRestLabel.isHidden = true
+            summaryNameLabel.isHidden = false
+            summaryTitleLabel.isHidden = false
+            bottomSeperator.isHidden = false
         }
     }
 
@@ -1399,6 +1440,24 @@ class FitTimeNavigationBar: UIView {
         enableRestLabel.topAnchor.constraint(equalTo: toggle.topAnchor).isActive = true
         enableRestLabel.bottomAnchor.constraint(equalTo: toggle.bottomAnchor).isActive = true
 
+        addSubview(summaryTitleLabel)
+        addSubview(summaryNameLabel)
+
+        summaryNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -43).isActive = true
+        summaryNameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
+        summaryNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
+        summaryNameLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+
+        summaryTitleLabel.bottomAnchor.constraint(equalTo: summaryNameLabel.topAnchor, constant: -8).isActive = true
+        summaryTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
+        summaryTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
+        summaryTitleLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+
+        addSubview(bottomSeperator)
+        bottomSeperator.topAnchor.constraint(equalTo: summaryNameLabel.bottomAnchor, constant: 18).isActive = true
+        bottomSeperator.leftAnchor.constraint(equalTo: summaryNameLabel.leftAnchor, constant: 0).isActive = true
+        bottomSeperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        bottomSeperator.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
     }
 
     @objc func leftButtonTapped() {

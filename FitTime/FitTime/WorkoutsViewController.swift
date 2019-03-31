@@ -88,7 +88,7 @@ extension GradientViewProvider where Self: UIView {
 
 
 struct ThemeProvider {
-    static let PrimaryColor: UIColor = UIColor(displayP3Red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
+    static let PrimaryColor: UIColor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
     static let HighlightColor: UIColor = .white
     static let TitleTextColor: UIColor = .black
     static let SubTitleTextColor: UIColor = .lightGray
@@ -131,9 +131,9 @@ class WorkoutsViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
 
-        //navigationController?.view.backgroundColor = UIColor(displayP3Red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
+        //navigationController?.view.backgroundColor = UIColor(red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
 
-        //navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
+        //navigationController?.navigationBar.barTintColor = UIColor(red: 249/255.0, green: 251/255.0, blue: 242/255.0, alpha: 1.0)
         navigationController?.navigationBar.tintColor = .magenta
         
         view.backgroundColor = ThemeProvider.PrimaryColor
