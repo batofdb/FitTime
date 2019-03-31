@@ -47,6 +47,7 @@
 		479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */; };
 		47A9D27B217CF06600ABA3C9 /* WorkoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */; };
 		47AD1522223B79C500ED904B /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD1521223B79C500ED904B /* SummaryViewController.swift */; };
+		47B3D13C22507F260093EF14 /* MyWorkoutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B3D13B22507F260093EF14 /* MyWorkoutCollectionViewCell.xib */; };
 		47C0A2E21FFB152400C22A2E /* CreateExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */; };
 		47C0A2E41FFB153800C22A2E /* CreateWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */; };
 		47C0A2E61FFB154400C22A2E /* OnWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */; };
@@ -177,6 +178,7 @@
 		47A736CF200D7ECD00EAAA6E /* FitTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitTime.entitlements; sourceTree = "<group>"; };
 		47A9D27A217CF06600ABA3C9 /* WorkoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutCell.xib; sourceTree = "<group>"; };
 		47AD1521223B79C500ED904B /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		47B3D13B22507F260093EF14 /* MyWorkoutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWorkoutCollectionViewCell.xib; sourceTree = "<group>"; };
 		47C0A2E11FFB152400C22A2E /* CreateExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseViewController.swift; sourceTree = "<group>"; };
 		47C0A2E31FFB153800C22A2E /* CreateWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutViewController.swift; sourceTree = "<group>"; };
 		47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		470110031FFB08C000AA4D9D /* FitTime */ = {
 			isa = PBXGroup;
 			children = (
+				473033BC22507374006D6A2E /* Workouts */,
 				47AD1520223B79A700ED904B /* Summary */,
 				470BFC18222654F600157AAF /* Add Sets */,
 				47CFD26F221E888500F57F9B /* Exercise */,
@@ -309,12 +312,9 @@
 				47C0A2E51FFB154400C22A2E /* OnWorkoutViewController.swift */,
 				47C0A2E71FFB155E00C22A2E /* OffWorkoutViewController.swift */,
 				47C0A2E91FFB177100C22A2E /* Exercise.swift */,
-				47C0A2EB1FFB1A5200C22A2E /* Workout.swift */,
 				47C0A2F31FFB396200C22A2E /* ExercisePhase.swift */,
 				47C0A2ED1FFB2A8F00C22A2E /* RootViewController.swift */,
 				47C0A2EF1FFB2ADB00C22A2E /* ExercisesViewController.swift */,
-				47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */,
-				479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */,
 				47C0A2F51FFB4A8100C22A2E /* CreatePhaseViewController.swift */,
 				4763B1F81FFDE01000C94216 /* ExerciseRefinementViewController.swift */,
 				4762C4C71FFF54AE006BDDC0 /* TimerBuilder.swift */,
@@ -345,6 +345,18 @@
 			);
 			name = "Add Sets";
 			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		473033BC22507374006D6A2E /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				47C0A2EB1FFB1A5200C22A2E /* Workout.swift */,
+				47C0A2F11FFB2AE700C22A2E /* WorkoutsViewController.swift */,
+				479F871621FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib */,
+				47B3D13B22507F260093EF14 /* MyWorkoutCollectionViewCell.xib */,
+			);
+			name = Workouts;
+			path = "New Group2";
 			sourceTree = "<group>";
 		};
 		47AD1520223B79A700ED904B /* Summary */ = {
@@ -600,6 +612,7 @@
 				4769FD9E223B7FBB0059866D /* MusclesInvolvedCell.xib in Resources */,
 				4718FC20222E47DB00CECA3F /* AddSetsSecondaryHeaderTableviewCell.xib in Resources */,
 				479F871721FE94D800A61C9B /* WorkoutCollectableCollectionViewCell.xib in Resources */,
+				47B3D13C22507F260093EF14 /* MyWorkoutCollectionViewCell.xib in Resources */,
 				479F871121FD8FCC00A61C9B /* WorkoutNextCollectionViewCell.xib in Resources */,
 				4769FD9C223B7E260059866D /* BasicTableHeaderView.xib in Resources */,
 				47CCC05222068B24007CB338 /* Rubik-Black.ttf in Resources */,

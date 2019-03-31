@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AddSetsSecondaryHeaderTableviewCell" customModule="FitTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="86"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N31-gF-2lp">
+                    <rect key="frame" x="52" y="0.0" width="380" height="86"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="body_icon" translatesAutoresizingMaskIntoConstraints="NO" id="HG0-0K-v3Z">
+                            <rect key="frame" x="20" y="16" width="53" height="53"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="HG0-0K-v3Z" secondAttribute="height" multiplier="1:1" id="9oO-bM-age"/>
+                                <constraint firstAttribute="width" constant="53" id="UAn-Eh-LhU"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bent Over Barbell Row" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8q-l7-oir">
+                            <rect key="frame" x="89" y="5" width="184" height="77"/>
+                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="q8q-l7-oir" secondAttribute="bottom" constant="4" id="0vH-At-z2q"/>
+                        <constraint firstItem="HG0-0K-v3Z" firstAttribute="top" secondItem="N31-gF-2lp" secondAttribute="top" constant="16" id="Mpj-lf-mlw"/>
+                        <constraint firstItem="q8q-l7-oir" firstAttribute="top" secondItem="N31-gF-2lp" secondAttribute="top" constant="5" id="Yiv-4j-IPD"/>
+                        <constraint firstItem="q8q-l7-oir" firstAttribute="leading" secondItem="HG0-0K-v3Z" secondAttribute="trailing" constant="16" id="fhK-gc-SQJ"/>
+                        <constraint firstItem="HG0-0K-v3Z" firstAttribute="leading" secondItem="N31-gF-2lp" secondAttribute="leading" constant="20" id="s3x-Nr-gW5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="N31-gF-2lp" secondAttribute="trailing" constant="4" id="SpL-rV-OSQ"/>
+                <constraint firstItem="N31-gF-2lp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="52" id="jO4-Ax-C0i"/>
+                <constraint firstItem="N31-gF-2lp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="y9f-K4-tVP"/>
+                <constraint firstAttribute="bottom" secondItem="N31-gF-2lp" secondAttribute="bottom" id="yFH-DI-JdZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="muscleImageView" destination="HG0-0K-v3Z" id="dJA-bC-z93"/>
+                <outlet property="titleLabel" destination="q8q-l7-oir" id="E15-1t-whD"/>
+            </connections>
+            <point key="canvasLocation" x="153.62318840579712" y="364.95535714285711"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="body_icon" width="53" height="47"/>
+    </resources>
+</document>

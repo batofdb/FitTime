@@ -88,7 +88,7 @@ extension GradientViewProvider where Self: UIView {
 
 
 struct ThemeProvider {
-    static let PrimaryColor: UIColor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1.0)
+    static let PrimaryColor: UIColor = UIColor(red: 80/255.0, green: 99/255.0, blue: 238/255.0, alpha: 1.0)
     static let HighlightColor: UIColor = .white
     static let TitleTextColor: UIColor = .black
     static let SubTitleTextColor: UIColor = .lightGray
@@ -275,5 +275,83 @@ extension WorkoutsViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             return 20.0
         }
+    }
+}
+
+
+
+
+class MyWorkoutsViewController: NavigationBaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNavigationHeight(constant: 140)
+        navigationView.update(type: .basic2Buttons)
+        navigationView.gradientLayer.removeFromSuperlayer()
+        navigationView.titleLabel.textColor = .black
+        navigationView.leftButton.setImage(UIImage(named: "back_button"), for: .normal)
+        navigationView.rightButton.setTitle("Edit", for: .normal)
+        navigationView.rightButton.setTitleColor(ThemeProvider.PrimaryColor, for: .normal)
+        navigationView.rightButton2.setTitleColor(ThemeProvider.PrimaryColor, for: .normal)
+        navigationView.rightButton2.setTitle("Create", for: .normal)
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.contentInset = UIEdgeInsetsMake((140 + 16), 0, 0, 0)
+        collectionView.register(UINib(nibName: "MyWorkoutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyWorkoutCollectionViewCell")
+    }
+
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 24 - 24, height: ((collectionView.frame.height - 140 - 64)/2) - 16-12)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyWorkoutCollectionViewCell", for: indexPath)
+        return cell
+    }
+}
+
+
+class NavigationBaseViewController: UIViewController {
+    var navigationView: FitTimeNavigationBar = {
+        let nav = FitTimeNavigationBar()
+        nav.translatesAutoresizingMaskIntoConstraints = false
+        nav.backgroundColor = .white
+        nav.subTitleLabel.isHidden = true
+        nav.update(type: .basic)
+        return nav
+    }()
+
+    var navigationHeightConstraint: NSLayoutConstraint!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.addSubview(navigationView)
+
+        navigationView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        navigationView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        navigationView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        navigationHeightConstraint = navigationView.heightAnchor.constraint(equalToConstant: 253)
+        navigationHeightConstraint.isActive = true
+
+        
+    }
+
+    public func setNavigationHeight(constant: CGFloat) {
+        navigationHeightConstraint.constant = constant
+    }
+}
+
+class MyWorkoutCollectionViewCell: UICollectionViewCell {
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
 }

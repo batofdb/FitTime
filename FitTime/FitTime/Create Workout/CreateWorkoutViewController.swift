@@ -1190,6 +1190,7 @@ class FitTimeNavigationBar: UIView {
         case filter
         case sets
         case summary
+        case basic2Buttons
     }
 
     static let InitialHeight: CGFloat = 220
@@ -1198,6 +1199,7 @@ class FitTimeNavigationBar: UIView {
     weak var heightConstraint: NSLayoutConstraint?
     var leftButtonTappedHandler: (()->Void)? = nil
     var rightButtonTappedHandler: (()->Void)? = nil
+    var rightButton2TappedHandler: (()->Void)? = nil
     var filterButtonTappedHandler: (()->Void)? = nil
 
     var titleLabelToTop: NSLayoutConstraint!
@@ -1241,6 +1243,14 @@ class FitTimeNavigationBar: UIView {
     }()
 
     var rightButton: UIButton = {
+        let b = UIButton()
+        b.titleLabel?.font = Fonts.getScaledFont(textStyle: .body, mode: .dark)
+        b.titleLabel?.adjustsFontForContentSizeCategory = true
+        b.translatesAutoresizingMaskIntoConstraints = false
+        return b
+    }()
+
+    var rightButton2: UIButton = {
         let b = UIButton()
         b.titleLabel?.font = Fonts.getScaledFont(textStyle: .body, mode: .dark)
         b.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -1333,6 +1343,7 @@ class FitTimeNavigationBar: UIView {
             summaryNameLabel.isHidden = true
             summaryTitleLabel.isHidden = true
             bottomSeperator.isHidden = true
+            rightButton2.isHidden = true
         case .filter:
             searchBar.isHidden = false
             filterButton.isHidden = false
@@ -1341,6 +1352,7 @@ class FitTimeNavigationBar: UIView {
             summaryNameLabel.isHidden = true
             summaryTitleLabel.isHidden = true
             bottomSeperator.isHidden = true
+            rightButton2.isHidden = true
         case .sets:
             searchBar.isHidden = true
             filterButton.isHidden = true
@@ -1349,6 +1361,7 @@ class FitTimeNavigationBar: UIView {
             summaryNameLabel.isHidden = true
             summaryTitleLabel.isHidden = true
             bottomSeperator.isHidden = true
+            rightButton2.isHidden = true
         case .summary:
             searchBar.isHidden = true
             filterButton.isHidden = true
@@ -1357,6 +1370,16 @@ class FitTimeNavigationBar: UIView {
             summaryNameLabel.isHidden = false
             summaryTitleLabel.isHidden = false
             bottomSeperator.isHidden = false
+            rightButton2.isHidden = true
+        case .basic2Buttons:
+            searchBar.isHidden = true
+            filterButton.isHidden = true
+            toggle.isHidden = true
+            enableRestLabel.isHidden = true
+            summaryNameLabel.isHidden = true
+            summaryTitleLabel.isHidden = true
+            bottomSeperator.isHidden = true
+            rightButton2.isHidden = false
         }
     }
 
@@ -1380,6 +1403,13 @@ class FitTimeNavigationBar: UIView {
         rightButton.titleLabel?.textColor = .white
 
         leftButton.addTarget(self, action: #selector(leftButtonTapped), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
+
+        addSubview(rightButton2)
+
+        rightButton2.rightAnchor.constraint(equalTo: rightButton.leftAnchor, constant: -24).isActive = true
+        rightButton2.centerYAnchor.constraint(equalTo: leftButton.centerYAnchor, constant: 0).isActive = true
+
         rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
 
         addSubview(searchBar)
@@ -1466,6 +1496,11 @@ class FitTimeNavigationBar: UIView {
     @objc func rightButtonTapped() {
         rightButtonTappedHandler?()
     }
+
+    @objc func rightButton2Tapped() {
+        rightButton2TappedHandler?()
+    }
+
     @objc func filterButtonTapped() {
         filterButtonTappedHandler?()
     }

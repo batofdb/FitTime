@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MuscleHistoryTopTableViewCell" customModule="FitTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="461" height="95"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLy-tI-ORP">
+                    <rect key="frame" x="4" y="15" width="453" height="80"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="body_icon" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-xx-7vO">
+                            <rect key="frame" x="20" y="16" width="53" height="53"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="53" id="cj9-Rb-2EM"/>
+                                <constraint firstAttribute="width" secondItem="1xb-xx-7vO" secondAttribute="height" multiplier="1:1" id="gwv-xx-OsI"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="history" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezo-qe-Yhv">
+                            <rect key="frame" x="411" y="31.5" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="CVs-Op-tS3"/>
+                                <constraint firstAttribute="width" secondItem="ezo-qe-Yhv" secondAttribute="height" multiplier="1:1" id="MIF-Gw-e5D"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bench Press" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlu-We-DOG">
+                            <rect key="frame" x="89" y="16" width="306" height="44"/>
+                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="1xb-xx-7vO" firstAttribute="leading" secondItem="iLy-tI-ORP" secondAttribute="leading" constant="20" id="A0h-nr-zQV"/>
+                        <constraint firstItem="jlu-We-DOG" firstAttribute="top" secondItem="1xb-xx-7vO" secondAttribute="top" id="CCe-3t-yKG"/>
+                        <constraint firstAttribute="bottom" secondItem="jlu-We-DOG" secondAttribute="bottom" constant="20" id="Cl6-wK-K8D"/>
+                        <constraint firstAttribute="trailing" secondItem="ezo-qe-Yhv" secondAttribute="trailing" constant="20" id="NZD-4O-i3F"/>
+                        <constraint firstItem="1xb-xx-7vO" firstAttribute="top" secondItem="iLy-tI-ORP" secondAttribute="top" constant="16" id="XQZ-8G-HNg"/>
+                        <constraint firstItem="ezo-qe-Yhv" firstAttribute="leading" secondItem="jlu-We-DOG" secondAttribute="trailing" constant="16" id="gJV-Nw-p6a"/>
+                        <constraint firstItem="ezo-qe-Yhv" firstAttribute="centerY" secondItem="1xb-xx-7vO" secondAttribute="centerY" id="jnC-JI-NBq"/>
+                        <constraint firstItem="jlu-We-DOG" firstAttribute="leading" secondItem="1xb-xx-7vO" secondAttribute="trailing" constant="16" id="z9m-LA-c8D"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="iLy-tI-ORP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="Mfh-Gh-MMp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iLy-tI-ORP" secondAttribute="trailing" constant="4" id="XeS-xu-95b"/>
+                <constraint firstAttribute="bottom" secondItem="iLy-tI-ORP" secondAttribute="bottom" id="bLe-cS-dV5"/>
+                <constraint firstItem="iLy-tI-ORP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="n4g-0h-p04"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="171.73913043478262" y="329.12946428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="body_icon" width="53" height="47"/>
+        <image name="history" width="20" height="17"/>
+    </resources>
+</document>
